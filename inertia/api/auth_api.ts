@@ -14,3 +14,8 @@ export async function getUserApi() {
   const { data } = await api.get('/auth/user')
   return data
 }
+
+export async function generateAdminApi() {
+  const { data } = await api.post('/auth/generate-admin')
+  return data
+}

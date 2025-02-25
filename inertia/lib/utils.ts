@@ -18,3 +18,8 @@ export function getSearchParams(searchParams: TSearchParamsData<string>) {
 
   return { page, count, sort, order, search, from, to, skip }
 }
+
+export function formErrorResolver(errors: Record<string, any>) {
+  if (!errors) return {}
+  return errors.reduce((acc, { field, message }) => ({ ...acc, [field]: message }), {})
+}

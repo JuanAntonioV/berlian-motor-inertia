@@ -1,3 +1,4 @@
+import User from '#models/user'
 import { defineConfig } from '@adonisjs/inertia'
 import type { InferSharedProps } from '@adonisjs/inertia/types'
 
@@ -11,7 +12,23 @@ const inertiaConfig = defineConfig({
    * Data that should be shared with all rendered pages
    */
   sharedData: {
-    // user: (ctx) => ctx.inertia.always(() => ctx.auth.user),
+    user: async (ctx) => {
+      const user = ctx.auth.user
+
+      if (!user) {
+        return ctx.inertia.always(() => null)
+      }
+
+      const userSerialized = user.serialize()
+
+      const userWithRoleAndPermissions = {
+        ...userSerialized,
+        roles: await User.getRoles(user),
+        permissions: await User.getPermissions(user),
+      }
+
+      return ctx.inertia.always(() => userWithRoleAndPermissions)
+    },
   },
 
   /**

@@ -15,15 +15,23 @@ const DashboardController = () => import('#controllers/dashboard_controller')
 
 router
   .group(() => {
-    router.get('login', [AuthController, 'showLogin']).as('login.page')
-    router.post('login', [AuthController, 'doLogin']).as('login.do')
+    router
+      .get('login', [AuthController, 'showLogin'])
+      .middleware(middleware.guest())
+      .as('login.page')
+    router.post('login', [AuthController, 'doLogin']).middleware(middleware.guest()).as('login.do')
     router
       .delete('logout', [AuthController, 'doLogout'])
       .as('logout.do')
       .middleware(middleware.auth())
 
-    router.get('user', [AuthController, 'getUser']).as('user.get')
+    router.get('user', [AuthController, 'getUser']).middleware(middleware.auth()).as('user.get')
+
+    router
+      .post('generate-admin', [AuthController, 'generateAdmin'])
+      .middleware(middleware.guest())
+      .as('generate-admin')
   })
   .prefix('auth')
 
-router.get('/', [DashboardController, 'show']).as('dashboard.page')
+router.get('/', [DashboardController, 'show']).middleware(middleware.auth()).as('dashboard.page')

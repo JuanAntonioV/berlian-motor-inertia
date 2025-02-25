@@ -1,7 +1,26 @@
+import { router, usePage } from '@inertiajs/react'
+import { Button } from '@mantine/core'
+import { useMutation } from '@tanstack/react-query'
+import { logoutApi } from '~/api/auth_api'
+
 const DashboardPage = () => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: logoutApi,
+    onSuccess: () => {
+      router.visit('/auth/login')
+    },
+  })
+
+  const props = usePage().props
+  console.log('🚀 ~ DashboardPage ~ props:', props)
+
   return (
-    <div className="flex-center h-screen">
+    <div className="flex-center flex-col gap-4 h-screen">
       <h1>DashboardPage</h1>
+      <pre>{JSON.stringify(props.user, null, 2)}</pre>
+      <Button onClick={() => mutate()} loading={isPending}>
+        Logout
+      </Button>
     </div>
   )
 }
