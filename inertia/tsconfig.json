@@ -5,8 +5,9 @@
     "module": "ESNext",
     "jsx": "react-jsx",
     "paths": {
-      "~/*": ["./*"],
+      "~/*": ["./*"]
     },
+    "noImplicitAny": false
   },
-  "include": ["./**/*.ts", "./**/*.tsx"],
+  "include": ["./**/*.ts", "./**/*.tsx"]
 }
