@@ -34,4 +34,9 @@ router
   })
   .prefix('auth')
 
-router.get('/', [DashboardController, 'show']).middleware(middleware.auth()).as('dashboard.page')
+router
+  .group(() => {
+    router.get('/', ({ response }) => response.redirect().toRoute('dashboard.page')).as('home.page')
+    router.get('/dashboard', [DashboardController, 'show']).as('dashboard.page')
+  })
+  .middleware(middleware.auth())

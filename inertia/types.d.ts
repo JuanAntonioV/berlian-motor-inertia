@@ -47,3 +47,20 @@ export type TMenu = {
   subMenus?: TSubMenus[]
   roles?: string[]
 }
+
+export interface TRoles {
+  id: number
+  name: string
+  slug: string
+  description: string | null
+  permissions?: string[]
+}
+
+export interface TUser {
+  id: number
+  fullName: string
+  email: string
+  image: string
+  roles: TRoles[]
+  permissions: string[]
+}

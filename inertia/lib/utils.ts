@@ -23,3 +23,13 @@ export function formErrorResolver(errors: Record<string, any>) {
   if (!errors) return {}
   return errors.reduce((acc, { field, message }) => ({ ...acc, [field]: message }), {})
 }
+
+export function getExactUrl(url: string) {
+  if (!url) return ''
+
+  const urlReplace = url.replace(/[\?&]/g, '/')
+  // remove trailing slash
+  const urlCleared = urlReplace.replace(/\/$/, '')
+  const urlRaw = urlCleared.split('/')[1]
+  return urlRaw?.includes('-') ? urlRaw.split('-').join(' ') : urlRaw
+}

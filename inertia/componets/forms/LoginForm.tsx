@@ -19,7 +19,7 @@ const LoginForm = () => {
         color: 'green',
       })
       form.reset()
-      router.visit('/')
+      router.visit('/dashboard')
     },
     onError: (err: Error & Record<string, any>) => {
       form.setErrors(formErrorResolver(err?.errors))
@@ -52,6 +52,7 @@ const LoginForm = () => {
             placeholder="Alamat email"
             label="Alamat email"
             withAsterisk
+            autoFocus
             key={form.key('email')}
             {...form.getInputProps('email')}
           />
