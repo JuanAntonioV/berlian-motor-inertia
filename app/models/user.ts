@@ -37,4 +37,23 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
+
+  static async getRoles(user: User) {
+    return await user.related('roles').query()
+  }
+
+  static async hasRole(user: User, roleSlug: string[]) {
+    const roles = await this.getRoles(user)
+    return roles.some((role) => roleSlug.includes(role.slug))
+  }
+
+  static async getPermissions(user: User) {
+    const roles = await user.related('roles').query().preload('permissions')
+    return roles.map((role) => role.permissions.map((permission) => permission.slug)).flat()
+  }
+
+  static async hasPermission(user: User, permissionSlug: string[]) {
+    const permissions = await this.getPermissions(user)
+    return permissions.some((permission) => permissionSlug.includes(permission))
+  }
 }
