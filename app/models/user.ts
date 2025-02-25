@@ -38,6 +38,14 @@ export default class User extends compose(BaseModel, AuthFinder) {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime | null
 
+  static async isAdminExist() {
+    const adminRole = await Role.query()
+      .where('slug', 'admin')
+      .orWhere('slug', 'super-admin')
+      .first()
+    return await adminRole?.related('users').query().first()
+  }
+
   static async getRoles(user: User) {
     return await user.related('roles').query()
   }
