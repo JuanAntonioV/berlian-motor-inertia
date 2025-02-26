@@ -14,7 +14,7 @@ const AppHeader = () => {
           <AppProfileMenu />
         </div>
       </div>
-      <div className="flex items-center justify-between w-full px-6 md:px-10 py-4">
+      <div className="flex items-center justify-between w-full px-6 md:px-10 py-4 min-h-14">
         <AppBreadcrumb />
       </div>
     </header>

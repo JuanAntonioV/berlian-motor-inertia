@@ -7,19 +7,19 @@ type Props = {
 }
 const AdminLayout = ({ children }: Props) => {
   return (
-    <main className="grid lg:grid-cols-[250px_1fr]">
+    <Box className="grid lg:grid-cols-[250px_1fr]">
       <AppSiderbar />
       <Box>
         <AppHeader />
         <Box
           bg={'gray.1'}
           pb={'md'}
-          className="dark:bg-inherit rounded-lg h-[calc(100vh-137px)] overflow-y-auto overflow-x-hidden"
+          className="dark:bg-inherit h-[calc(100vh-137px)] overflow-auto"
         >
           {children}
         </Box>
       </Box>
-    </main>
+    </Box>
   )
 }
 export default AdminLayout

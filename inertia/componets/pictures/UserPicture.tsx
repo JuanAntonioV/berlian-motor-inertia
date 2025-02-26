@@ -1,12 +1,13 @@
 import { usePage } from '@inertiajs/react'
-import { Avatar, Center, rem } from '@mantine/core'
+import { Avatar, Center, type MantineColor, rem } from '@mantine/core'
 import { TUser } from '~/types'
 
 type Props = {
   size?: number
+  color?: MantineColor
 }
 
-const UserPicture = ({ size = 32 }: Props) => {
+const UserPicture = ({ color, size = 32 }: Props) => {
   const props = usePage().props
   const user = props.user as TUser
 
@@ -17,7 +18,7 @@ const UserPicture = ({ size = 32 }: Props) => {
       {user && user?.image ? (
         <Avatar src={user.image} alt={user.fullName} size={rem(size)} radius={'100%'} />
       ) : (
-        <Avatar size={rem(size)} radius={'100%'} />
+        <Avatar size={rem(size)} color={color} radius={'100%'} />
       )}
     </Center>
   )

@@ -8,6 +8,7 @@ import { logoutApi } from '~/api/auth_api'
 import UserPicture from '../pictures/UserPicture'
 import { TUser } from '~/types'
 import { getFormatedAvatarName, getInitialRoleName } from '~/lib/formaters'
+import toast from 'react-hot-toast'
 
 const AppProfileMenu = () => {
   const [opened, { toggle }] = useDisclosure()
@@ -16,6 +17,7 @@ const AppProfileMenu = () => {
     mutationFn: logoutApi,
     onSuccess: () => {
       router.visit('/auth/login')
+      toast.success('Logout berhasil')
     },
   })
 

@@ -8,6 +8,7 @@ import { router } from '@inertiajs/react'
 import { notifications } from '@mantine/notifications'
 import { Info } from 'lucide-react'
 import { formErrorResolver } from '~/lib/utils'
+import toast from 'react-hot-toast'
 
 const LoginForm = () => {
   const { mutate, isPending, error } = useMutation({
@@ -19,6 +20,7 @@ const LoginForm = () => {
         color: 'green',
       })
       form.reset()
+      toast.success('Login berhasil')
       router.visit('/dashboard')
     },
     onError: (err: Error & Record<string, any>) => {
