@@ -1,4 +1,4 @@
-export type TFormState<T = any> = {
+export interface TFormState<T> {
   successMessage?: string
   errors?: StringMap | null
   message?: string
@@ -9,7 +9,7 @@ export type StringMap = Record<string, string>
 
 export type StringToBooleanMap = Record<string, boolean>
 
-export type TQueryParams = {
+export interface TQueryParams {
   page: number
   limit: number
   sort: string
@@ -18,7 +18,7 @@ export type TQueryParams = {
   skip: number
 }
 
-export type TStatItem = {
+export interface TStatItem {
   id: string
   name: string
   value: number | string
@@ -28,18 +28,24 @@ export type TStatItem = {
 
 export type SortingState = ColumnSort[]
 
-export type TSearchParamsData<VT> = {
-  [key: string]: VT
-}
+export type TSearchParamsData<VT> = Record<string, VT>
 
-export type TSubMenus = {
+export interface TSubMenus {
   id: number
   label: string
   href: string
   roles?: number[]
 }
 
-export type TMenu = {
+export interface ProfileMenu {
+  icon: React.ReactNode
+  title: string
+  rightSection?: React.ReactNode
+  href?: string
+  onClick?: () => void
+}
+
+export interface TMenu {
   id: number
   icon?: React.ReactNode
   label: string
