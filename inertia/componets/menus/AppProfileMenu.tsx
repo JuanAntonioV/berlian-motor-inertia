@@ -52,7 +52,7 @@ const AppProfileMenu = () => {
         icon: <User size={14} />,
         rightSection: null,
         title: 'Akun Saya',
-        href: '/profile',
+        href: '/akun-saya',
       },
       {
         icon: <ScanSearch size={14} />,

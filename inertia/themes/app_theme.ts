@@ -263,5 +263,26 @@ export const appTheme = createTheme({
         miw: 'max-content',
       },
     },
+    TextInput: {
+      defaultProps: {
+        classNames: {
+          label: 'mb-1',
+        },
+      },
+    },
+    PasswordInput: {
+      defaultProps: {
+        classNames: {
+          label: 'mb-1',
+        },
+      },
+    },
+    InputBase: {
+      defaultProps: {
+        classNames: {
+          label: 'mb-1',
+        },
+      },
+    },
   },
 })

@@ -117,7 +117,7 @@ const NavList = () => {
       }
 
       return {
-        group: menu.subMenus && menu.subMenus?.length > 0 ? menu.label : null,
+        group: menu.subMenus && menu.subMenus?.length > 0 ? menu.label : '',
         actions,
       }
     })

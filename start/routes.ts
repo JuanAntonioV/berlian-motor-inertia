@@ -12,6 +12,7 @@ import { middleware } from './kernel.js'
 
 const AuthController = () => import('#controllers/auth_controller')
 const DashboardController = () => import('#controllers/dashboard_controller')
+const ProfileController = () => import('#controllers/profile_controller')
 
 router
   .group(() => {
@@ -38,5 +39,6 @@ router
   .group(() => {
     router.get('/', ({ response }) => response.redirect().toRoute('dashboard.page')).as('home.page')
     router.get('/dashboard', [DashboardController, 'show']).as('dashboard.page')
+    router.get('/akun-saya', [ProfileController, 'show']).as('profile.page')
   })
   .middleware(middleware.auth())

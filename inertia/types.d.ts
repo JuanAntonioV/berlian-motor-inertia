@@ -69,4 +69,5 @@ export interface TUser {
   image: string
   roles: TRoles[]
   permissions: string[]
+  createdAt: Date
 }
