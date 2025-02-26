@@ -1,4 +1,4 @@
-import { Box } from '@mantine/core'
+import { Box, ScrollArea } from '@mantine/core'
 import AppHeader from '~/componets/headers/AppHeader'
 import AppSiderbar from '~/componets/sidebars/AppSiderbar'
 
@@ -7,16 +7,14 @@ type Props = {
 }
 const AdminLayout = ({ children }: Props) => {
   return (
-    <Box className="grid lg:grid-cols-[250px_1fr]">
+    <Box className="grid lg:grid-cols-[250px_1fr] dark:bg-inherit" bg={'gray.1'}>
       <AppSiderbar />
       <Box>
         <AppHeader />
-        <Box
-          bg={'gray.1'}
-          pb={'md'}
-          className="dark:bg-inherit h-[calc(100vh-137px)] overflow-auto"
-        >
-          {children}
+        <Box bg={'gray.1'} pb={'md'} className="dark:bg-inherit">
+          <ScrollArea className="!h-[calc(100vh-153px)]" type="always">
+            {children}
+          </ScrollArea>
         </Box>
       </Box>
     </Box>

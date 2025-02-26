@@ -107,6 +107,7 @@ const NavList = () => {
                   href={menu.href}
                   component={Link}
                   label={menu.label}
+                  prefetch
                   leftSection={menu.icon || <Inbox size={24} />}
                   className="!rounded-lg hover:!bg-gray-900 data-[active=true]:!bg-gray-600 data-[active=true]:!text-white"
                   childrenOffset={28}
@@ -139,6 +140,7 @@ const NavList = () => {
                           <NavLink
                             href={subMenu.href}
                             component={Link}
+                            prefetch
                             label={subMenu.label}
                             className="!rounded-lg hover:!bg-gray-900 data-[active=true]:!bg-gray-600 data-[active=true]:!text-white"
                             childrenOffset={28}

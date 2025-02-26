@@ -1,5 +1,6 @@
 import AppProfileMenu from '../menus/AppProfileMenu'
 import AppBreadcrumb from '../navigations/AppBreadcrumb'
+import AppMobileSidebar from '../sidebars/AppMobileSidebar'
 import AppPageTitle from '../titles/AppPageTitle'
 
 const AppHeader = () => {
@@ -7,7 +8,7 @@ const AppHeader = () => {
     <header className="bg-white border-b border-b-gray-200 flex flex-col items-center justify-center">
       <div className="flex items-center justify-between w-full border-b border-b-gray-200 px-6 md:px-10 min-h-20">
         <div className="flex items-center gap-4">
-          {/* <AppMobileSidebar /> */}
+          <AppMobileSidebar />
           <AppPageTitle />
         </div>
         <div>
