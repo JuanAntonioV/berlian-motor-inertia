@@ -33,38 +33,46 @@ export default class AuthService {
     const defaultEmail = env.get('ADMIN_EMAIL')
     const defaultPassword = env.get('ADMIN_PASSWORD')
 
-    const newAdmin = await User.create({
-      email: defaultEmail,
-      password: defaultPassword,
-      fullName: 'Super Admin',
-    })
+    try {
+      const newAdmin = await User.create({
+        email: defaultEmail,
+        password: defaultPassword,
+        fullName: 'Super Admin',
+      })
 
-    await User.hashPassword(newAdmin)
+      await User.hashPassword(newAdmin)
 
-    const adminRole = await Role.query().where('slug', 'super-admin').first()
+      const adminRole = await Role.query().where('slug', 'super-admin').first()
 
-    if (!adminRole) {
-      return ResponseHelper.badRequestResponse('Role Super Admin belum ada!')
+      if (!adminRole) {
+        return ResponseHelper.badRequestResponse('Role Super Admin belum ada!')
+      }
+
+      await newAdmin.related('roles').attach([adminRole.id])
+
+      await auth.use('web').login(newAdmin)
+
+      return ResponseHelper.okResponse(null, 'Admin berhasil digenerate!')
+    } catch (err) {
+      return ResponseHelper.serverErrorResponse(err)
     }
-
-    await newAdmin.related('roles').attach([adminRole.id])
-
-    await auth.use('web').login(newAdmin)
-
-    return ResponseHelper.okResponse(null, 'Admin berhasil digenerate!')
   }
 
   static async getUser({ auth }: HttpContext) {
     const user = auth.user!
 
-    const serializedUser = user.serialize()
+    try {
+      const serializedUser = user.serialize()
 
-    const userWithRoleAndPermissions = {
-      ...serializedUser,
-      roles: await User.getRoles(user),
-      permissions: await User.getPermissions(user),
+      const userWithRoleAndPermissions = {
+        ...serializedUser,
+        roles: await User.getRoles(user),
+        permissions: await User.getPermissions(user),
+      }
+
+      return ResponseHelper.okResponse(userWithRoleAndPermissions)
+    } catch (err) {
+      return ResponseHelper.serverErrorResponse(err)
     }
-
-    return ResponseHelper.okResponse(userWithRoleAndPermissions)
   }
 }

@@ -38,7 +38,15 @@ router
 router
   .group(() => {
     router.get('/', ({ response }) => response.redirect().toRoute('dashboard.page')).as('home.page')
-    router.get('/dashboard', [DashboardController, 'show']).as('dashboard.page')
-    router.get('/akun-saya', [ProfileController, 'show']).as('profile.page')
+    router.get('dashboard', [DashboardController, 'show']).as('dashboard.page')
+    router.get('akun-saya', [ProfileController, 'show']).as('profile.page')
+
+    router
+      .group(() => {
+        router
+          .post('reset-password', [ProfileController, 'doResetPassword'])
+          .as('profile.password.reset')
+      })
+      .prefix('profile')
   })
   .middleware(middleware.auth())

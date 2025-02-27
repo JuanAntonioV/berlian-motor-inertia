@@ -43,7 +43,7 @@ export default class ResponseHelper {
     message: string = 'Unauthorized',
     code: StatusCodes = StatusCodes.UNAUTHORIZED
   ) {
-    this.notFoundResponse(message, code)
+    return this.notFoundResponse(message, code)
   }
 
   static serverErrorResponse<T>(
@@ -52,6 +52,6 @@ export default class ResponseHelper {
     code: StatusCodes = StatusCodes.INTERNAL_SERVER_ERROR
   ) {
     logger.fatal(errors)
-    this.badRequestResponse(message, errors, code)
+    return this.badRequestResponse(message, errors, code)
   }
 }

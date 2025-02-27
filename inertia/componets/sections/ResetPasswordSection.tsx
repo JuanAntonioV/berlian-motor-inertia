@@ -1,7 +1,11 @@
-import { Button, Card, PasswordInput, Stack } from '@mantine/core'
+import { Alert, Button, Card, PasswordInput, Stack } from '@mantine/core'
 import SectionHeader from './SectionHeader'
 import { Form, useForm, zodResolver } from '@mantine/form'
 import { resetPasswordSchema } from '~/lib/validators'
+import { useMutation } from '@tanstack/react-query'
+import { resetPasswordApi } from '~/api/profile_api'
+import toast from 'react-hot-toast'
+import { Info } from 'lucide-react'
 
 const ResetPasswordSection = () => {
   const form = useForm({
@@ -9,8 +13,20 @@ const ResetPasswordSection = () => {
     validate: zodResolver(resetPasswordSchema),
   })
 
+  const { mutate, isPending, error } = useMutation({
+    mutationFn: resetPasswordApi,
+    onSuccess: () => {
+      form.reset()
+      toast.success('Kata sandi berhasil diubah')
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+  console.log('🚀 ~ ResetPasswordSection ~ error:', error)
+
   const onSubmit = (values: typeof form.values) => {
-    console.log('values', values)
+    mutate(values)
   }
 
   return (
@@ -22,6 +38,11 @@ const ResetPasswordSection = () => {
 
       <Form form={form} onSubmit={onSubmit}>
         <Stack gap={'sm'}>
+          {error?.message && (
+            <Alert color="red" c={'red'} icon={<Info />}>
+              {error.message}
+            </Alert>
+          )}
           <PasswordInput
             placeholder="Masukkan kata sandi lama"
             label="Kata sandi lama"
@@ -45,7 +66,7 @@ const ResetPasswordSection = () => {
           />
         </Stack>
 
-        <Button type="submit" mt={'lg'}>
+        <Button type="submit" mt={'lg'} loading={isPending}>
           Ubah Kata Sandi
         </Button>
       </Form>
