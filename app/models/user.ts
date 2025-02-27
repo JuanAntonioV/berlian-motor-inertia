@@ -64,4 +64,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
     const permissions = await this.getPermissions(user)
     return permissions.some((permission) => permissionSlug.includes(permission))
   }
+
+  static async isEmailExist(email: string): Promise<boolean> {
+    const q = await User.query().where('email', email).first()
+    return !!q
+  }
 }

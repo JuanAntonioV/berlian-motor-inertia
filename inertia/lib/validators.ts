@@ -72,5 +72,5 @@ export const profileSchema = z.object({
       message: 'Email tidak valid',
     })
     .email('Email tidak valid'),
-  image: z.instanceof(File).optional(),
+  image: z.instanceof(File).nullish(),
 })

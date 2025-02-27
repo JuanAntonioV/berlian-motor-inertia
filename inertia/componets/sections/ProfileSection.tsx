@@ -1,4 +1,4 @@
-import { usePage } from '@inertiajs/react'
+import { router, usePage } from '@inertiajs/react'
 import {
   Avatar,
   Badge,
@@ -18,8 +18,11 @@ import SectionHeader from './SectionHeader'
 import { Form, useForm, zodResolver } from '@mantine/form'
 import { profileSchema } from '~/lib/validators'
 import { DateTime } from 'luxon'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { getInitials } from '~/lib/formaters'
+import { useMutation } from '@tanstack/react-query'
+import { updateProfileApi } from '~/api/profile_api'
+import toast from 'react-hot-toast'
 
 const ProfileSection = () => {
   const props = usePage().props
@@ -30,13 +33,30 @@ const ProfileSection = () => {
     initialValues: {
       fullName: user.fullName,
       email: user.email,
-      image: user.image,
+      image: null,
     },
     validate: zodResolver(profileSchema),
   })
 
+  useEffect(() => {
+    if (user.image) {
+      setPreviewImage(user.image)
+    }
+  }, [user.image])
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: updateProfileApi,
+    onSuccess: () => {
+      toast.success('Profil berhasil diperbarui')
+      router.reload({ only: ['user'] })
+    },
+    onError: (error) => {
+      toast.error(error.message)
+    },
+  })
+
   const onSubmit = (values: typeof form.values) => {
-    console.log('values', values)
+    mutate(values)
   }
 
   const [previewImage, setPreviewImage] = useState<string | null>(null)
@@ -122,7 +142,13 @@ const ProfileSection = () => {
               ))}
             </Pill.Group>
           </InputBase>
-          <Button type="submit" mt={'lg'} w={'fit-content'} disabled={!form.isDirty()}>
+          <Button
+            type="submit"
+            mt={'lg'}
+            w={'fit-content'}
+            disabled={!form.isDirty()}
+            loading={isPending}
+          >
             Simpan
           </Button>
         </Stack>

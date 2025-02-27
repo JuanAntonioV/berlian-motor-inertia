@@ -1,4 +1,5 @@
 import User from '#models/user'
+import env from '#start/env'
 import { defineConfig } from '@adonisjs/inertia'
 import type { InferSharedProps } from '@adonisjs/inertia/types'
 
@@ -21,8 +22,16 @@ const inertiaConfig = defineConfig({
 
       const userSerialized = user.serialize()
 
+      let imageUrl = null
+
+      if (user?.image) {
+        const absolutePath = `${env.get('APP_URL')}${user.image}`
+        imageUrl = absolutePath
+      }
+
       const userWithRoleAndPermissions = {
         ...userSerialized,
+        image: imageUrl,
         roles: await User.getRoles(user),
         permissions: await User.getPermissions(user),
       }

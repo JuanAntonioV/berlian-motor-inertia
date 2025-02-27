@@ -1,7 +1,11 @@
-import { resetPasswordValidator } from '#validators/profile'
+import { resetPasswordValidator, updateProfileValidator } from '#validators/profile'
 import { HttpContext } from '@adonisjs/core/http'
 import ResponseHelper from '../helpers/response_helper.js'
 import User from '#models/user'
+import app from '@adonisjs/core/services/app'
+import { cuid } from '@adonisjs/core/helpers'
+import { unlink } from 'node:fs/promises'
+import logger from '@adonisjs/core/services/logger'
 
 export default class ProfileService {
   static async doResetPassword({ request, auth }: HttpContext) {
@@ -22,6 +26,51 @@ export default class ProfileService {
       await User.hashPassword(user)
 
       return ResponseHelper.okResponse(null, 'Password berhasil diubah')
+    } catch (err) {
+      return ResponseHelper.serverErrorResponse(err.message)
+    }
+  }
+  static async update({ request, auth }: HttpContext) {
+    const { fullName, email } = await request.validateUsing(updateProfileValidator)
+
+    const user = auth.user!
+
+    try {
+      if (user.email !== email) {
+        const isEmailExist = await User.isEmailExist(email)
+        if (isEmailExist) {
+          return ResponseHelper.badRequestResponse('Email sudah digunakan')
+        }
+
+        user.email = email
+      }
+
+      user.fullName = fullName
+      const avatar = request.file('image')
+
+      if (avatar?.isValid) {
+        const oldImage = user.image
+
+        if (oldImage) {
+          const path = `storage/uploads/${oldImage}`
+          await unlink(app.makePath(path)).catch((e) => {
+            logger.info(`Failed to delete old profile image: ${e.message}`)
+          })
+        }
+
+        const filename = `${cuid()}.${avatar.extname}`
+        const folderPath = 'storage/uploads'
+        await avatar.move(app.makePath(folderPath), {
+          name: filename,
+        })
+
+        const filePath = `/${folderPath}/${filename}`
+        user.image = filePath
+      }
+
+      await user.save()
+
+      return ResponseHelper.okResponse(null, 'Profil berhasil diubah')
     } catch (err) {
       return ResponseHelper.serverErrorResponse(err.message)
     }

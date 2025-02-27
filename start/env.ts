@@ -41,6 +41,7 @@ export default await Env.create(new URL('../', import.meta.url), {
   | Variables for custom configuration
   |----------------------------------------------------------
   */
+  APP_URL: Env.schema.string({ format: 'url', tld: false }),
   ADMIN_EMAIL: Env.schema.string(),
   ADMIN_PASSWORD: Env.schema.string(),
 })

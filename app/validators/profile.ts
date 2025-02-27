@@ -7,3 +7,17 @@ export const resetPasswordValidator = vine.compile(
     confirmPassword: vine.string().maxLength(30).minLength(6).sameAs('password'),
   })
 )
+
+export const updateProfileValidator = vine.compile(
+  vine.object({
+    fullName: vine.string().maxLength(50),
+    email: vine.string().maxLength(50).email(),
+    image: vine
+      .file({
+        size: '2mb',
+        extnames: ['jpg', 'jpeg', 'png'],
+      })
+      .nullable()
+      .optional(),
+  })
+)

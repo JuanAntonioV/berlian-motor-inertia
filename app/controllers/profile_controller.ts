@@ -6,7 +6,10 @@ export default class ProfileController {
     return inertia.render('profiles/ProfilePage')
   }
 
-  async update({}: HttpContext) {}
+  async update(ctx: HttpContext) {
+    const res = await ProfileService.update(ctx)
+    return ctx.response.status(res.code).json(res)
+  }
 
   async doResetPassword(ctx: HttpContext) {
     const res = await ProfileService.doResetPassword(ctx)

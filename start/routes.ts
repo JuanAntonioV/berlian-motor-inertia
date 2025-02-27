@@ -13,6 +13,9 @@ import { middleware } from './kernel.js'
 const AuthController = () => import('#controllers/auth_controller')
 const DashboardController = () => import('#controllers/dashboard_controller')
 const ProfileController = () => import('#controllers/profile_controller')
+const FileController = () => import('#controllers/file_controller')
+
+router.get('storage/*', [FileController, 'show']).as('storage')
 
 router
   .group(() => {
@@ -46,6 +49,8 @@ router
         router
           .post('reset-password', [ProfileController, 'doResetPassword'])
           .as('profile.password.reset')
+
+        router.post('update', [ProfileController, 'update']).as('profile.update')
       })
       .prefix('profile')
   })
