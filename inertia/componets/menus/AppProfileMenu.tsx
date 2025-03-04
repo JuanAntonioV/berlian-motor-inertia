@@ -90,7 +90,7 @@ const AppProfileMenu = () => {
               component={menu.href ? Link : undefined}
               href={menu.href ?? '/'}
               onClick={menu.onClick}
-              prefetch
+              prefetch={menu.href ? true : undefined}
               className="flex-nowrap"
             >
               {menu.title}

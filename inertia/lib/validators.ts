@@ -54,6 +54,7 @@ export const categorySchema = z.object({
     })
     .min(1, 'Nama tidak boleh kosong')
     .max(255, 'Nama maksimal 255 karakter'),
+  description: z.string().nullable(),
 })
 
 export const profileSchema = z.object({

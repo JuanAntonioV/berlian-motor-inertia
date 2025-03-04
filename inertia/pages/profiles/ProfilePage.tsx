@@ -12,6 +12,7 @@ const ProfilePage = () => {
         cols={{ base: 1, md: 3 }}
         p={{ base: 'md', lg: 'xl' }}
         spacing={0}
+        component={'main'}
         className="!gap-y-6 md:!gap-4"
       >
         <ProfileSection />

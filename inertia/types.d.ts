@@ -71,3 +71,11 @@ export interface TUser {
   permissions: string[]
   createdAt: Date
 }
+
+export interface TCategory {
+  id: number
+  name: string
+  description: string
+  createdAt: Date
+  updatedAt: Date
+}

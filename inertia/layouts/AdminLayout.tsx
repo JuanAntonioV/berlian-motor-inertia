@@ -11,8 +11,8 @@ const AdminLayout = ({ children }: Props) => {
       <AppSiderbar />
       <Box>
         <AppHeader />
-        <Box bg={'gray.1'} pb={'md'} className="dark:bg-inherit">
-          <ScrollArea className="!h-[calc(100vh-153px)]" type="always">
+        <Box bg={'gray.1'} pb={'md'} className="dark:bg-inherit !w-full">
+          <ScrollArea className="!h-[calc(100vh-153px)]" scrollbars="y" type="always">
             {children}
           </ScrollArea>
         </Box>
