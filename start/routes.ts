@@ -9,12 +9,12 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
-
 const AuthController = () => import('#controllers/auth_controller')
 const DashboardController = () => import('#controllers/dashboard_controller')
 const ProfileController = () => import('#controllers/profile_controller')
 const FileController = () => import('#controllers/file_controller')
 const CategoryController = () => import('#controllers/category_controller')
+const BrandController = () => import('#controllers/brand_controller')
 
 router.get('storage/*', [FileController, 'show']).as('storage')
 
@@ -53,12 +53,20 @@ router
 
     router
       .group(() => {
-        router.get('list', [CategoryController, 'list']).as('list')
-        router.post('/', [CategoryController, 'create']).as('create')
-        router.put(':id', [CategoryController, 'update']).as('update')
-        router.delete(':id', [CategoryController, 'delete']).as('delete')
+        router.get('list', [CategoryController, 'list']).as('categories.list')
+        router.post('/', [CategoryController, 'create']).as('categories.create')
+        router.put(':id', [CategoryController, 'update']).as('categories.update')
+        router.delete(':id', [CategoryController, 'delete']).as('categories.delete')
       })
       .prefix('categories')
+    router
+      .group(() => {
+        router.get('list', [BrandController, 'list']).as('brand.list')
+        router.post('/', [BrandController, 'create']).as('brand.create')
+        router.put(':id', [BrandController, 'update']).as('brand.update')
+        router.delete(':id', [BrandController, 'delete']).as('brand.delete')
+      })
+      .prefix('brands')
   })
   .prefix('api')
 
@@ -78,5 +86,6 @@ router
     router.get('dashboard', [DashboardController, 'show']).as('dashboard.page')
     router.get('akun-saya', [ProfileController, 'show']).as('profile.page')
     router.get('kelola-kategori', [CategoryController, 'show']).as('category.page')
+    router.get('kelola-merek', [BrandController, 'show']).as('brand.page')
   })
   .middleware(middleware.auth())

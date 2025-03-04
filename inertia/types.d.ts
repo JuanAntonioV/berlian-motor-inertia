@@ -79,3 +79,5 @@ export interface TCategory {
   createdAt: Date
   updatedAt: Date
 }
+
+export type TBrand = TCategory

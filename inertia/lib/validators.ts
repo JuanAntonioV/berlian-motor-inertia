@@ -57,6 +57,8 @@ export const categorySchema = z.object({
   description: z.string().nullable(),
 })
 
+export const brandSchema = categorySchema
+
 export const profileSchema = z.object({
   fullName: z
     .string({
