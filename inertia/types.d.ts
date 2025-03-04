@@ -81,3 +81,4 @@ export interface TCategory {
 }
 
 export type TBrand = TCategory
+export type TType = TCategory

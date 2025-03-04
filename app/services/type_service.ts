@@ -1,13 +1,13 @@
-import { brandValidator, createBrandValidator } from '#validators/brand'
+import { typeValidator, createTypeValidator } from '#validators/type'
 import { HttpContext } from '@adonisjs/core/http'
 import ResponseHelper from '../helpers/response_helper.js'
-import Brand from '#models/brand'
+import Type from '#models/type'
 import { errors as lucidErrors } from '@adonisjs/lucid'
 
-export default class BrandService {
+export default class TypeService {
   static async list({}: HttpContext) {
     try {
-      const categories = await Brand.all()
+      const categories = await Type.all()
       return ResponseHelper.okResponse(categories)
     } catch (err) {
       return ResponseHelper.serverErrorResponse(err.message)
@@ -15,39 +15,40 @@ export default class BrandService {
   }
 
   static async create({ request }: HttpContext) {
-    const { name, description } = await request.validateUsing(createBrandValidator)
+    const { name, description } = await request.validateUsing(createTypeValidator)
 
     try {
-      const newBrand = new Brand()
-      newBrand.name = name
-      newBrand.description = description ?? null
-      await newBrand.save()
+      const newType = new Type()
+      newType.name = name
 
-      return ResponseHelper.okResponse(newBrand, 'Kategori berhasil dibuat')
+      newType.description = description ?? null
+      await newType.save()
+
+      return ResponseHelper.okResponse(newType, 'Kategori berhasil dibuat')
     } catch (err) {
       return ResponseHelper.serverErrorResponse(err.message)
     }
   }
 
   static async update({ request, params }: HttpContext) {
-    const { name, description } = await request.validateUsing(brandValidator)
+    const { name, description } = await request.validateUsing(typeValidator)
 
     try {
-      const brand = await Brand.findOrFail(params.id)
+      const type = await Type.findOrFail(params.id)
 
-      if (brand.name !== name) {
-        const existingBrand = await Brand.findBy('name', name)
-        if (existingBrand) {
+      if (type.name !== name) {
+        const existingType = await Type.findBy('name', name)
+        if (existingType) {
           return ResponseHelper.badRequestResponse('Nama kategori sudah ada')
         }
 
-        brand.name = name
+        type.name = name
       }
 
-      brand.description = description ?? null
-      await brand.save()
+      type.description = description ?? null
+      await type.save()
 
-      return ResponseHelper.okResponse(brand, 'Kategori berhasil diupdate')
+      return ResponseHelper.okResponse(type, 'Kategori berhasil diupdate')
     } catch (err) {
       if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
         return ResponseHelper.notFoundResponse(err.message)
@@ -59,10 +60,10 @@ export default class BrandService {
 
   static async delete({ params }: HttpContext) {
     try {
-      const brand = await Brand.findOrFail(params.id)
-      await brand.delete()
+      const type = await Type.findOrFail(params.id)
+      await type.delete()
 
-      return ResponseHelper.okResponse(brand, 'Kategori berhasil dihapus')
+      return ResponseHelper.okResponse(type, 'Kategori berhasil dihapus')
     } catch (err) {
       if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
         return ResponseHelper.notFoundResponse(err.message)

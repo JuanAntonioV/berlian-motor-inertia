@@ -1,16 +1,16 @@
 import vine from '@vinejs/vine'
 
-export const createCategoryValidator = vine.compile(
+export const createTypeValidator = vine.compile(
   vine.object({
     name: vine.string().unique({
-      table: 'categories',
+      table: 'types',
       column: 'name',
     }),
     description: vine.string().optional(),
   })
 )
 
-export const categoryValidator = vine.compile(
+export const typeValidator = vine.compile(
   vine.object({
     name: vine.string(),
     description: vine.string().optional(),

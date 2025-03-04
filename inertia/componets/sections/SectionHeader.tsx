@@ -3,9 +3,10 @@ import { Box, Flex, Text, Title } from '@mantine/core'
 type Props = {
   title: string
   description?: string
+  children?: Readonly<React.ReactNode>
 }
 
-const SectionHeader = ({ title, description }: Props) => {
+const SectionHeader = ({ title, description, children }: Props) => {
   return (
     <Flex
       justify={'space-between'}
@@ -23,6 +24,8 @@ const SectionHeader = ({ title, description }: Props) => {
           {description}
         </Text>
       </Box>
+
+      {children}
     </Flex>
   )
 }

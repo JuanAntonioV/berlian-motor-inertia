@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const TypeController = () => import('#controllers/type_controller')
 const AuthController = () => import('#controllers/auth_controller')
 const DashboardController = () => import('#controllers/dashboard_controller')
 const ProfileController = () => import('#controllers/profile_controller')
@@ -67,6 +68,14 @@ router
         router.delete(':id', [BrandController, 'delete']).as('brand.delete')
       })
       .prefix('brands')
+    router
+      .group(() => {
+        router.get('list', [TypeController, 'list']).as('type.list')
+        router.post('/', [TypeController, 'create']).as('type.create')
+        router.put(':id', [TypeController, 'update']).as('type.update')
+        router.delete(':id', [TypeController, 'delete']).as('type.delete')
+      })
+      .prefix('types')
   })
   .prefix('api')
 
@@ -87,5 +96,6 @@ router
     router.get('akun-saya', [ProfileController, 'show']).as('profile.page')
     router.get('kelola-kategori', [CategoryController, 'show']).as('category.page')
     router.get('kelola-merek', [BrandController, 'show']).as('brand.page')
+    router.get('kelola-tipe', [TypeController, 'show']).as('type.page')
   })
   .middleware(middleware.auth())

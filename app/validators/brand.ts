@@ -6,13 +6,13 @@ export const createBrandValidator = vine.compile(
       table: 'brands',
       column: 'name',
     }),
-    description: vine.string().nullable(),
+    description: vine.string().optional(),
   })
 )
 
 export const brandValidator = vine.compile(
   vine.object({
     name: vine.string(),
-    description: vine.string().nullable(),
+    description: vine.string().optional(),
   })
 )

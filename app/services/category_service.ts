@@ -20,7 +20,7 @@ export default class CategoryService {
     try {
       const newCategory = new Category()
       newCategory.name = name
-      newCategory.description = description
+      newCategory.description = description ?? null
       await newCategory.save()
 
       return ResponseHelper.okResponse(newCategory, 'Kategori berhasil dibuat')
@@ -44,7 +44,7 @@ export default class CategoryService {
         category.name = name
       }
 
-      category.description = description
+      category.description = description ?? null
       await category.save()
 
       return ResponseHelper.okResponse(category, 'Kategori berhasil diupdate')

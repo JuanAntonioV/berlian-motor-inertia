@@ -7,8 +7,8 @@ import toast from 'react-hot-toast'
 import { deleteBrandApi, getBrandListApi } from '~/api/brand_api'
 import { brandColumn } from '~/componets/columns/brand_column'
 import BrandModal from '~/componets/modals/BrandModal'
+import SectionHeader from '~/componets/sections/SectionHeader'
 import DataTable from '~/componets/tables/DataTable'
-import PageTitle from '~/componets/titles/PageTitle'
 import PageTransition from '~/componets/transitions/PageTransition'
 import AdminLayout from '~/layouts/AdminLayout'
 import { TBrand } from '~/types'
@@ -48,9 +48,11 @@ const ManageBrandPage = () => {
         }}
       />
       <PageTransition>
-        <PageTitle title="Tabel Merek" description="Berisi tentang merek yang ada di aplikasi" />
-
         <Card shadow="xs">
+          <SectionHeader
+            title="Tabel Merek"
+            description="Berisi tentang merek yang ada di aplikasi"
+          />
           <DataTable
             data={data?.data || []}
             columns={brandColumn}
