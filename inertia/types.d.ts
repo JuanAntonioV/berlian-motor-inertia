@@ -82,3 +82,7 @@ export interface TCategory {
 
 export type TBrand = TCategory
 export type TType = TCategory
+
+export type TStorage = TCategory & {
+  image: string | null
+}

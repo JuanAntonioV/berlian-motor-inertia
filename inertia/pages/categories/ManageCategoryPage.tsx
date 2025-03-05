@@ -7,8 +7,8 @@ import toast from 'react-hot-toast'
 import { deleteCategoryApi, getCategoryListApi } from '~/api/category_api'
 import { categoryColumn } from '~/componets/columns/category_column'
 import CategoryModal from '~/componets/modals/CategoryModal'
+import SectionHeader from '~/componets/sections/SectionHeader'
 import DataTable from '~/componets/tables/DataTable'
-import PageTitle from '~/componets/titles/PageTitle'
 import PageTransition from '~/componets/transitions/PageTransition'
 import AdminLayout from '~/layouts/AdminLayout'
 import { TCategory } from '~/types'
@@ -49,12 +49,11 @@ const ManageCategoryPage = () => {
         }}
       />
       <PageTransition>
-        <PageTitle
-          title="Tabel Kategori"
-          description="Berisi tentang kategori yang ada di aplikasi"
-        />
-
         <Card shadow="xs">
+          <SectionHeader
+            title="Tabel Kategori"
+            description="Berisi tentang kategori yang ada di aplikasi"
+          />
           <DataTable
             data={data?.data || []}
             columns={categoryColumn}

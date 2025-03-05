@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const StorageController = () => import('#controllers/storage_controller')
 const TypeController = () => import('#controllers/type_controller')
 const AuthController = () => import('#controllers/auth_controller')
 const DashboardController = () => import('#controllers/dashboard_controller')
@@ -76,6 +77,14 @@ router
         router.delete(':id', [TypeController, 'delete']).as('type.delete')
       })
       .prefix('types')
+    router
+      .group(() => {
+        router.get('list', [StorageController, 'list']).as('storage.list')
+        router.post('/', [StorageController, 'create']).as('storage.create')
+        router.put(':id', [StorageController, 'update']).as('storage.update')
+        router.delete(':id', [StorageController, 'delete']).as('storage.delete')
+      })
+      .prefix('storages')
   })
   .prefix('api')
 
@@ -97,5 +106,6 @@ router
     router.get('kelola-kategori', [CategoryController, 'show']).as('category.page')
     router.get('kelola-merek', [BrandController, 'show']).as('brand.page')
     router.get('kelola-tipe', [TypeController, 'show']).as('type.page')
+    router.get('kelola-rak', [StorageController, 'show']).as('storage.page')
   })
   .middleware(middleware.auth())

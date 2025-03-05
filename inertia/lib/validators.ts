@@ -78,3 +78,16 @@ export const profileSchema = z.object({
     .email('Email tidak valid'),
   image: z.instanceof(File).nullish(),
 })
+
+export const storageSchema = z.object({
+  name: z
+    .string({
+      required_error: 'Nama wajib diisi',
+      invalid_type_error: 'Nama tidak valid',
+      message: 'Nama tidak valid',
+    })
+    .min(1, 'Nama tidak boleh kosong')
+    .max(255, 'Nama maksimal 255 karakter'),
+  description: z.string().nullish(),
+  image: z.instanceof(File).nullish(),
+})
