@@ -7,15 +7,26 @@ type Props = {
 }
 const AdminLayout = ({ children }: Props) => {
   return (
-    <Box className="grid lg:grid-cols-[250px_1fr] dark:bg-inherit" bg={'gray.1'}>
+    <Box w={'100vw'} h={'100vh'} display={'flex'} className="!text-gray-900">
       <AppSiderbar />
-      <Box>
+      <Box component="main" flex={1} bg={'gray.0'}>
         <AppHeader />
-        <Box bg={'gray.1'} pb={'md'} className="dark:bg-inherit !w-full">
-          <ScrollArea className="!h-[calc(100vh-153px)]" scrollbars="y" type="always">
+        <ScrollArea.Autosize
+          scrollbars={'y'}
+          pos={'relative'}
+          mah={'calc(100vh - 140px)'}
+          type="always"
+        >
+          <Box
+            component="main"
+            w={{
+              base: '100vw',
+              lg: 'calc(100vw - 255px)',
+            }}
+          >
             {children}
-          </ScrollArea>
-        </Box>
+          </Box>
+        </ScrollArea.Autosize>
       </Box>
     </Box>
   )

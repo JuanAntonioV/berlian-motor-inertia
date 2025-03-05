@@ -28,7 +28,7 @@ export default function AppMobileSidebar() {
       >
         <Stack component={'nav'} h={'100%'} px={8} mt={rem(38)}>
           <Stack gap={4}>
-            <NavList />
+            <NavList onToggleSidebar={toggle} />
           </Stack>
         </Stack>
       </Drawer>

@@ -6,7 +6,11 @@ import { FolderCog, Inbox, PanelsTopLeft, Search, ShoppingCart, UsersRound } fro
 import { useMemo } from 'react'
 import { TMenu } from '~/types'
 
-const NavList = () => {
+type Props = {
+  onToggleSidebar?: () => void
+}
+
+const NavList = ({ onToggleSidebar }: Props) => {
   const { url } = usePage()
 
   const menuList = useMemo<TMenu[]>(() => {
@@ -153,6 +157,7 @@ const NavList = () => {
                     component={Link}
                     label={menu.label}
                     prefetch
+                    onClick={onToggleSidebar}
                     leftSection={menu.icon || <Inbox size={24} />}
                     className="!rounded-lg hover:!bg-gray-900 data-[active=true]:!bg-gray-600 data-[active=true]:!text-white"
                     childrenOffset={28}
@@ -191,6 +196,7 @@ const NavList = () => {
                               childrenOffset={28}
                               active={url.includes(subMenu.href)}
                               variant="light"
+                              onClick={onToggleSidebar}
                             />
                           </List.Item>
                         ))}

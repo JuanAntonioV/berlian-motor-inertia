@@ -16,12 +16,16 @@ export const storageColumn = [
   }),
   columnHelper.accessor('description', {
     header: 'Deskripsi',
-    Cell: ({ cell }) => <Text lineClamp={1}>{cell.getValue() || '-'}</Text>,
+    Cell: ({ cell }) => (
+      <Text size="sm" lineClamp={1}>
+        {cell.getValue() || '-'}
+      </Text>
+    ),
   }),
   columnHelper.accessor('createdAt', {
     header: 'Dibuat',
     Cell: ({ cell }) => (
-      <Text>
+      <Text size="sm">
         {DateTime.fromJSDate(new Date(cell.getValue())).toLocaleString(DateTime.DATETIME_MED)}
       </Text>
     ),

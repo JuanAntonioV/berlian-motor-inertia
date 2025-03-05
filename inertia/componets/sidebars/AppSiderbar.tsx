@@ -6,7 +6,15 @@ import SidebarProfile from './SidebarProfile'
 
 const AppSiderbar = () => {
   return (
-    <Box component="aside" c={'white'} bg={'black'} visibleFrom="lg" pos={'relative'}>
+    <Box
+      component="aside"
+      c={'white'}
+      bg={'black'}
+      visibleFrom="lg"
+      pos={'relative'}
+      w={'250px'}
+      h={'100vh'}
+    >
       <Box component="header" className="flex-center" p={'md'}>
         <Link href="/dashboard" prefetch className="w-full">
           <BrandLogo />
