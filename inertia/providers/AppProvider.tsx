@@ -12,7 +12,7 @@ const AppProvider = ({ children }: Props) => {
   return (
     <>
       {children}
-      <Toaster position="bottom-right" />
+      <Toaster position="top-center" />
     </>
   )
 }

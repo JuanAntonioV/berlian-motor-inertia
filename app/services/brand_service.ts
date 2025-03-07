@@ -5,7 +5,7 @@ import Brand from '#models/brand'
 import { errors as lucidErrors } from '@adonisjs/lucid'
 
 export default class BrandService {
-  static async list({}: HttpContext) {
+  static async list({}: HttpContext = {}) {
     try {
       const categories = await Brand.all()
       return ResponseHelper.okResponse(categories)

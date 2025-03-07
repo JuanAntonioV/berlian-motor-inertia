@@ -1,5 +1,7 @@
+import { Link } from '@inertiajs/react'
 import { ActionIcon, Button, Group, Text, Tooltip } from '@mantine/core'
 import { modals } from '@mantine/modals'
+import { isEmpty } from 'lodash'
 import { CircleAlert, Edit3, Plus, RefreshCcw, Trash2 } from 'lucide-react'
 import {
   MantineReactTable,
@@ -20,6 +22,8 @@ type Props<T extends MRT_RowData> = {
   onEdit?: (data: T) => void
   customActions?: (rowData: T) => React.ReactNode
   onCreate?: () => void
+  createPath?: string
+  editPath?: string
 } & MRT_TableOptions<T & MRT_RowData>
 
 const DataTable = <T extends MRT_RowData>({
@@ -33,6 +37,8 @@ const DataTable = <T extends MRT_RowData>({
   onEdit,
   customActions,
   onCreate,
+  createPath,
+  editPath,
   ...props
 }: Props<T>) => {
   const confirmLogoutModal = (id) =>
@@ -83,7 +89,7 @@ const DataTable = <T extends MRT_RowData>({
                   <RefreshCcw />
                 </ActionIcon>
               )}
-              <Text span fz={'sm'}>
+              <Text span fz={'sm'} c={'red'}>
                 {errorMessage || 'Error fetching data'}
               </Text>
             </Group>
@@ -105,10 +111,13 @@ const DataTable = <T extends MRT_RowData>({
     positionActionsColumn: 'last',
     renderTopToolbarCustomActions: () => (
       <Group>
-        {onCreate && (
+        {(onCreate || createPath) && (
           <Button
+            component={createPath ? Link : undefined}
+            href={createPath ?? ''}
+            prefetch={!isEmpty(createPath)}
             onClick={() => {
-              onCreate()
+              onCreate?.()
             }}
             leftSection={<Plus size={18} />}
           >
@@ -119,15 +128,18 @@ const DataTable = <T extends MRT_RowData>({
     ),
     renderRowActions: ({ row }) => (
       <Group>
-        {onEdit && (
+        {(onEdit || editPath) && (
           <Tooltip label="Edit" position="left" color="blue">
             <ActionIcon
               variant="outline"
               color="blue"
               size="lg"
+              prefetch={!isEmpty(editPath)}
+              component={editPath ? Link : undefined}
+              href={editPath ? `${editPath}/${row.original.id}/edit` : ''}
               onClick={(e) => {
                 e.stopPropagation()
-                onEdit(row.original)
+                onEdit?.(row.original)
               }}
             >
               <Edit3 size={20} />

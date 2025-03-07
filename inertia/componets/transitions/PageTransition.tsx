@@ -1,5 +1,5 @@
 import { keyframes } from '@emotion/react'
-import { Box, type BoxProps } from '@mantine/core'
+import { Stack, type BoxProps } from '@mantine/core'
 
 type Props = {
   children: Readonly<React.ReactNode>
@@ -16,7 +16,7 @@ const slideFromBottom = keyframes({
 
 const PageTransition = ({ children, ...props }: Props) => {
   return (
-    <Box
+    <Stack
       p={{ base: 'md', lg: 'xl' }}
       component="main"
       sx={{
@@ -25,7 +25,7 @@ const PageTransition = ({ children, ...props }: Props) => {
       {...props}
     >
       {children}
-    </Box>
+    </Stack>
   )
 }
 export default PageTransition

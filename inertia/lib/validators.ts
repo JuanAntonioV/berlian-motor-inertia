@@ -91,3 +91,25 @@ export const storageSchema = z.object({
   description: z.string().nullish(),
   image: z.instanceof(File).nullish(),
 })
+
+export const productSchema = z.object({
+  name: z
+    .string({
+      required_error: 'Nama wajib diisi',
+      invalid_type_error: 'Nama tidak valid',
+      message: 'Nama tidak valid',
+    })
+    .min(1, 'Nama tidak boleh kosong')
+    .max(255, 'Nama maksimal 255 karakter'),
+  brandId: z.coerce.number(),
+  typeId: z.coerce.number().nullish(),
+  categoryIds: z.array(z.coerce.number()).default([]),
+  sku: z.string().nullish(),
+  description: z.string().nullish(),
+  image: z.instanceof(File).nullish(),
+  salePrice: z.coerce.number().default(0),
+  supplierPrice: z.coerce.number().default(0),
+  wholesalePrice: z.coerce.number().default(0),
+  retailPrice: z.coerce.number().default(0),
+  workshopPrice: z.coerce.number().default(0),
+})

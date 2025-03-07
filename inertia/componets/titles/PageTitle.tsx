@@ -7,8 +7,8 @@ type Props = {
 }
 const PageTitle = ({ title, description, children }: Props) => {
   return (
-    <Group justify="space-between" align="center" gap={'md'}>
-      <Stack gap={rem(4)} mb={'xl'}>
+    <Group justify="space-between" align="center" gap={0} mb={'xl'}>
+      <Stack gap={rem(4)}>
         <Title order={3}>{title}</Title>
         {description && (
           <Text size="sm" c={'gray'}>

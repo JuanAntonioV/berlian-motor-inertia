@@ -5,7 +5,7 @@ import Type from '#models/type'
 import { errors as lucidErrors } from '@adonisjs/lucid'
 
 export default class TypeService {
-  static async list({}: HttpContext) {
+  static async list({}: HttpContext = {}) {
     try {
       const categories = await Type.all()
       return ResponseHelper.okResponse(categories)

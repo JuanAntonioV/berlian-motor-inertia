@@ -86,3 +86,20 @@ export type TType = TCategory
 export type TStorage = TCategory & {
   image: string | null
 }
+
+export interface TProduct {
+  id: number
+  brandId: number
+  typeId: number | null
+  name: string
+  sku: string
+  description: string | null
+  image: string | null
+  salePrice: number
+  supplierPrice: number
+  wholesalePrice: number
+  retailPrice: number
+  workshopPrice: number
+  createdAt: Date
+  updatedAt: Date
+}

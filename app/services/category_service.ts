@@ -5,7 +5,7 @@ import Category from '#models/category'
 import { errors as lucidErrors } from '@adonisjs/lucid'
 
 export default class CategoryService {
-  static async list({}: HttpContext) {
+  static async list({}: HttpContext = {}) {
     try {
       const categories = await Category.all()
       return ResponseHelper.okResponse(categories)

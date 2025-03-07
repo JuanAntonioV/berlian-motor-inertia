@@ -20,3 +20,17 @@ api.interceptors.response.use(
     return Promise.reject(error.response.data)
   }
 )
+
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    const unauthorizedCode = 401
+    const isAuthError = error.code === unauthorizedCode
+
+    if (isAuthError) {
+      localStorage.removeItem('token')
+    }
+
+    return Promise.reject(error)
+  }
+)

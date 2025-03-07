@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const ProductController = () => import('#controllers/product_controller')
 const StorageController = () => import('#controllers/storage_controller')
 const TypeController = () => import('#controllers/type_controller')
 const AuthController = () => import('#controllers/auth_controller')
@@ -85,6 +86,15 @@ router
         router.delete(':id', [StorageController, 'delete']).as('storage.delete')
       })
       .prefix('storages')
+    router
+      .group(() => {
+        router.get('list', [ProductController, 'list']).as('product.list')
+        router.get(':id', [ProductController, 'detail']).as('product.detail')
+        router.post('/', [ProductController, 'create']).as('product.create')
+        router.put(':id', [ProductController, 'update']).as('product.update')
+        router.delete(':id', [ProductController, 'delete']).as('product.delete')
+      })
+      .prefix('products')
   })
   .prefix('api')
 
@@ -107,5 +117,12 @@ router
     router.get('kelola-merek', [BrandController, 'show']).as('brand.page')
     router.get('kelola-tipe', [TypeController, 'show']).as('type.page')
     router.get('kelola-rak', [StorageController, 'show']).as('storage.page')
+    router
+      .group(() => {
+        router.get('/', [ProductController, 'show']).as('product.page')
+        router.get('/tambah', [ProductController, 'showCreate']).as('product.create.page')
+        router.get('/:id/edit', [ProductController, 'showEdit']).as('product.edit.page')
+      })
+      .prefix('kelola-produk')
   })
   .middleware(middleware.auth())

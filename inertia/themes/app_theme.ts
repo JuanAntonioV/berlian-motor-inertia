@@ -270,6 +270,13 @@ export const appTheme = createTheme({
         },
       },
     },
+    NumberInput: {
+      defaultProps: {
+        classNames: {
+          label: 'mb-1',
+        },
+      },
+    },
     PasswordInput: {
       defaultProps: {
         classNames: {
