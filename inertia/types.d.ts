@@ -103,3 +103,16 @@ export interface TProduct {
   createdAt: Date
   updatedAt: Date
 }
+
+export interface TStaff {
+  id: number
+  fullName: string
+  email: string
+  image: null
+  createdAt: string
+  updatedAt: string
+  roles: string[]
+  totalRoles: number
+  totalPermissions: number
+  permissions: string[]
+}
