@@ -2,7 +2,7 @@ import { Link, router, usePage } from '@inertiajs/react'
 import { em, Flex, Menu, rem, Stack, Text, Title } from '@mantine/core'
 import { useDisclosure } from '@mantine/hooks'
 import { modals } from '@mantine/modals'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CircleAlert, LogOut, ScanSearch, User } from 'lucide-react'
 import { logoutApi } from '~/api/auth_api'
 import UserPicture from '../pictures/UserPicture'
@@ -15,11 +15,20 @@ import { openSpotlight } from '@mantine/spotlight'
 const AppProfileMenu = () => {
   const [opened, { toggle }] = useDisclosure()
 
+  const queryClient = useQueryClient()
+
   const { mutate, isPending } = useMutation({
     mutationFn: logoutApi,
     onSuccess: () => {
+      queryClient.resetQueries()
+      queryClient.clear()
+      router.flushAll()
+      router.visit('/auth/login', { replace: true })
       router.visit('/auth/login')
       toast.success('Logout berhasil')
+    },
+    onError: (err) => {
+      toast.error(err?.message)
     },
   })
 

@@ -19,7 +19,7 @@ import { Form, useForm, zodResolver } from '@mantine/form'
 import { profileSchema } from '~/lib/validators'
 import { DateTime } from 'luxon'
 import { useEffect, useState } from 'react'
-import { getInitials } from '~/lib/formaters'
+import { getInitials, parseFormatedPhoneNumber } from '~/lib/formaters'
 import { useMutation } from '@tanstack/react-query'
 import { updateProfileApi } from '~/api/profile_api'
 import toast from 'react-hot-toast'
@@ -33,6 +33,7 @@ const ProfileSection = () => {
     initialValues: {
       fullName: user.fullName,
       email: user.email,
+      phone: parseFormatedPhoneNumber(user.phone),
       image: null,
     },
     validate: zodResolver(profileSchema),
@@ -129,11 +130,18 @@ const ProfileSection = () => {
             {...form.getInputProps('email')}
           />
           <TextInput
+            placeholder="Masukkan nomor telepon"
+            label="Nomor telepon"
+            withAsterisk
+            key={form.key('phone')}
+            {...form.getInputProps('phone')}
+          />
+          <TextInput
             disabled
             placeholder="Tanggal bergabung"
             label="Tanggal bergabung"
             withAsterisk
-            value={DateTime.fromJSDate(new Date(user.createdAt)).toLocaleString(DateTime.DATE_FULL)}
+            value={DateTime.fromJSDate(new Date(user.joinDate)).toLocaleString(DateTime.DATE_FULL)}
           />
           <InputBase component="div" multiline disabled label="Peran">
             <Pill.Group>

@@ -1,3 +1,5 @@
+import 'dayjs/locale/id'
+import { DatesProvider } from '@mantine/dates'
 import { Settings } from 'luxon'
 import { Toaster } from 'react-hot-toast'
 
@@ -10,10 +12,10 @@ Settings.defaultLocale = 'id-ID'
 
 const AppProvider = ({ children }: Props) => {
   return (
-    <>
+    <DatesProvider settings={{ locale: 'id', timezone: 'Asia/Jakarta' }}>
       {children}
       <Toaster position="top-center" />
-    </>
+    </DatesProvider>
   )
 }
 export default AppProvider

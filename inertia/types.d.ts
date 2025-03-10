@@ -66,9 +66,11 @@ export interface TUser {
   id: number
   fullName: string
   email: string
+  phone: string | null
   image: string
   roles: TRoles[]
   permissions: string[]
+  joinDate: Date
   createdAt: Date
 }
 
@@ -115,4 +117,19 @@ export interface TStaff {
   totalRoles: number
   totalPermissions: number
   permissions: string[]
+}
+
+export interface TRole {
+  id: number
+  name: string
+  slug: string
+  description: string
+  permissions: TPermission[] | string[]
+}
+
+export interface TPermission {
+  id: number
+  name: string
+  slug: string
+  description: string
 }

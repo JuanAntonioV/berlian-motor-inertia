@@ -25,7 +25,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { StatusCodes } from 'http-status-codes'
 import { AlertCircleIcon, ArrowLeft, CircleAlert, Info } from 'lucide-react'
 import toast from 'react-hot-toast'
-import { deleteProductApi, getProducDetail, updateProductApi } from '~/api/product_api'
+import { deleteProductApi, getProductDetail, updateProductApi } from '~/api/product_api'
 import SectionHeader from '~/componets/sections/SectionHeader'
 import PageTitle from '~/componets/titles/PageTitle'
 import PageTransition from '~/componets/transitions/PageTransition'
@@ -45,7 +45,7 @@ const EditProductPage = () => {
 
   const { data, isPending, error } = useQuery({
     queryKey: ['product-detail', { id }],
-    queryFn: () => getProducDetail({ id: Number(id!) }),
+    queryFn: () => getProductDetail({ id: Number(id!) }),
     enabled: !!id,
     select: (res) => res.data,
   })
@@ -71,7 +71,6 @@ const EditProductPage = () => {
 
   useEffect(() => {
     if (data) {
-      console.log('data', data)
       form.setValues({
         ...data,
         categoryIds: data.categories.map((category) => category.id.toString()),
@@ -101,7 +100,7 @@ const EditProductPage = () => {
       toast.success('Produk berhasil diubah')
     },
     onError: (err) => {
-      form.setErrors(formErrorResolver(err))
+      form.setErrors(formErrorResolver(err?.errors))
     },
   })
 

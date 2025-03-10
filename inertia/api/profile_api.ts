@@ -6,7 +6,7 @@ export async function resetPasswordApi(payload) {
 }
 
 export async function updateProfileApi(payload) {
-  const { data } = await api.post('/profile/update', payload, {
+  const { data } = await api.put('/profile/update', payload, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

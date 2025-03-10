@@ -31,8 +31,8 @@ const ManageStaffPage = () => {
             isError={isError}
             errorMessage={error?.message}
             enableRowSelection={false}
-            createPath="/kelola-produk/tambah"
-            editPath="/kelola-produk"
+            createPath="/kelola-karyawan/tambah"
+            editPath="/kelola-karyawan"
           />
         </Card>
       </PageTransition>

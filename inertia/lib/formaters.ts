@@ -16,3 +16,9 @@ export function getInitials(name: string) {
 export function getInitialRoleName(roles: TRoles[]) {
   return roles[0]?.name ?? ''
 }
+
+export function parseFormatedPhoneNumber(phone: string | null): string {
+  if (!phone) return ''
+  // remove +62 if exists and replace with 0
+  return phone.replace(/^\+62/, '0')
+}

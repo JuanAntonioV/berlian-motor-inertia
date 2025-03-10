@@ -1,5 +1,6 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
+import { ValidationError } from '~/react_query'
 import { TSearchParamsData } from '~/types'
 
 export function cn(...inputs: ClassValue[]) {
@@ -19,7 +20,7 @@ export function getSearchParams(searchParams: TSearchParamsData<string>) {
   return { page, count, sort, order, search, from, to, skip }
 }
 
-export function formErrorResolver(errors: Record<string, any>) {
+export function formErrorResolver(errors?: ValidationError[] | null) {
   if (!errors) return {}
   return errors.reduce((acc, { field, message }) => ({ ...acc, [field]: message }), {})
 }

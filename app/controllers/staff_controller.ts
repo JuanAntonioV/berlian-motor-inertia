@@ -1,3 +1,4 @@
+import Role from '#models/role'
 import StaffService from '#services/staff_service'
 import type { HttpContext } from '@adonisjs/core/http'
 
@@ -6,9 +7,23 @@ export default class StaffController {
     return inertia.render('staffs/ManageStaffPage')
   }
 
-  async showCreate({}: HttpContext) {}
+  async showCreate({ inertia }: HttpContext) {
+    const roleList = await Role.query().select('id', 'name').exec()
 
-  async showEdit({}: HttpContext) {}
+    return inertia.render('staffs/CreateStaffPage', {
+      roleList: inertia.defer(() => roleList),
+    })
+  }
+
+  async showEdit({ inertia, params }: HttpContext) {
+    const id = params.id
+    const roleList = await Role.query().select('id', 'name').exec()
+
+    return inertia.render('staffs/EditStaffPage', {
+      roleList: inertia.defer(() => roleList),
+      id,
+    })
+  }
 
   async list(c: HttpContext) {
     const res = await StaffService.list(c)

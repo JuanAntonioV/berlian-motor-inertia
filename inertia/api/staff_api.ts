@@ -15,7 +15,7 @@ export async function getStaffListApi() {
   return data
 }
 
-export async function getProducDetail({ id }: TSearchParamsData<number> = {}) {
+export async function getStaffDetail({ id }: TSearchParamsData<number> = {}) {
   const { data } = await api.get(`/staffs/${id}`)
   return data
 }

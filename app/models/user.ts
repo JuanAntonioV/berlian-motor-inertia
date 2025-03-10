@@ -5,6 +5,7 @@ import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import Role from './role.js'
 import type { ManyToMany } from '@adonisjs/lucid/types/relations'
+import parsePhoneNumber from 'libphonenumber-js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -26,6 +27,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column({ serializeAs: null })
   declare password: string
+
+  @column.date({ autoCreate: true })
+  declare joinDate: DateTime
 
   @column()
   declare image: string | null
@@ -71,5 +75,23 @@ export default class User extends compose(BaseModel, AuthFinder) {
   static async isEmailExist(email: string): Promise<boolean> {
     const q = await User.query().where('email', email).first()
     return !!q
+  }
+
+  static async isPhoneExist(phone: string): Promise<boolean> {
+    const formatedPhone = await this.formatPhoneNumber(phone)
+    if (!formatedPhone) return false
+    const q = await User.query().where('phone', formatedPhone).first()
+    return !!q
+  }
+
+  static async formatPhoneNumber(phone: string): Promise<string | null> {
+    const number = parsePhoneNumber(phone, 'ID')
+
+    if (number) {
+      const formatedNumber = number.formatInternational()
+      return formatedNumber.split(' ').join('')
+    }
+
+    return null
   }
 }

@@ -48,15 +48,15 @@ router
     router
       .group(() => {
         router
-          .post('reset-password', [ProfileController, 'doResetPassword'])
-          .as('profile.password.reset')
+          .group(() => {
+            router
+              .post('reset-password', [ProfileController, 'doResetPassword'])
+              .as('profile.password.reset')
 
-        router.post('update', [ProfileController, 'update']).as('profile.update')
-      })
-      .prefix('profile')
+            router.put('update', [ProfileController, 'update']).as('profile.update')
+          })
+          .prefix('profile')
 
-    router
-      .group(() => {
         router
           .group(() => {
             router.get('list', [CategoryController, 'list']).as('categories.list')

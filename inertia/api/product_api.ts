@@ -15,7 +15,7 @@ export async function getProductListApi() {
   return data
 }
 
-export async function getProducDetail({ id }: TSearchParamsData<number> = {}) {
+export async function getProductDetail({ id }: TSearchParamsData<number> = {}) {
   const { data } = await api.get(`/products/${id}`)
   return data
 }

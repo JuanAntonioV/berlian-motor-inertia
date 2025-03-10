@@ -69,6 +69,7 @@ export const profileSchema = z.object({
     })
     .min(3, 'Nama lengkap minimal 3 karakter')
     .max(255, 'Nama lengkap maksimal 255 karakter'),
+  phone: z.string().nullable(),
   email: z
     .string({
       required_error: 'Email wajib diisi',
@@ -112,4 +113,57 @@ export const productSchema = z.object({
   wholesalePrice: z.coerce.number().default(0),
   retailPrice: z.coerce.number().default(0),
   workshopPrice: z.coerce.number().default(0),
+})
+
+export const staffSchema = z
+  .object({
+    fullName: z
+      .string({
+        required_error: 'Nama wajib diisi',
+        invalid_type_error: 'Nama tidak valid',
+        message: 'Nama tidak valid',
+      })
+      .min(1, 'Nama tidak boleh kosong')
+      .max(255, 'Nama maksimal 255 karakter'),
+    email: z
+      .string({
+        required_error: 'Email wajib diisi',
+        invalid_type_error: 'Email tidak valid',
+        message: 'Email tidak valid',
+      })
+      .email('Email tidak valid'),
+    joinDate: z.date().nullable(),
+    phone: z.string().nullable(),
+    password: z.string().min(6, 'Password minimal 6 karakter').trim(),
+    confirmPassword: z.string().min(6, 'Password minimal 6 karakter').trim(),
+    roles: z.coerce.number(),
+    image: z.instanceof(File).nullish(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: 'Password tidak sama',
+    path: ['confirmPassword'],
+  })
+
+export const updateStaffSchema = z.object({
+  fullName: z
+    .string({
+      required_error: 'Nama wajib diisi',
+      invalid_type_error: 'Nama tidak valid',
+      message: 'Nama tidak valid',
+    })
+    .min(1, 'Nama tidak boleh kosong')
+    .max(255, 'Nama maksimal 255 karakter'),
+  email: z
+    .string({
+      required_error: 'Email wajib diisi',
+      invalid_type_error: 'Email tidak valid',
+      message: 'Email tidak valid',
+    })
+    .email('Email tidak valid'),
+  joinDate: z.date().nullable(),
+  phone: z.string().nullable(),
+  password: z.string().nullish(),
+  confirmPassword: z.string().nullish(),
+  roles: z.coerce.number(),
+  image: z.instanceof(File).nullish(),
 })

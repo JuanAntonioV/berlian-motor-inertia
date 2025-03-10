@@ -12,6 +12,7 @@ export const updateProfileValidator = vine.compile(
   vine.object({
     fullName: vine.string().maxLength(50),
     email: vine.string().maxLength(50).email(),
+    phone: vine.string().maxLength(15).nullable(),
     image: vine
       .file({
         size: '2mb',

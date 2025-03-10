@@ -9,6 +9,8 @@ import { unlink } from 'node:fs/promises'
 import logger from '@adonisjs/core/services/logger'
 import env from '#start/env'
 import Role from '#models/role'
+import { DateTime } from 'luxon'
+import User from '#models/user'
 
 export default class StaffService {
   static async list({ auth }: HttpContext) {
@@ -77,7 +79,8 @@ export default class StaffService {
   }
 
   static async create({ request }: HttpContext) {
-    const { name, email, phone, roles, password } = await request.validateUsing(staffValidator)
+    const { fullName, email, phone, roles, password, joinDate } =
+      await request.validateUsing(staffValidator)
 
     const isRoleValid = await Role.query().whereIn('id', roles)
     if (isRoleValid.length !== roles.length) {
@@ -86,9 +89,10 @@ export default class StaffService {
 
     try {
       const newStaff = new Staff()
-      newStaff.fullName = name
+      newStaff.fullName = fullName
       newStaff.email = email
-      newStaff.phone = phone
+      newStaff.phone = await User.formatPhoneNumber(phone)
+      newStaff.joinDate = DateTime.fromJSDate(joinDate)
       newStaff.password = password
 
       const image = request.file('image')
@@ -117,7 +121,8 @@ export default class StaffService {
   }
 
   static async update({ request, params }: HttpContext) {
-    const { name, email, phone, roles } = await request.validateUsing(updateStaffValidator)
+    const { fullName, email, phone, roles, joinDate, password } =
+      await request.validateUsing(updateStaffValidator)
 
     const isRoleValid = await Role.query().whereIn('id', roles)
     if (isRoleValid.length !== roles.length) {
@@ -127,9 +132,10 @@ export default class StaffService {
     try {
       const staff = await Staff.findOrFail(params.id)
 
-      staff.fullName = name
+      staff.fullName = fullName
       staff.email = email
-      staff.phone = phone
+      staff.phone = await User.formatPhoneNumber(phone)
+      staff.joinDate = DateTime.fromJSDate(joinDate)
 
       const image = request.file('image')
 
@@ -151,6 +157,11 @@ export default class StaffService {
 
         const filePath = `/${folderPath}/${filename}`
         staff.image = filePath
+      }
+
+      if (password) {
+        staff.password = password
+        await Staff.hashPassword(staff)
       }
 
       await staff.save()
@@ -194,7 +205,11 @@ export default class StaffService {
     try {
       const staff = await Staff.query()
         .where('id', id)
-
+        .preload('roles', (q) => {
+          q.select('id', 'name').preload('permissions', (qs) => {
+            qs.select('id', 'name')
+          })
+        })
         .first()
 
       if (!staff) {
@@ -206,7 +221,30 @@ export default class StaffService {
         staff.image = absolutePath
       }
 
-      return ResponseHelper.okResponse(staff)
+      const permissions = staff.roles
+        .map((role) => role.permissions.map((permission) => permission.name))
+        .flat()
+      const permissionIds = staff.roles
+        .map((role) => role.permissions.map((permission) => permission.id))
+        .flat()
+
+      const roles = staff.roles.map((role) => role.name)
+      const roleIds = staff.roles.map((role) => role.id)
+
+      const totalRoles = roles.length
+      const totalPermissions = permissions.length
+
+      const staffWithPermissions = {
+        ...staff.serialize(),
+        totalRoles,
+        roles,
+        totalPermissions,
+        permissions,
+        roleIds,
+        permissionIds,
+      }
+
+      return ResponseHelper.okResponse(staffWithPermissions)
     } catch (err) {
       if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
         return ResponseHelper.notFoundResponse(err.message)

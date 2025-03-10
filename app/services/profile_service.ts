@@ -31,13 +31,14 @@ export default class ProfileService {
     }
   }
   static async update({ request, auth }: HttpContext) {
-    const { fullName, email } = await request.validateUsing(updateProfileValidator)
+    const { fullName, email, phone } = await request.validateUsing(updateProfileValidator)
 
     const user = auth.user!
 
     try {
       if (user.email !== email) {
         const isEmailExist = await User.isEmailExist(email)
+
         if (isEmailExist) {
           return ResponseHelper.badRequestResponse('Email sudah digunakan')
         }
@@ -46,6 +47,17 @@ export default class ProfileService {
       }
 
       user.fullName = fullName
+
+      if (phone) {
+        const formatedPhone = await User.formatPhoneNumber(phone)
+
+        if (!formatedPhone) {
+          return ResponseHelper.badRequestResponse('Nomor telepon tidak valid')
+        }
+
+        user.phone = formatedPhone
+      }
+
       const avatar = request.file('image')
 
       if (avatar?.isValid) {

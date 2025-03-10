@@ -61,7 +61,7 @@ const CreateProductPage = () => {
       router.visit('/kelola-produk')
     },
     onError: (err) => {
-      form.setErrors(formErrorResolver(err))
+      form.setErrors(formErrorResolver(err?.errors))
     },
   })
 

@@ -3,16 +3,21 @@
 import { router } from '@inertiajs/react'
 import { ActionIcon, Text } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { CircleAlert, LucideLogOut } from 'lucide-react'
 import toast from 'react-hot-toast'
 import { logoutApi } from '~/api/auth_api'
 
 export default function LogoutIconButton() {
+  const queryClient = useQueryClient()
+
   const { mutate, isPending } = useMutation({
     mutationFn: logoutApi,
     onSuccess: () => {
       toast.success('Logout berhasil')
+      queryClient.resetQueries()
+      queryClient.clear()
+      router.flushAll()
       router.visit('/auth/login', { replace: true })
     },
     onError: (err) => {
