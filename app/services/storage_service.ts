@@ -12,16 +12,16 @@ import env from '#start/env'
 export default class StorageService {
   static async list({}: HttpContext) {
     try {
-      const categories = await Storage.all()
+      const storages = await Storage.all()
 
-      categories.forEach((category) => {
+      storages.forEach((category) => {
         if (category.image) {
           const absolutePath = `${env.get('APP_URL')}${category.image}`
           category.image = absolutePath
         }
       })
 
-      return ResponseHelper.okResponse(categories)
+      return ResponseHelper.okResponse(storages)
     } catch (err) {
       return ResponseHelper.serverErrorResponse(err.message)
     }
@@ -50,7 +50,7 @@ export default class StorageService {
 
       await newStorage.save()
 
-      return ResponseHelper.okResponse(newStorage, 'Kategori berhasil dibuat')
+      return ResponseHelper.okResponse(newStorage, 'Rak berhasil dibuat')
     } catch (err) {
       return ResponseHelper.serverErrorResponse(err.message)
     }
@@ -65,7 +65,7 @@ export default class StorageService {
       if (storage.name !== name) {
         const existingStorage = await Storage.findBy('name', name)
         if (existingStorage) {
-          return ResponseHelper.badRequestResponse('Nama kategori sudah ada')
+          return ResponseHelper.badRequestResponse('Nama rak sudah ada')
         }
 
         storage.name = name
@@ -97,7 +97,7 @@ export default class StorageService {
 
       await storage.save()
 
-      return ResponseHelper.okResponse(storage, 'Kategori berhasil diupdate')
+      return ResponseHelper.okResponse(storage, 'Rak berhasil diupdate')
     } catch (err) {
       if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
         return ResponseHelper.notFoundResponse(err.message)
@@ -120,7 +120,7 @@ export default class StorageService {
 
       await storage.delete()
 
-      return ResponseHelper.okResponse(storage, 'Kategori berhasil dihapus')
+      return ResponseHelper.okResponse(storage, 'Rak berhasil dihapus')
     } catch (err) {
       if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
         return ResponseHelper.notFoundResponse(err.message)

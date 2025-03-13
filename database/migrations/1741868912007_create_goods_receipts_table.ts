@@ -5,8 +5,19 @@ export default class extends BaseSchema {
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
-
+      table.string('id', 20).primary().notNullable()
+      table.integer('user_id').unsigned().references('id').inTable('users').onDelete('SET NULL')
+      table
+        .integer('supplier_id')
+        .unsigned()
+        .references('id')
+        .inTable('suppliers')
+        .onDelete('SET NULL')
+      table.integer('total_amount').notNullable().defaultTo(0)
+      table.timestamp('received_at').nullable()
+      table.string('attachment').nullable()
+      table.string('reference').nullable()
+      table.text('notes').nullable()
       table.timestamp('created_at')
       table.timestamp('updated_at')
     })

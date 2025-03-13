@@ -23,10 +23,11 @@ import { TStorage } from '~/types'
 import Form from '../forms/Form'
 import { Stack } from '@mantine/core'
 import { Group } from '@mantine/core'
+import { router } from '@inertiajs/react'
 
-type Props = { data?: TStorage | null } & ModalProps
+type Props = { data?: TStorage | null; onCreatedId?: (id: number) => void } & ModalProps
 
-const StorageModal = ({ data, ...props }: Props) => {
+const StorageModal = ({ data, onCreatedId, ...props }: Props) => {
   const isEditing = useMemo(() => !!data, [data])
 
   const form = useForm({
@@ -74,8 +75,12 @@ const StorageModal = ({ data, ...props }: Props) => {
     error: createError,
   } = useMutation({
     mutationFn: createStorageApi,
-    onSuccess: () => {
+    onSuccess: (res) => {
       queryClient.refetchQueries({ queryKey: ['storages'] })
+      if (onCreatedId) {
+        router.reload({ only: ['storageList'] })
+        onCreatedId(res.id)
+      }
       form.reset()
       props.onClose()
     },

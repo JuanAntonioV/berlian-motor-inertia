@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const GoodsReceiptController = () => import('#controllers/goods_receipt_controller')
 const StaffController = () => import('#controllers/staff_controller')
 const ProductController = () => import('#controllers/product_controller')
 const StorageController = () => import('#controllers/storage_controller')
@@ -109,6 +110,13 @@ router
             router.delete(':id', [StaffController, 'delete']).as('staff.delete')
           })
           .prefix('staffs')
+        router
+          .group(() => {
+            router.get('list', [GoodsReceiptController, 'list']).as('goodsReceipt.list')
+            router.get(':id', [GoodsReceiptController, 'detail']).as('goodsReceipt.detail')
+            router.post('/', [GoodsReceiptController, 'create']).as('goodsReceipt.create')
+          })
+          .prefix('goods-receipts')
       })
       .middleware(middleware.auth())
   })
@@ -147,5 +155,12 @@ router
         router.get('/:id/edit', [StaffController, 'showEdit']).as('staff.edit.page')
       })
       .prefix('kelola-karyawan')
+    router
+      .group(() => {
+        router.get('/', [GoodsReceiptController, 'show']).as('goodsReceipt.page')
+        router.get('/tambah', [GoodsReceiptController, 'showCreate']).as('goodsReceipt.create.page')
+        router.get('/:id', [GoodsReceiptController, 'showDetail']).as('goodsReceipt.detail.page')
+      })
+      .prefix('penerimaan-barang')
   })
   .middleware(middleware.auth())

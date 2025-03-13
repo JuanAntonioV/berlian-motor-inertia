@@ -143,3 +143,40 @@ export interface TProductStock {
   updatedAt: string
   storage: TStorage
 }
+
+export interface TGoodsReceiptItems {
+  id: number
+  goodsReceiptId: string
+  productId: number
+  quantity: number
+  price: number
+  createdAt: string
+  updatedAt: string
+  product: TProduct
+}
+
+export interface TSupplier {
+  id: number
+  name: string
+  phone: string
+  email: string
+  address: string
+  createdAt: string
+  updatedAt: string
+}
+
+export interface TGoodsReceipt {
+  id: string
+  supplierId: number
+  userId: number
+  user: TStaff
+  totalQuantity: number
+  supplier: TSupplier
+  attachment: string | null
+  notes: string | null
+  reference: string | null
+  totalAmount: number
+  createdAt: string
+  updatedAt: string
+  items: TGoodsReceiptItems[]
+}
