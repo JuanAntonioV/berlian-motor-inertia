@@ -167,3 +167,8 @@ export const updateStaffSchema = z.object({
   roles: z.coerce.number(),
   image: z.instanceof(File).nullish(),
 })
+
+export const stockSchema = z.object({
+  quantity: z.coerce.number(),
+  storageId: z.coerce.number(),
+})

@@ -62,4 +62,12 @@ export default class ProductController {
     const res = await ProductService.delete(c)
     return c.response.status(res.code).json(res)
   }
+  async stock(c: HttpContext) {
+    const res = await ProductService.getProductStock(c)
+    return c.response.status(res.code).json(res)
+  }
+  async addStock(c: HttpContext) {
+    const res = await ProductService.addProductStock(c)
+    return c.response.status(res.code).json(res)
+  }
 }

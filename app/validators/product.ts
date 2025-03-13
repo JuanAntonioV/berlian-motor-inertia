@@ -22,3 +22,10 @@ export const productValidator = vine.compile(
       .optional(),
   })
 )
+
+export const addStockValidator = vine.compile(
+  vine.object({
+    storageId: vine.number(),
+    quantity: vine.number().min(0),
+  })
+)

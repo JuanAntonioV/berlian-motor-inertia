@@ -38,6 +38,7 @@ import { isEmpty } from 'lodash'
 import { useEffect, useState, useMemo } from 'react'
 import { formErrorResolver } from '~/lib/utils'
 import { Group } from '@mantine/core'
+import ProductStockTable from '~/componets/tables/ProductStockTable'
 
 const EditProductPage = () => {
   const { id } = usePage().props
@@ -328,6 +329,8 @@ const EditProductPage = () => {
                     />
                   </Stack>
                 </Card>
+
+                <ProductStockTable id={Number(id)} />
 
                 <Group>
                   <Button

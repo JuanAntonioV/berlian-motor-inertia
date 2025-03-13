@@ -10,10 +10,11 @@ import { TType } from '~/types'
 import Form from '../forms/Form'
 import { Stack } from '@mantine/core'
 import { Group } from '@mantine/core'
+import { router } from '@inertiajs/react'
 
-type Props = { data?: TType | null } & ModalProps
+type Props = { data?: TType | null; onCreatedId?: (id: number) => void } & ModalProps
 
-const TypeModal = ({ data, ...props }: Props) => {
+const TypeModal = ({ data, onCreatedId, ...props }: Props) => {
   const isEditing = useMemo(() => !!data, [data])
 
   const form = useForm({
@@ -51,8 +52,12 @@ const TypeModal = ({ data, ...props }: Props) => {
     error: createError,
   } = useMutation({
     mutationFn: createTypeApi,
-    onSuccess: () => {
+    onSuccess: (res) => {
       queryClient.refetchQueries({ queryKey: ['types'] })
+      if (onCreatedId) {
+        router.reload({ only: ['typeList'] })
+        onCreatedId(res.id)
+      }
       form.reset()
       props.onClose()
     },

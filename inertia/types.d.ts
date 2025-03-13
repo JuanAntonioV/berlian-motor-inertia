@@ -133,3 +133,13 @@ export interface TPermission {
   slug: string
   description: string
 }
+
+export interface TProductStock {
+  id: number
+  productId: number
+  quantity: number
+  storageId: number
+  createdAt: string
+  updatedAt: string
+  storage: TStorage
+}

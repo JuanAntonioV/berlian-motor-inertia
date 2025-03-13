@@ -1,9 +1,10 @@
 import { DateTime } from 'luxon'
-import { BaseModel, belongsTo, column, manyToMany } from '@adonisjs/lucid/orm'
+import { BaseModel, belongsTo, column, hasMany, manyToMany } from '@adonisjs/lucid/orm'
 import Category from './category.js'
-import type { BelongsTo, ManyToMany } from '@adonisjs/lucid/types/relations'
+import type { BelongsTo, HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
 import Brand from './brand.js'
 import Type from './type.js'
+import ProductStock from './product_stock.js'
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -61,6 +62,9 @@ export default class Product extends BaseModel {
 
   @belongsTo(() => Type)
   declare type: BelongsTo<typeof Type>
+
+  @hasMany(() => ProductStock)
+  declare stocks: HasMany<typeof ProductStock>
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

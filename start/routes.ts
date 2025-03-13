@@ -93,6 +93,8 @@ router
           .group(() => {
             router.get('list', [ProductController, 'list']).as('product.list')
             router.get(':id', [ProductController, 'detail']).as('product.detail')
+            router.get(':id/stock', [ProductController, 'stock']).as('product.stock')
+            router.post(':id/stock', [ProductController, 'addStock']).as('product.stock.create')
             router.post('/', [ProductController, 'create']).as('product.create')
             router.put(':id', [ProductController, 'update']).as('product.update')
             router.delete(':id', [ProductController, 'delete']).as('product.delete')

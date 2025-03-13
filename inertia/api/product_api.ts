@@ -33,3 +33,13 @@ export async function updateProductApi(payload) {
   })
   return data
 }
+
+export async function getProductStockApi({ id }: TSearchParamsData<number> = {}) {
+  const { data } = await api.get(`/products/${id}/stock`)
+  return data
+}
+
+export async function addProductStockApi(payload) {
+  const { data } = await api.post(`/products/${payload.id}/stock`, payload)
+  return data
+}

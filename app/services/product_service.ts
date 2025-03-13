@@ -1,4 +1,4 @@
-import { productValidator } from '#validators/product'
+import { addStockValidator, productValidator } from '#validators/product'
 import { HttpContext } from '@adonisjs/core/http'
 import ResponseHelper from '../helpers/response_helper.js'
 import Product from '#models/product'
@@ -85,10 +85,6 @@ export default class ProductService {
       newProduct.name = name
       newProduct.description = description ?? null
 
-      if (categoryIds && categoryIds?.length > 0) {
-        newProduct.related('categories').sync(categoryIds!)
-      }
-
       const image = request.file('image')
 
       if (image) {
@@ -103,6 +99,10 @@ export default class ProductService {
       }
 
       await newProduct.save()
+
+      if (categoryIds && categoryIds?.length > 0) {
+        newProduct.related('categories').sync(categoryIds)
+      }
 
       return ResponseHelper.okResponse(newProduct, 'Produk berhasil dibuat')
     } catch (err) {
@@ -162,10 +162,6 @@ export default class ProductService {
       product.name = name
       product.description = description ?? null
 
-      if (categoryIds && categoryIds?.length > 0) {
-        product.related('categories').sync(categoryIds!)
-      }
-
       const image = request.file('image')
 
       if (image) {
@@ -189,6 +185,10 @@ export default class ProductService {
       }
 
       await product.save()
+
+      if (categoryIds && categoryIds?.length > 0) {
+        product.related('categories').sync(categoryIds)
+      }
 
       return ResponseHelper.okResponse(product, 'Produk berhasil diupdate')
     } catch (err) {
@@ -278,6 +278,58 @@ export default class ProductService {
       }
 
       throw err
+    }
+  }
+
+  static async getProductStock({ params }: HttpContext) {
+    const id = params.id
+
+    try {
+      const product = await Product.findOrFail(id)
+
+      const stock = await product.related('stocks').query().preload('storage').exec()
+
+      return ResponseHelper.okResponse(stock)
+    } catch (err) {
+      if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
+        return ResponseHelper.notFoundResponse(err.message)
+      }
+
+      return ResponseHelper.serverErrorResponse(err.message)
+    }
+  }
+  static async addProductStock({ params, request }: HttpContext) {
+    const id = params.id
+
+    const { storageId, quantity } = await request.validateUsing(addStockValidator)
+
+    try {
+      const product = await Product.findOrFail(id)
+
+      const isStockAlreadyExist = await product
+        .related('stocks')
+        .query()
+        .where('storageId', storageId)
+        .first()
+
+      if (isStockAlreadyExist) {
+        return ResponseHelper.badRequestResponse(
+          'Maaf, anda hanya bisa menambahkan stok awal sekali!'
+        )
+      }
+
+      const stock = await product.related('stocks').create({
+        storageId,
+        quantity,
+      })
+
+      return ResponseHelper.okResponse(stock, 'Stok berhasil ditambahkan')
+    } catch (err) {
+      if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
+        return ResponseHelper.notFoundResponse(err.message)
+      }
+
+      return ResponseHelper.serverErrorResponse(err.message)
     }
   }
 }

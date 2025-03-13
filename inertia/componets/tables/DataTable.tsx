@@ -1,7 +1,6 @@
 import { Link } from '@inertiajs/react'
 import { ActionIcon, Button, Group, Text, Tooltip } from '@mantine/core'
 import { modals } from '@mantine/modals'
-import { isEmpty } from 'lodash'
 import { CircleAlert, Edit3, Plus, RefreshCcw, Trash2 } from 'lucide-react'
 import {
   MantineReactTable,
@@ -111,32 +110,51 @@ const DataTable = <T extends MRT_RowData>({
     positionActionsColumn: 'last',
     renderTopToolbarCustomActions: () => (
       <Group>
-        {(onCreate || createPath) && (
+        {createPath ? (
           <Button
-            component={createPath ? Link : undefined}
-            href={createPath ?? ''}
-            prefetch={!isEmpty(createPath)}
+            component={Link}
+            href={createPath}
+            prefetch
             onClick={() => {
               onCreate?.()
             }}
             leftSection={<Plus size={18} />}
           >
-            Add New
+            Tambah
           </Button>
-        )}
+        ) : onCreate ? (
+          <Button
+            onClick={() => {
+              onCreate?.()
+            }}
+            leftSection={<Plus size={18} />}
+          >
+            Tambah
+          </Button>
+        ) : null}
       </Group>
     ),
     renderRowActions: ({ row }) => (
       <Group>
-        {(onEdit || editPath) && (
+        {editPath ? (
           <Tooltip label="Edit" position="left" color="blue">
             <ActionIcon
               variant="outline"
               color="blue"
               size="lg"
-              prefetch={!isEmpty(editPath)}
-              component={editPath ? Link : undefined}
-              href={editPath ? `${editPath}/${row.original.id}/edit` : ''}
+              prefetch
+              component={Link}
+              href={`${editPath}/${row.original.id}/edit`}
+            >
+              <Edit3 size={20} />
+            </ActionIcon>
+          </Tooltip>
+        ) : onEdit ? (
+          <Tooltip label="Edit" position="left" color="blue">
+            <ActionIcon
+              variant="outline"
+              color="blue"
+              size="lg"
               onClick={(e) => {
                 e.stopPropagation()
                 onEdit?.(row.original)
@@ -145,7 +163,7 @@ const DataTable = <T extends MRT_RowData>({
               <Edit3 size={20} />
             </ActionIcon>
           </Tooltip>
-        )}
+        ) : null}
         {onDelete && (
           <Tooltip label="Delete" position="right" color="red">
             <ActionIcon

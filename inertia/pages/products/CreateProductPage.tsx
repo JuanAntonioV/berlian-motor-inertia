@@ -1,6 +1,6 @@
 import Brand from '#models/brand'
 import { Head, Link, router, usePage } from '@inertiajs/react'
-import { MultiSelect, Textarea } from '@mantine/core'
+import { MultiSelect, Textarea, UnstyledButton } from '@mantine/core'
 import { Group } from '@mantine/core'
 import {
   Alert,
@@ -20,11 +20,15 @@ import {
   TextInput,
 } from '@mantine/core'
 import { Form, useForm, zodResolver } from '@mantine/form'
+import { useDisclosure } from '@mantine/hooks'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { isEmpty } from 'lodash'
 import { ArrowLeft, Info } from 'lucide-react'
 import { useEffect, useMemo, useState } from 'react'
 import { createProductApi } from '~/api/product_api'
+import BrandModal from '~/componets/modals/BrandModal'
+import CategoryModal from '~/componets/modals/CategoryModal'
+import TypeModal from '~/componets/modals/TypeModal'
 import SectionHeader from '~/componets/sections/SectionHeader'
 import PageTitle from '~/componets/titles/PageTitle'
 import PageTransition from '~/componets/transitions/PageTransition'
@@ -44,10 +48,6 @@ const CreateProductPage = () => {
     if (serverProps?.sku) {
       form.setValues({
         sku: serverProps.sku,
-        salePrice: 0,
-        supplierPrice: 0,
-        wholesalePrice: 0,
-        retailPrice: 0,
       })
     }
   }, [serverProps?.sku])
@@ -56,9 +56,9 @@ const CreateProductPage = () => {
 
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: createProductApi,
-    onSuccess: () => {
+    onSuccess: (res) => {
       queryClient.refetchQueries({ queryKey: ['products'] })
-      router.visit('/kelola-produk')
+      router.visit(`/kelola-produk/${res?.data?.id}/edit`)
     },
     onError: (err) => {
       form.setErrors(formErrorResolver(err?.errors))
@@ -88,7 +88,7 @@ const CreateProductPage = () => {
       label: brand.name,
       value: brand.id.toString(),
     }))
-  }, [serverProps?.brandList])
+  }, [serverProps])
 
   const typeList = useMemo(() => {
     if (isEmpty(serverProps?.typeList)) return []
@@ -96,7 +96,7 @@ const CreateProductPage = () => {
       label: type.name,
       value: type.id.toString(),
     }))
-  }, [serverProps?.typeList])
+  }, [serverProps])
 
   const categoryList = useMemo(() => {
     if (isEmpty(serverProps?.categoryList)) return []
@@ -104,11 +104,37 @@ const CreateProductPage = () => {
       label: category.name,
       value: category.id.toString(),
     }))
-  }, [serverProps?.categoryList])
+  }, [serverProps])
+
+  const [openedBrandModal, { open: openBrandModal, close: closeBrandModal }] = useDisclosure()
+  const [openedTypeModal, { open: openTypeModal, close: closeTypeModal }] = useDisclosure()
+  const [openedCategoryModal, { open: openCategoryModal, close: closeCategoryModal }] =
+    useDisclosure()
 
   return (
     <>
       <Head title="Tambah Produk" />
+      <BrandModal
+        opened={openedBrandModal}
+        onClose={closeBrandModal}
+        onCreatedId={(id) => {
+          if (id) form.getInputProps('brandId').onChange({ value: id.toString() })
+        }}
+      />
+      <TypeModal
+        opened={openedTypeModal}
+        onClose={closeTypeModal}
+        onCreatedId={(id) => {
+          if (id) form.getInputProps('typeId').onChange({ value: id.toString() })
+        }}
+      />
+      <CategoryModal
+        opened={openedCategoryModal}
+        onClose={closeCategoryModal}
+        onCreatedId={(id) => {
+          if (id) form.getInputProps('categoryIds').onChange({ value: [id.toString()] })
+        }}
+      />
 
       <PageTransition>
         <Form form={form} onSubmit={onSubmit}>
@@ -158,6 +184,15 @@ const CreateProductPage = () => {
                         placeholder="Pilih merek produk"
                         withAsterisk
                         searchable
+                        descriptionProps={{ component: 'div' }}
+                        description={
+                          <Text c={'gray.6'} fz={'xs'}>
+                            Tidak menemukan merek?{' '}
+                            <UnstyledButton fz={'xs'} c={'blue.5'} onClick={openBrandModal}>
+                              Tambah merek.
+                            </UnstyledButton>
+                          </Text>
+                        }
                         clearable
                         key={form.key('brandId')}
                         {...form.getInputProps('brandId')}
@@ -172,6 +207,15 @@ const CreateProductPage = () => {
                         label="Tipe Produk"
                         placeholder="Pilih tipe produk"
                         withAsterisk
+                        descriptionProps={{ component: 'div' }}
+                        description={
+                          <Text c={'gray.6'} fz={'xs'}>
+                            Tidak menemukan tipe?{' '}
+                            <UnstyledButton fz={'xs'} c={'blue.5'} onClick={openTypeModal}>
+                              Tambah tipe.
+                            </UnstyledButton>
+                          </Text>
+                        }
                         searchable
                         clearable
                         {...form.getInputProps('typeId')}
@@ -232,6 +276,15 @@ const CreateProductPage = () => {
                       withAsterisk
                       multiple
                       searchable
+                      descriptionProps={{ component: 'div' }}
+                      description={
+                        <Text c={'gray.6'} fz={'xs'}>
+                          Tidak menemukan kategori?{' '}
+                          <UnstyledButton fz={'xs'} c={'blue.5'} onClick={openCategoryModal}>
+                            Tambah kategori.
+                          </UnstyledButton>
+                        </Text>
+                      }
                       clearable
                       key={form.key('categoryIds')}
                       {...form.getInputProps('categoryIds')}

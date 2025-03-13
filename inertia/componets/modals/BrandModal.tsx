@@ -10,10 +10,11 @@ import { TBrand } from '~/types'
 import Form from '../forms/Form'
 import { Stack } from '@mantine/core'
 import { Group } from '@mantine/core'
+import { router } from '@inertiajs/react'
 
-type Props = { data?: TBrand | null } & ModalProps
+type Props = { data?: TBrand | null; onCreatedId?: (id: number) => void } & ModalProps
 
-const BrandModal = ({ data, ...props }: Props) => {
+const BrandModal = ({ data, onCreatedId, ...props }: Props) => {
   const isEditing = useMemo(() => !!data, [data])
 
   const form = useForm({
@@ -51,8 +52,12 @@ const BrandModal = ({ data, ...props }: Props) => {
     error: createError,
   } = useMutation({
     mutationFn: createBrandApi,
-    onSuccess: () => {
+    onSuccess: (res) => {
       queryClient.refetchQueries({ queryKey: ['brands'] })
+      if (onCreatedId) {
+        router.reload({ only: ['brandList'] })
+        onCreatedId(res.data.id)
+      }
       form.reset()
       props.onClose()
     },

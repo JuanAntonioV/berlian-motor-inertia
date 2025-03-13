@@ -10,10 +10,11 @@ import { TCategory } from '~/types'
 import Form from '../forms/Form'
 import { Stack } from '@mantine/core'
 import { Group } from '@mantine/core'
+import { router } from '@inertiajs/react'
 
-type Props = { data?: TCategory | null } & ModalProps
+type Props = { data?: TCategory | null; onCreatedId?: (id: number) => void } & ModalProps
 
-const CategoryModal = ({ data, ...props }: Props) => {
+const CategoryModal = ({ data, onCreatedId, ...props }: Props) => {
   const isEditing = useMemo(() => !!data, [data])
 
   const form = useForm({
@@ -51,8 +52,12 @@ const CategoryModal = ({ data, ...props }: Props) => {
     error: createError,
   } = useMutation({
     mutationFn: createCategoryApi,
-    onSuccess: () => {
+    onSuccess: (res) => {
       queryClient.refetchQueries({ queryKey: ['categories'] })
+      if (onCreatedId) {
+        router.reload({ only: ['categoryList'] })
+        onCreatedId(res.id)
+      }
       form.reset()
       props.onClose()
     },
