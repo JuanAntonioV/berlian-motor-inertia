@@ -1,5 +1,5 @@
 import { Head, router, usePage } from '@inertiajs/react'
-import { Alert, ComboboxItem } from '@mantine/core'
+import { Alert, ComboboxItem, OptionsFilter } from '@mantine/core'
 import {
   ActionIcon,
   Button,
@@ -68,9 +68,9 @@ const CreateGoodsReceiptPage = () => {
       reference: '',
       supplierName: '',
       receiptDate: new Date(),
-      image: null,
+      attachment: null,
       notes: '',
-      items: [{ id: -1, quantity: 0, price: 0 }],
+      items: [{ id: -1, quantity: '', price: '' }],
     },
   })
 
@@ -80,6 +80,7 @@ const CreateGoodsReceiptPage = () => {
     mutationFn: createGoodsReceiptApi,
     onSuccess: () => {
       queryClient.refetchQueries({ queryKey: ['goodsReceipts'] })
+      queryClient.refetchQueries({ queryKey: ['products'] })
       toast.success('Berhasil menyimpan transaksi!')
       router.visit('/penerimaan-barang')
     },
@@ -102,15 +103,19 @@ const CreateGoodsReceiptPage = () => {
 
   const [openedStorageModal, { open: openStorageModal, close: closeStorageModal }] = useDisclosure()
 
-  const items = form.getValues()?.items
-
   const productList = useMemo(() => {
     if (isEmpty(products)) return []
     return (products as TProduct[]).map((product) => ({
       label: `${product.name} - ${product.sku}`,
       value: product.id.toString(),
     }))
-  }, [products, items])
+  }, [products])
+
+  const optionsFilter: OptionsFilter = ({ options }) => {
+    return (options as ComboboxItem[]).filter((option) => {
+      return !form.getValues()?.items.some((item) => String(item.id) === String(option.value))
+    })
+  }
 
   return (
     <>
@@ -139,7 +144,7 @@ const CreateGoodsReceiptPage = () => {
               <SectionHeader title="Informasi Penerimaan" />
 
               {isError && (
-                <Alert color="red" c={'red'} icon={<Info />}>
+                <Alert color="red" c={'red'} icon={<Info />} mb={'md'}>
                   {error?.message}
                 </Alert>
               )}
@@ -200,12 +205,15 @@ const CreateGoodsReceiptPage = () => {
                   }}
                 />
                 <FileInput
-                  accept="image/*"
+                  accept="image/*, application/pdf"
                   placeholder="Pilih file lampiran"
-                  label="Unggah Lampiran"
+                  label="Upload Lampiran"
                   clearable
-                  key={form.key('image')}
-                  {...form.getInputProps('image')}
+                  key={form.key('attachment')}
+                  {...form.getInputProps('attachment')}
+                  onChange={(file) => {
+                    form.getInputProps('attachment').onChange(file)
+                  }}
                 />
                 <Textarea
                   placeholder="Masukkan keterangan tambahan"
@@ -230,7 +238,7 @@ const CreateGoodsReceiptPage = () => {
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
-                    {items?.map((_, index) => (
+                    {form.getValues()?.items?.map((_, index) => (
                       <Table.Tr key={index}>
                         <Table.Td align="center" w={rem(46)}>
                           <ActionIcon
@@ -248,13 +256,7 @@ const CreateGoodsReceiptPage = () => {
                             disabled={isProductsPending || isProductsError}
                             searchable
                             withAsterisk
-                            filter={({ options }) => {
-                              return (options as ComboboxItem[]).filter((option) => {
-                                return !items.some(
-                                  (item) => String(item.id) === String(option.value)
-                                )
-                              })
-                            }}
+                            filter={optionsFilter}
                             key={form.key(`items.${index}.id`)}
                             {...form.getInputProps(`items.${index}.id`)}
                           />
@@ -264,6 +266,7 @@ const CreateGoodsReceiptPage = () => {
                             placeholder="Masukkan jumlah barang"
                             withAsterisk
                             hideControls
+                            allowNegative={false}
                             decimalSeparator=","
                             thousandSeparator="."
                             key={form.key(`items.${index}.quantity`)}
@@ -277,6 +280,7 @@ const CreateGoodsReceiptPage = () => {
                             decimalSeparator=","
                             thousandSeparator="."
                             prefix="Rp "
+                            allowNegative={false}
                             hideControls
                             key={form.key(`items.${index}.price`)}
                             {...form.getInputProps(`items.${index}.price`)}
@@ -294,8 +298,8 @@ const CreateGoodsReceiptPage = () => {
                             onClick={() =>
                               form.insertListItem('items', {
                                 id: -1,
-                                quantity: 0,
-                                price: 0,
+                                quantity: '',
+                                price: '',
                               })
                             }
                             leftSection={<Plus size={16} />}

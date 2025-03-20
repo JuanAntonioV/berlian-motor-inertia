@@ -9,7 +9,7 @@ export default class GoodsReceiptItem extends BaseModel {
   declare id: number
 
   @column()
-  declare goodsReceiptId: number
+  declare goodsReceiptId: string
 
   @column()
   declare productId: number

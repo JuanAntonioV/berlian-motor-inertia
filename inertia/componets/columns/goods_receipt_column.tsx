@@ -11,6 +11,12 @@ export const goodsReceiptColumn = [
     enableClickToCopy: true,
     enableSorting: false,
   }),
+  columnHelper.accessor('reference', {
+    header: 'Referensi',
+    enableClickToCopy: true,
+    enableSorting: false,
+    Cell: ({ cell }) => <Text size="sm">{cell.getValue() || '-'}</Text>,
+  }),
   columnHelper.accessor('supplier.name', {
     header: 'Nama Pemasok',
   }),

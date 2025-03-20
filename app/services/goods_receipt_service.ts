@@ -8,11 +8,14 @@ import app from '@adonisjs/core/services/app'
 import env from '#start/env'
 import Supplier from '#models/supplier'
 import db from '@adonisjs/lucid/services/db'
+import Product from '#models/product'
+import ProductStock from '#models/product_stock'
+import Storage from '#models/storage'
 
 export default class GoodsReceiptService {
   static async list({}: HttpContext) {
     try {
-      const goodsReceipt = await GoodsReceipt.query().preload('supplier').exec()
+      const goodsReceipt = await GoodsReceipt.query().preload('supplier').preload('user').exec()
 
       return ResponseHelper.okResponse(goodsReceipt)
     } catch (err) {
@@ -21,12 +24,40 @@ export default class GoodsReceiptService {
   }
 
   static async create({ request, auth }: HttpContext) {
-    const { id, supplierId, items, notes, reference } =
+    const { id, supplierName, items, notes, reference, storageId } =
       await request.validateUsing(goodsReceiptValidator)
 
-    const isSupplierExist = await Supplier.find(supplierId)
-    if (!isSupplierExist) {
-      return ResponseHelper.badRequestResponse('Pemasok tidak ditemukan')
+    let supplier = await Supplier.query().where('name', supplierName).first()
+    if (!supplier) {
+      // create new supplier
+      const newSupplier = await Supplier.create({ name: supplierName })
+      supplier = newSupplier
+    }
+
+    const storageValid = await Storage.query().where('id', storageId).first()
+
+    if (!storageValid) {
+      return ResponseHelper.badRequestResponse('Gudang tidak valid')
+    }
+
+    try {
+      const totalValidProduct = await Product.query()
+        .whereIn(
+          'id',
+          items.map((item) => item.id)
+        )
+        .count('id', 'total')
+        .firstOrFail()
+
+      if (Number(totalValidProduct.$extras.total) !== items.length) {
+        return ResponseHelper.badRequestResponse('Terdapat produk yang tidak valid')
+      }
+    } catch (err) {
+      if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
+        return ResponseHelper.badRequestResponse('Produk tidak valid')
+      }
+
+      return ResponseHelper.badRequestResponse('Produk tidak valid')
     }
 
     const user = auth.user!
@@ -54,34 +85,56 @@ export default class GoodsReceiptService {
       }
 
       const totalAmount = items.reduce((acc, item) => {
-        return acc + item.quantity * item.price
+        return acc + item.price
       }, 0)
 
-      const newGoodsReceipt = trx
-        .insertQuery()
-        .table('goods_receipts')
-        .insert({
-          user_id: user.id,
-          supplier_id: supplierId,
-          invoice_number: invoiceNumber,
+      const newGoodsReceipt = await GoodsReceipt.create(
+        {
+          id: invoiceNumber,
+          userId: user.id,
+          supplierId: supplier.id,
           reference: reference || null,
           notes: notes || null,
           attachment: attachmentPath,
           totalAmount,
-        })
-
-      const goodsReceiptId = await newGoodsReceipt.returning('id')
+        },
+        { client: trx }
+      )
 
       const goodsReceiptItems = items.map((item) => {
         return {
-          goods_receipt_id: goodsReceiptId,
-          product_id: item.productId,
+          productId: item.id,
           quantity: item.quantity,
           price: item.price,
         }
       })
 
-      await trx.insertQuery().table('goods_receipt_items').multiInsert(goodsReceiptItems)
+      newGoodsReceipt.related('items').createMany(goodsReceiptItems, { client: trx })
+
+      const currProductStock = await ProductStock.query({ client: trx })
+        .whereIn(
+          'productId',
+          items.map((item) => item.id)
+        )
+        .where('storageId', storageId)
+        .select('productId', 'quantity')
+        .exec()
+
+      const newProductStock = items.map((item) => {
+        const stock = currProductStock.find(
+          (productStock) => productStock.productId === Number(item.id)
+        )
+        const quantity = stock ? stock.quantity + item.quantity : item.quantity
+
+        return {
+          productId: item.id,
+          storageId: storageId,
+          quantity: quantity,
+        }
+      })
+      await ProductStock.updateOrCreateMany(['productId', 'storageId'], newProductStock, {
+        client: trx,
+      })
 
       trx.commit()
       return ResponseHelper.okResponse(newGoodsReceipt, 'Penerimaan barang berhasil dibuat')

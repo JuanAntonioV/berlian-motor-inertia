@@ -3,10 +3,11 @@ import vine from '@vinejs/vine'
 export const goodsReceiptValidator = vine.compile(
   vine.object({
     id: vine.string().maxLength(20).optional().nullable(),
-    supplierId: vine.number(),
+    supplierName: vine.string().maxLength(255),
+    storageId: vine.number(),
     items: vine.array(
       vine.object({
-        productId: vine.number(),
+        id: vine.number(),
         quantity: vine.number(),
         price: vine.number(),
       })

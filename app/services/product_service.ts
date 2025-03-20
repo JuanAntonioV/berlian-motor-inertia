@@ -19,14 +19,9 @@ export default class ProductService {
         .preload('brand')
         .preload('type')
         .preload('categories')
-        .exec()
-
-      products.forEach((product) => {
-        if (product.image) {
-          const absolutePath = `${env.get('APP_URL')}${product.image}`
-          product.image = absolutePath
-        }
-      })
+        .withCount('stocks', (query) => {
+          query.sum('quantity').as('totalStock')
+        })
 
       return ResponseHelper.okResponse(products)
     } catch (err) {

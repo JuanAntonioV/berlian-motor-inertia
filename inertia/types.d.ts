@@ -104,6 +104,9 @@ export interface TProduct {
   workshopPrice: number
   createdAt: Date
   updatedAt: Date
+  meta: {
+    totalStock: number
+  }
 }
 
 export interface TStaff {

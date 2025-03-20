@@ -5,6 +5,7 @@ import type { BelongsTo, HasMany, ManyToMany } from '@adonisjs/lucid/types/relat
 import Brand from './brand.js'
 import Type from './type.js'
 import ProductStock from './product_stock.js'
+import { CherryPick, ModelObject } from '@adonisjs/lucid/types/model'
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -93,5 +94,18 @@ export default class Product extends BaseModel {
     }
 
     return `${prefix}-${number}`
+  }
+
+  serializeExtras = true
+
+  serialize(cherryPick?: CherryPick): ModelObject {
+    const serialized = super.serialize(cherryPick)
+
+    if (this.image) {
+      const absolutePath = `${process.env.APP_URL}${this.image}`
+      serialized.image = absolutePath
+    }
+
+    return serialized
   }
 }

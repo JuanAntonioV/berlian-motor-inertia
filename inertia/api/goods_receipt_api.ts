@@ -12,6 +12,10 @@ export async function getGoodsReceiptDetailApi({ id }: TSearchParamsData<string>
 }
 
 export async function createGoodsReceiptApi(payload) {
-  const { data } = await api.post('/goods-receipts', payload)
+  const { data } = await api.post('/goods-receipts', payload, {
+    headers: {
+      'Content-Type': 'multipart/form-data',
+    },
+  })
   return data
 }

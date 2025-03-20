@@ -2,10 +2,15 @@ import { NumberFormatter, Text } from '@mantine/core'
 import { DateTime } from 'luxon'
 import { createMRTColumnHelper } from 'mantine-react-table'
 import { TProduct } from '~/types'
+import ImageViewer from '../modals/ImageViewer'
 
 const columnHelper = createMRTColumnHelper<TProduct>()
 
 export const productColumn = [
+  columnHelper.display({
+    header: 'Gambar',
+    Cell: ({ cell }) => <ImageViewer src={cell.row.original.image} />,
+  }),
   columnHelper.accessor('sku', {
     header: 'SKU',
     enableClickToCopy: true,
@@ -63,6 +68,14 @@ export const productColumn = [
           thousandSeparator="."
           decimalSeparator=","
         />
+      </Text>
+    ),
+  }),
+  columnHelper.accessor('meta.totalStock', {
+    header: 'Total Stok',
+    Cell: ({ cell }) => (
+      <Text size="sm">
+        <NumberFormatter value={cell.getValue() || 0} thousandSeparator="." decimalSeparator="," />
       </Text>
     ),
   }),
