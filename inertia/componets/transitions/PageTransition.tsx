@@ -22,6 +22,7 @@ const PageTransition = ({ children, ...props }: Props) => {
       sx={{
         animation: `${slideFromBottom} 0.3s`,
       }}
+      gap={'lg'}
       {...props}
     >
       {children}

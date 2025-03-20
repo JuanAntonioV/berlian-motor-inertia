@@ -23,6 +23,27 @@ export default class GoodsReceiptService {
     }
   }
 
+  static async stats({}: HttpContext) {
+    try {
+      const totalTransactionQuery = GoodsReceipt.query().count('id', 'total').firstOrFail()
+      const totalAmountQuery = GoodsReceipt.query().sum('totalAmount', 'total').firstOrFail()
+      const lastUpdated = new Date().toISOString()
+
+      const [totalGoodsReceipt, totalAmount] = await Promise.all([
+        totalTransactionQuery,
+        totalAmountQuery,
+      ])
+
+      return ResponseHelper.okResponse({
+        totalGoodsReceipt: totalGoodsReceipt.$extras.total,
+        totalAmount: totalAmount.$extras.total,
+        lastUpdated,
+      })
+    } catch (err) {
+      return ResponseHelper.serverErrorResponse(err.message)
+    }
+  }
+
   static async create({ request, auth }: HttpContext) {
     const { id, supplierName, items, notes, reference, storageId } =
       await request.validateUsing(goodsReceiptValidator)

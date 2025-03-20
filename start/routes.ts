@@ -112,6 +112,7 @@ router
           .prefix('staffs')
         router
           .group(() => {
+            router.get('stats', [GoodsReceiptController, 'stats']).as('goodsReceipt.stats')
             router.get('list', [GoodsReceiptController, 'list']).as('goodsReceipt.list')
             router.get(':id', [GoodsReceiptController, 'detail']).as('goodsReceipt.detail')
             router.post('/', [GoodsReceiptController, 'create']).as('goodsReceipt.create')

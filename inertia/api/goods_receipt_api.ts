@@ -6,6 +6,11 @@ export async function getGoodsReceiptListApi() {
   return data
 }
 
+export async function getGoodsReceiptStatsApi() {
+  const { data } = await api.get('/goods-receipts/stats')
+  return data
+}
+
 export async function getGoodsReceiptDetailApi({ id }: TSearchParamsData<string>) {
   const { data } = await api.delete(`/goods-receipts/${id}`)
   return data

@@ -23,6 +23,11 @@ export default class GoodsReceiptController {
     return c.response.status(res.code).json(res)
   }
 
+  async stats(c: HttpContext) {
+    const res = await GoodsReceiptService.stats(c)
+    return c.response.status(res.code).json(res)
+  }
+
   async detail(c: HttpContext) {
     const res = await GoodsReceiptService.detail(c)
     return c.response.status(res.code).json(res)

@@ -3,6 +3,7 @@ import { Card } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { getGoodsReceiptListApi } from '~/api/goods_receipt_api'
 import { goodsReceiptColumn } from '~/componets/columns/goods_receipt_column'
+import GoodsReceiptStatSection from '~/componets/sections/GoodsReceiptStatSection'
 import SectionHeader from '~/componets/sections/SectionHeader'
 import DataTable from '~/componets/tables/DataTable'
 import PageTransition from '~/componets/transitions/PageTransition'
@@ -19,6 +20,7 @@ const ManageGoodsReceiptPage = () => {
       <Head title="Kelola Penerimaan Barang" />
 
       <PageTransition>
+        <GoodsReceiptStatSection />
         <Card shadow="xs">
           <SectionHeader
             title="Tabel Penerimaan Barang"
