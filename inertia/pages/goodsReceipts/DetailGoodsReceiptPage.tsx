@@ -118,7 +118,7 @@ const DetailGoodsReceiptPage = () => {
               </Table>
 
               <Flex justify="flex-end">
-                <Stack maw={'30%'} w={'100%'} gap={0}>
+                <Stack maw={{ base: '50%', md: '40%' }} w={'100%'} gap={0}>
                   <Flex justify={'space-between'} align={'center'} py={'md'}>
                     <Title order={3} fz={'sm'} fw={'bold'}>
                       Total QTY:

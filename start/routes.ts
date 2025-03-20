@@ -163,5 +163,9 @@ router
         router.get('/:id', [GoodsReceiptController, 'showDetail']).as('goodsReceipt.detail.page')
       })
       .prefix('penerimaan-barang')
+
+    // TODO: Pengeluaraan Barang
+    // TODO: Transfer Barang
+    // TODO: Laporan
   })
   .middleware(middleware.auth())
