@@ -6,8 +6,12 @@ export default class GoodsReceiptController {
   async show({ inertia }: HttpContext) {
     return inertia.render('goodsReceipts/ManageGoodsReceiptPage')
   }
-  async showDetail({ inertia }: HttpContext) {
-    return inertia.render('goodsReceipts/DetailGoodsReceiptPage')
+  async showDetail({ inertia, request }: HttpContext) {
+    const id = request.param('id')
+
+    return inertia.render('goodsReceipts/DetailGoodsReceiptPage', {
+      id,
+    })
   }
 
   async showCreate({ inertia }: HttpContext) {

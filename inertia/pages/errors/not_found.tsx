@@ -8,7 +8,7 @@ interface Props {
 export default function NotFoundScreen({ h, message }: Props) {
   return (
     <Center h={h} w={'100%'}>
-      <Card p={'xl'} miw={rem(400)}>
+      <Card p={'xl'} miw={rem(400)} bg={'inherit'}>
         <Stack align="center" gap="md">
           <Title order={1} className="!text-6xl">
             404

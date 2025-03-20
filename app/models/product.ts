@@ -6,6 +6,7 @@ import Brand from './brand.js'
 import Type from './type.js'
 import ProductStock from './product_stock.js'
 import { CherryPick, ModelObject } from '@adonisjs/lucid/types/model'
+import env from '#start/env'
 
 export default class Product extends BaseModel {
   @column({ isPrimary: true })
@@ -102,7 +103,7 @@ export default class Product extends BaseModel {
     const serialized = super.serialize(cherryPick)
 
     if (this.image) {
-      const absolutePath = `${process.env.APP_URL}${this.image}`
+      const absolutePath = `${env.get('APP_URL')}${this.image}`
       serialized.image = absolutePath
     }
 

@@ -23,6 +23,9 @@ type Props<T extends MRT_RowData> = {
   onCreate?: () => void
   createPath?: string
   editPath?: string
+  editIcon?: React.ReactNode
+  editLabel?: string
+  editAsDetail?: boolean
 } & MRT_TableOptions<T & MRT_RowData>
 
 const DataTable = <T extends MRT_RowData>({
@@ -38,6 +41,9 @@ const DataTable = <T extends MRT_RowData>({
   onCreate,
   createPath,
   editPath,
+  editIcon,
+  editLabel,
+  editAsDetail,
   ...props
 }: Props<T>) => {
   const confirmLogoutModal = (id) =>
@@ -137,20 +143,20 @@ const DataTable = <T extends MRT_RowData>({
     renderRowActions: ({ row }) => (
       <Group>
         {editPath ? (
-          <Tooltip label="Edit" position="left" color="blue">
+          <Tooltip label={editLabel || 'Edit'} position="left" color="blue">
             <ActionIcon
               variant="outline"
               color="blue"
               size="lg"
               prefetch
               component={Link}
-              href={`${editPath}/${row.original.id}/edit`}
+              href={`${editPath}/${row.original.id}${!editAsDetail ? '/edit' : ''}`}
             >
-              <Edit3 size={20} />
+              {editIcon || <Edit3 size={20} />}
             </ActionIcon>
           </Tooltip>
         ) : onEdit ? (
-          <Tooltip label="Edit" position="left" color="blue">
+          <Tooltip label={editLabel || 'Edit'} position="left" color="blue">
             <ActionIcon
               variant="outline"
               color="blue"
@@ -160,7 +166,7 @@ const DataTable = <T extends MRT_RowData>({
                 onEdit?.(row.original)
               }}
             >
-              <Edit3 size={20} />
+              {editIcon || <Edit3 size={20} />}
             </ActionIcon>
           </Tooltip>
         ) : null}

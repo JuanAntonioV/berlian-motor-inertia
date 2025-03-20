@@ -216,8 +216,8 @@ const CreateGoodsReceiptPage = () => {
                   }}
                 />
                 <Textarea
-                  placeholder="Masukkan keterangan tambahan"
-                  label="Keterangan"
+                  placeholder="Masukkan catatan tambahan"
+                  label="Catatan"
                   rows={3}
                   key={form.key('notes')}
                   {...form.getInputProps('notes')}

@@ -1,6 +1,7 @@
 import { Head } from '@inertiajs/react'
 import { Card } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
+import { SearchIcon } from 'lucide-react'
 import { getGoodsReceiptListApi } from '~/api/goods_receipt_api'
 import { goodsReceiptColumn } from '~/componets/columns/goods_receipt_column'
 import GoodsReceiptStatSection from '~/componets/sections/GoodsReceiptStatSection'
@@ -34,7 +35,10 @@ const ManageGoodsReceiptPage = () => {
             errorMessage={error?.message}
             enableRowSelection={false}
             createPath="/penerimaan-barang/tambah"
+            editAsDetail
             editPath="/penerimaan-barang"
+            editIcon={<SearchIcon />}
+            editLabel="Detail"
           />
         </Card>
       </PageTransition>

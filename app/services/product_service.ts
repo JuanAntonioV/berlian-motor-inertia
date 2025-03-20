@@ -11,6 +11,7 @@ import { cuid } from '@adonisjs/core/helpers'
 import { unlink } from 'node:fs/promises'
 import logger from '@adonisjs/core/services/logger'
 import env from '#start/env'
+import GoodsReceiptItem from '#models/goods_receipt_item'
 
 export default class ProductService {
   static async list({}: HttpContext = {}) {
@@ -199,6 +200,19 @@ export default class ProductService {
     try {
       const product = await Product.findOrFail(params.id)
 
+      // check if product still have stock
+      const stock = await product.related('stocks').query().sum('quantity', 'total').first()
+
+      if (stock && stock.$extras.total > 0) {
+        return ResponseHelper.badRequestResponse('Produk masih memiliki stok')
+      }
+
+      const goodsReceipt = await GoodsReceiptItem.query().where('productId', product.id).first()
+
+      if (goodsReceipt) {
+        return ResponseHelper.badRequestResponse('Produk sudah digunakan di penerimaan barang')
+      }
+
       if (product.image) {
         const path = `storage/uploads/${product.image}`
         await unlink(app.makePath(path)).catch((e) => {
@@ -211,7 +225,7 @@ export default class ProductService {
       return ResponseHelper.okResponse(product, 'Produk berhasil dihapus')
     } catch (err) {
       if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
-        return ResponseHelper.notFoundResponse(err.message)
+        return ResponseHelper.notFoundResponse('Produk tidak ditemukan')
       }
 
       return ResponseHelper.serverErrorResponse(err.message)
@@ -227,21 +241,12 @@ export default class ProductService {
         .preload('brand')
         .preload('type')
         .preload('categories')
-        .first()
-
-      if (!product) {
-        return ResponseHelper.notFoundResponse('Produk tidak ditemukan')
-      }
-
-      if (product.image) {
-        const absolutePath = `${env.get('APP_URL')}${product.image}`
-        product.image = absolutePath
-      }
+        .firstOrFail()
 
       return ResponseHelper.okResponse(product)
     } catch (err) {
       if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
-        return ResponseHelper.notFoundResponse(err.message)
+        return ResponseHelper.notFoundResponse('Produk tidak ditemukan')
       }
 
       return ResponseHelper.serverErrorResponse(err.message)
