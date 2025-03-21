@@ -30,7 +30,7 @@ const GoodsReceiptStatSection = () => {
         <Group justify="space-between" align="center">
           <Text fz={'h2'} fw={'bold'}>
             <NumberFormatter
-              value={data?.totalAmount}
+              value={data?.totalAmount || 0}
               prefix="Rp "
               decimalSeparator=","
               thousandSeparator="."

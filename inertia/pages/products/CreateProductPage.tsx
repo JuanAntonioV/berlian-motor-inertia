@@ -227,6 +227,7 @@ const CreateProductPage = () => {
                         placeholder="Masukkan harga jual produk"
                         label="Harga Jual"
                         hideControls
+                        allowNegative={false}
                         prefix="Rp "
                         decimalSeparator=","
                         thousandSeparator="."
@@ -239,6 +240,7 @@ const CreateProductPage = () => {
                         label="Harga Pemasok"
                         hideControls
                         prefix="Rp "
+                        allowNegative={false}
                         decimalSeparator=","
                         thousandSeparator="."
                         withAsterisk
@@ -261,6 +263,7 @@ const CreateProductPage = () => {
                         label="Harga Eceran"
                         hideControls
                         prefix="Rp "
+                        allowNegative={false}
                         decimalSeparator=","
                         thousandSeparator="."
                         withAsterisk

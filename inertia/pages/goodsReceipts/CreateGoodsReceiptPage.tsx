@@ -81,6 +81,7 @@ const CreateGoodsReceiptPage = () => {
     onSuccess: () => {
       queryClient.refetchQueries({ queryKey: ['goodsReceipts'] })
       queryClient.refetchQueries({ queryKey: ['products'] })
+      queryClient.refetchQueries({ queryKey: ['goodsReceiptStats'] })
       toast.success('Berhasil menyimpan transaksi!')
       router.visit('/penerimaan-barang')
     },
