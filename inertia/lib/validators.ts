@@ -178,7 +178,23 @@ export const goodsReceiptSchema = z.object({
   storageId: z.coerce.number(),
   reference: z.string().nullish(),
   supplierName: z.coerce.string().max(100),
-  receiptDate: z.date(),
+  receivedAt: z.date(),
+  notes: z.string().nullish(),
+  attachment: z.instanceof(File).nullish(),
+  items: z.array(
+    z.object({
+      id: z.coerce.number(),
+      quantity: z.coerce.number(),
+      price: z.coerce.number(),
+    })
+  ),
+})
+
+export const reductionOfGoodsSchema = z.object({
+  id: z.string().nullish().optional(),
+  storageId: z.coerce.number(),
+  reference: z.string().nullish(),
+  reducedAt: z.date(),
   notes: z.string().nullish(),
   attachment: z.instanceof(File).nullish(),
   items: z.array(

@@ -1,9 +1,8 @@
 import vine from '@vinejs/vine'
 
-export const goodsReceiptValidator = vine.compile(
+export const reductionOfGoodValidator = vine.compile(
   vine.object({
     id: vine.string().maxLength(20).optional().nullable(),
-    supplierName: vine.string().maxLength(255),
     storageId: vine.number(),
     items: vine.array(
       vine.object({
@@ -12,7 +11,7 @@ export const goodsReceiptValidator = vine.compile(
         price: vine.number(),
       })
     ),
-    receivedAt: vine.date(),
+    reducedAt: vine.date(),
     notes: vine.string().optional(),
     reference: vine.string().optional(),
     attachment: vine

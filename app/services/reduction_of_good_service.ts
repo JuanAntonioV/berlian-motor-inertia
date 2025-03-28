@@ -1,24 +1,23 @@
-import { goodsReceiptValidator } from '#validators/goods_receipt'
+import { reductionOfGoodValidator } from '#validators/reduction_of_good'
 import { HttpContext } from '@adonisjs/core/http'
 import ResponseHelper from '../helpers/response_helper.js'
-import GoodsReceipt from '#models/goods_receipt'
+import ReductionOfGood from '#models/reduction_of_good'
 import { errors as lucidErrors } from '@adonisjs/lucid'
 import { cuid } from '@adonisjs/core/helpers'
 import app from '@adonisjs/core/services/app'
 import env from '#start/env'
-import Supplier from '#models/supplier'
 import db from '@adonisjs/lucid/services/db'
 import Product from '#models/product'
 import ProductStock from '#models/product_stock'
 import Storage from '#models/storage'
 import { DateTime } from 'luxon'
 
-export default class GoodsReceiptService {
+export default class ReductionOfGoodService {
   static async list({}: HttpContext) {
     try {
-      const goodsReceipt = await GoodsReceipt.query().preload('supplier').preload('user').exec()
+      const reductionOfGood = await ReductionOfGood.query().preload('user').exec()
 
-      return ResponseHelper.okResponse(goodsReceipt)
+      return ResponseHelper.okResponse(reductionOfGood)
     } catch (err) {
       return ResponseHelper.serverErrorResponse(err.message)
     }
@@ -26,17 +25,17 @@ export default class GoodsReceiptService {
 
   static async stats({}: HttpContext) {
     try {
-      const totalTransactionQuery = GoodsReceipt.query().count('id', 'total').firstOrFail()
-      const totalAmountQuery = GoodsReceipt.query().sum('totalAmount', 'total').firstOrFail()
+      const totalTransactionQuery = ReductionOfGood.query().count('id', 'total').firstOrFail()
+      const totalAmountQuery = ReductionOfGood.query().sum('totalAmount', 'total').firstOrFail()
       const lastUpdated = new Date().toISOString()
 
-      const [totalGoodsReceipt, totalAmount] = await Promise.all([
+      const [totalReductionOfGood, totalAmount] = await Promise.all([
         totalTransactionQuery,
         totalAmountQuery,
       ])
 
       return ResponseHelper.okResponse({
-        totalGoodsReceipt: totalGoodsReceipt.$extras.total,
+        totalReductionOfGood: totalReductionOfGood.$extras.total,
         totalAmount: totalAmount.$extras.total,
         lastUpdated,
       })
@@ -46,15 +45,8 @@ export default class GoodsReceiptService {
   }
 
   static async create({ request, auth }: HttpContext) {
-    const { id, supplierName, items, notes, reference, storageId, receivedAt } =
-      await request.validateUsing(goodsReceiptValidator)
-
-    let supplier = await Supplier.query().where('name', supplierName).first()
-    if (!supplier) {
-      // create new supplier
-      const newSupplier = await Supplier.create({ name: supplierName })
-      supplier = newSupplier
-    }
+    const { id, items, notes, reference, storageId, reducedAt } =
+      await request.validateUsing(reductionOfGoodValidator)
 
     const storageValid = await Storage.query().where('id', storageId).first()
 
@@ -89,7 +81,7 @@ export default class GoodsReceiptService {
       let invoiceNumber = id
 
       if (!invoiceNumber) {
-        invoiceNumber = await GoodsReceipt.generateInvoiceNumber()
+        invoiceNumber = await ReductionOfGood.generateInvoiceNumber()
       }
 
       const attachment = request.file('attachment')
@@ -97,7 +89,7 @@ export default class GoodsReceiptService {
 
       if (attachment) {
         const filename = `${cuid()}.${attachment.extname}`
-        const folderPath = 'storage/uploads/goods_receipt'
+        const folderPath = 'storage/uploads/reduction_of_good'
         await attachment.move(app.makePath(folderPath), {
           name: filename,
         })
@@ -114,22 +106,21 @@ export default class GoodsReceiptService {
         return acc + item.quantity
       }, 0)
 
-      const newGoodsReceipt = await GoodsReceipt.create(
+      const newReductionOfGood = await ReductionOfGood.create(
         {
           id: invoiceNumber,
           userId: user.id,
-          supplierId: supplier.id,
           reference: reference || null,
           notes: notes || null,
           attachment: attachmentPath,
           totalAmount,
           totalQuantity: totalQty,
-          receivedAt: DateTime.fromJSDate(receivedAt),
+          reducedAt: DateTime.fromJSDate(reducedAt),
         },
         { client: trx }
       )
 
-      const goodsReceiptItems = items.map((item) => {
+      const reductionOfGoodItems = items.map((item) => {
         return {
           productId: item.id,
           quantity: item.quantity,
@@ -137,7 +128,7 @@ export default class GoodsReceiptService {
         }
       })
 
-      newGoodsReceipt.related('items').createMany(goodsReceiptItems, { client: trx })
+      newReductionOfGood.related('items').createMany(reductionOfGoodItems, { client: trx })
 
       const currProductStock = await ProductStock.query({ client: trx })
         .whereIn(
@@ -152,20 +143,39 @@ export default class GoodsReceiptService {
         const stock = currProductStock.find(
           (productStock) => productStock.productId === Number(item.id)
         )
-        const quantity = stock ? stock.quantity + item.quantity : item.quantity
 
-        return {
-          productId: item.id,
-          storageId: storageId,
-          quantity: quantity,
+        if (stock) {
+          const quantity = stock.quantity - item.quantity
+
+          return {
+            productId: item.id,
+            storageId: storageId,
+            quantity: quantity,
+          }
+        } else {
+          return {
+            productId: item.id,
+            storageId: storageId,
+            quantity: item.quantity * -1,
+          }
         }
       })
+
+      const isValidStock = newProductStock.every((item) => {
+        return item.quantity >= 0
+      })
+
+      if (!isValidStock) {
+        trx.rollback()
+        return ResponseHelper.badRequestResponse('Stok tidak cukup')
+      }
+
       await ProductStock.updateOrCreateMany(['productId', 'storageId'], newProductStock, {
         client: trx,
       })
 
       trx.commit()
-      return ResponseHelper.okResponse(newGoodsReceipt, 'Penerimaan barang berhasil dibuat')
+      return ResponseHelper.okResponse(newReductionOfGood, 'Pengurangan barang berhasil dibuat')
     } catch (err) {
       trx.rollback()
       return ResponseHelper.serverErrorResponse(err.message)
@@ -174,21 +184,20 @@ export default class GoodsReceiptService {
 
   static async detail({ params }: HttpContext) {
     try {
-      const goodsReceipt = await GoodsReceipt.query()
+      const reductionOfGood = await ReductionOfGood.query()
         .preload('items', (query) => {
           query.preload('product')
         })
         .preload('user')
-        .preload('supplier')
         .where('id', params.id)
         .firstOrFail()
 
-      if (goodsReceipt.attachment) {
-        const absolutePath = `${env.get('APP_URL')}${goodsReceipt.attachment}`
-        goodsReceipt.attachment = absolutePath
+      if (reductionOfGood.attachment) {
+        const absolutePath = `${env.get('APP_URL')}${reductionOfGood.attachment}`
+        reductionOfGood.attachment = absolutePath
       }
 
-      return ResponseHelper.okResponse(goodsReceipt, 'Penerimaan barang berhasil dapatkan')
+      return ResponseHelper.okResponse(reductionOfGood, 'Pengurangan barang berhasil dapatkan')
     } catch (err) {
       if (err instanceof lucidErrors.E_ROW_NOT_FOUND) {
         return ResponseHelper.notFoundResponse(err.message)

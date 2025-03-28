@@ -10,8 +10,14 @@ export async function createProductApi(payload) {
   return data
 }
 
-export async function getProductListApi() {
-  const { data } = await api.get('/products/list')
+export async function getProductListApi({ storageId }: TSearchParamsData<number | undefined> = {}) {
+  let url = '/products/list'
+
+  const params = new URLSearchParams()
+  if (storageId) params.append('storageId', storageId.toString())
+  if (params.toString()) url += `?${params.toString()}`
+
+  const { data } = await api.get(url)
   return data
 }
 

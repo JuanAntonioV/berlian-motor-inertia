@@ -11,7 +11,7 @@ import AdminLayout from '~/layouts/AdminLayout'
 const ManageProductPage = () => {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['products'],
-    queryFn: getProductListApi,
+    queryFn: () => getProductListApi(),
   })
 
   return (

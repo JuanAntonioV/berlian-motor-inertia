@@ -14,7 +14,11 @@ import env from '#start/env'
 import GoodsReceiptItem from '#models/goods_receipt_item'
 
 export default class ProductService {
-  static async list({}: HttpContext = {}) {
+  static async list({ request }: HttpContext) {
+    const queryParams = request.qs()
+    const { storageId } = queryParams
+    console.log('🚀 ~ ProductService ~ list ~ storageId:', storageId)
+
     try {
       const products = await Product.query()
         .preload('brand')
@@ -23,6 +27,12 @@ export default class ProductService {
         .withCount('stocks', (query) => {
           query.sum('quantity').as('totalStock')
         })
+        .if(storageId, (query) => {
+          query.preload('stocks', (q) => {
+            q.where('storageId', storageId)
+          })
+        })
+        .exec()
 
       return ResponseHelper.okResponse(products)
     } catch (err) {

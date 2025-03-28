@@ -9,6 +9,7 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const ReductionOfGoodController = () => import('#controllers/reduction_of_good_controller')
 const GoodsReceiptController = () => import('#controllers/goods_receipt_controller')
 const StaffController = () => import('#controllers/staff_controller')
 const ProductController = () => import('#controllers/product_controller')
@@ -118,6 +119,14 @@ router
             router.post('/', [GoodsReceiptController, 'create']).as('goodsReceipt.create')
           })
           .prefix('goods-receipts')
+        router
+          .group(() => {
+            router.get('stats', [ReductionOfGoodController, 'stats']).as('reductionOfGood.stats')
+            router.get('list', [ReductionOfGoodController, 'list']).as('reductionOfGood.list')
+            router.get(':id', [ReductionOfGoodController, 'detail']).as('reductionOfGood.detail')
+            router.post('/', [ReductionOfGoodController, 'create']).as('reductionOfGood.create')
+          })
+          .prefix('reduction-of-goods')
       })
       .middleware(middleware.auth())
   })
@@ -164,7 +173,17 @@ router
       })
       .prefix('penerimaan-barang')
 
-    // TODO: Pengeluaraan Barang
+    router
+      .group(() => {
+        router.get('/', [ReductionOfGoodController, 'show']).as('reductionOfGoods.page')
+        router
+          .get('/tambah', [ReductionOfGoodController, 'showCreate'])
+          .as('reductionOfGoods.create.page')
+        router
+          .get('/:id', [ReductionOfGoodController, 'showDetail'])
+          .as('reductionOfGoods.detail.page')
+      })
+      .prefix('pengeluaran-barang')
     // TODO: Transfer Barang
     // TODO: Laporan
   })

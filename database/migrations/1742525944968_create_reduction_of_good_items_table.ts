@@ -1,13 +1,13 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
 export default class extends BaseSchema {
-  protected tableName = 'goods_receipt_items'
+  protected tableName = 'reduction_of_good_items'
 
   async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
+      table.increments('id').primary()
       table
-        .string('reduction_of_goods_id', 20)
+        .string('reduction_of_good_id', 20)
         .unsigned()
         .references('id')
         .inTable('reduction_of_goods')
@@ -17,12 +17,6 @@ export default class extends BaseSchema {
         .unsigned()
         .references('id')
         .inTable('products')
-        .onDelete('SET NULL')
-      table
-        .integer('storage_id')
-        .unsigned()
-        .references('id')
-        .inTable('storages')
         .onDelete('SET NULL')
       table.integer('quantity').notNullable().defaultTo(0)
       table.integer('price').notNullable().defaultTo(0)

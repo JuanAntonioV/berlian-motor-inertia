@@ -1,32 +1,34 @@
 import { Head, router, usePage } from '@inertiajs/react'
-import { Alert, ComboboxItem, OptionsFilter } from '@mantine/core'
+import { Text } from '@mantine/core'
 import {
   ActionIcon,
+  Alert,
   Button,
   Card,
   Center,
+  ComboboxItem,
   FileInput,
   NumberInput,
+  OptionsFilter,
   rem,
   Select,
   SimpleGrid,
   Stack,
   Table,
-  Text,
   Textarea,
   TextInput,
   UnstyledButton,
 } from '@mantine/core'
-import { DatePickerInput } from '@mantine/dates'
+import { DateInput } from '@mantine/dates'
 import { Form, useForm, zodResolver } from '@mantine/form'
 import { useDisclosure } from '@mantine/hooks'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { isEmpty } from 'lodash'
-import { Info, Plus, Trash } from 'lucide-react'
+import { Trash, Plus, Info } from 'lucide-react'
 import { useMemo } from 'react'
 import toast from 'react-hot-toast'
-import { createGoodsReceiptApi } from '~/api/goods_receipt_api'
 import { getProductListApi } from '~/api/product_api'
+import { createReductionOfGoodsApi } from '~/api/reduction_of_good_api'
 import { getStorageListApi } from '~/api/storage_api'
 import StorageModal from '~/componets/modals/StorageModal'
 import SectionHeader from '~/componets/sections/SectionHeader'
@@ -34,10 +36,10 @@ import PageTitle from '~/componets/titles/PageTitle'
 import PageTransition from '~/componets/transitions/PageTransition'
 import AdminLayout from '~/layouts/AdminLayout'
 import { formErrorResolver } from '~/lib/utils'
-import { goodsReceiptSchema } from '~/lib/validators'
+import { reductionOfGoodsSchema } from '~/lib/validators'
 import { TProduct, TStorage } from '~/types'
 
-const CreateGoodsReceiptPage = () => {
+const CreateReductionOfGoodPage = () => {
   const { generatedId } = usePage().props
 
   const {
@@ -49,41 +51,43 @@ const CreateGoodsReceiptPage = () => {
     queryFn: getStorageListApi,
     select: (res) => res.data,
   })
-  const {
-    data: products,
-    isPending: isProductsPending,
-    isError: isProductsError,
-  } = useQuery({
-    queryKey: ['products'],
-    queryFn: () => getProductListApi(),
-    select: (res) => res.data,
-  })
 
   const form = useForm({
     mode: 'uncontrolled',
-    validate: zodResolver(goodsReceiptSchema),
+    validate: zodResolver(reductionOfGoodsSchema),
     initialValues: {
       id: generatedId,
       storageId: 0,
       reference: '',
-      supplierName: '',
-      receivedAt: new Date(),
+      reducedAt: new Date(),
       attachment: null,
       notes: '',
       items: [{ id: -1, quantity: '', price: '' }],
     },
   })
 
+  const selectedStorageId = form.getValues().storageId
+
+  const {
+    data: products,
+    isPending: isProductsPending,
+    isError: isProductsError,
+  } = useQuery({
+    queryKey: ['products', { storageId: selectedStorageId }],
+    queryFn: () => getProductListApi({ storageId: selectedStorageId }),
+    select: (res) => res.data,
+  })
+
   const queryClient = useQueryClient()
 
   const { mutate, isPending, error } = useMutation({
-    mutationFn: createGoodsReceiptApi,
+    mutationFn: createReductionOfGoodsApi,
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: ['goodsReceipts'] })
+      queryClient.refetchQueries({ queryKey: ['reductionOfGoods'] })
       queryClient.refetchQueries({ queryKey: ['products'] })
-      queryClient.refetchQueries({ queryKey: ['goodsReceiptStats'] })
+      queryClient.refetchQueries({ queryKey: ['reductionOfGoodStats'] })
       toast.success('Berhasil menyimpan transaksi!')
-      router.visit('/penerimaan-barang')
+      router.visit('/pengeluaran-barang')
     },
     onError: (err) => {
       form.setErrors(formErrorResolver(err.errors))
@@ -120,7 +124,7 @@ const CreateGoodsReceiptPage = () => {
 
   return (
     <>
-      <Head title="Penerimaan Barang" />
+      <Head title="Pengeluaran Barang" />
 
       <StorageModal
         opened={openedStorageModal}
@@ -133,8 +137,8 @@ const CreateGoodsReceiptPage = () => {
       <PageTransition>
         <Form form={form} onSubmit={onSubmit}>
           <PageTitle
-            title="Tambah Penerimaan Barang"
-            description="Merupakan halaman untuk menambah penerimaan barang baru ke dalam sistem."
+            title="Tambah Pengeluaran Barang"
+            description="Merupakan halaman untuk menambah pengeluaran barang baru ke dalam sistem."
           >
             <Button type="submit" loading={isPending}>
               Simpan
@@ -142,7 +146,7 @@ const CreateGoodsReceiptPage = () => {
           </PageTitle>
           <Stack>
             <Card shadow="xs">
-              <SectionHeader title="Informasi Penerimaan" />
+              <SectionHeader title="Informasi Pengeluaran" />
 
               {error?.message && (
                 <Alert color="red" c={'red'} icon={<Info />} mb={'md'}>
@@ -159,12 +163,11 @@ const CreateGoodsReceiptPage = () => {
                     key={form.key('id')}
                     {...form.getInputProps('id')}
                   />
-                  <DatePickerInput
-                    placeholder="Pilih tanggal penerimaan"
-                    label="Tanggal Penerimaan"
+                  <DateInput
+                    placeholder="Pilih tanggal pengeluaran"
+                    label="Tanggal Pengeluaran"
                     withAsterisk
                     highlightToday
-                    valueFormat="DD MMMM YYYY"
                     key={form.key('receivedAt')}
                     {...form.getInputProps('receivedAt')}
                   />
@@ -175,14 +178,6 @@ const CreateGoodsReceiptPage = () => {
                     {...form.getInputProps('reference')}
                   />
                 </SimpleGrid>
-                <TextInput
-                  placeholder="Masukkan nama pemasok"
-                  label="Nama Pemasok"
-                  withAsterisk
-                  autoFocus
-                  key={form.key('supplierName')}
-                  {...form.getInputProps('supplierName')}
-                />
                 <Select
                   data={storageList}
                   label="Rak Penyimpanan Barang"
@@ -322,6 +317,5 @@ const CreateGoodsReceiptPage = () => {
   )
 }
 
-CreateGoodsReceiptPage.layout = (page: React.ReactNode) => <AdminLayout children={page} />
-
-export default CreateGoodsReceiptPage
+CreateReductionOfGoodPage.layout = (page) => <AdminLayout children={page} />
+export default CreateReductionOfGoodPage

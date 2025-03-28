@@ -174,6 +174,7 @@ const CreateStaffPage = () => {
                       placeholder="Pilih tanggal bergabung"
                       withAsterisk
                       valueFormat="DD MMMM YYYY"
+                      highlightToday
                       key={form.key('joinDate')}
                       {...form.getInputProps('joinDate')}
                     />

@@ -153,6 +153,8 @@ export interface TGoodsReceiptItems {
   productId: number
   quantity: number
   price: number
+  product: TProduct
+  goodsReceipt: TGoodsReceipt
   createdAt: string
   updatedAt: string
   product: TProduct
@@ -182,4 +184,23 @@ export interface TGoodsReceipt {
   createdAt: string
   updatedAt: string
   items: TGoodsReceiptItems[]
+}
+
+export type TReductionOfGoodItems = Omit<TGoodsReceiptItems, 'goodsReceiptId' | 'goodsReceipt'> & {
+  reductionOfGoodId: string
+  reductionOfGood: TReductionOfGoods
+}
+
+export interface TReductionOfGoods {
+  id: string
+  userId: number
+  user: TStaff
+  attachment: string | null
+  notes: string | null
+  reference: string | null
+  totalQuantity: number
+  totalAmount: number
+  createdAt: string
+  updatedAt: string
+  items: TReductionOfGoodItems[]
 }
