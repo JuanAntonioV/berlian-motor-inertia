@@ -276,7 +276,6 @@ const CreateProductPage = () => {
                       data={categoryList}
                       label="Kategori Produk"
                       placeholder="Pilih kategori produk"
-                      withAsterisk
                       multiple
                       searchable
                       descriptionProps={{ component: 'div' }}

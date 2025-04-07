@@ -1,13 +1,14 @@
 import { Head, router, usePage } from '@inertiajs/react'
-import { Text } from '@mantine/core'
 import {
   ActionIcon,
   Alert,
+  Badge,
   Button,
   Card,
   Center,
   ComboboxItem,
   FileInput,
+  Flex,
   NumberInput,
   OptionsFilter,
   rem,
@@ -17,20 +18,18 @@ import {
   Table,
   Textarea,
   TextInput,
-  UnstyledButton,
 } from '@mantine/core'
-import { DateInput } from '@mantine/dates'
+import { DatePickerInput } from '@mantine/dates'
 import { Form, useForm, zodResolver } from '@mantine/form'
-import { useDisclosure } from '@mantine/hooks'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { isEmpty } from 'lodash'
 import { Trash, Plus, Info } from 'lucide-react'
+import { DateTime } from 'luxon'
 import { useMemo } from 'react'
 import toast from 'react-hot-toast'
 import { getProductListApi } from '~/api/product_api'
 import { createReductionOfGoodsApi } from '~/api/reduction_of_good_api'
 import { getStorageListApi } from '~/api/storage_api'
-import StorageModal from '~/componets/modals/StorageModal'
 import SectionHeader from '~/componets/sections/SectionHeader'
 import PageTitle from '~/componets/titles/PageTitle'
 import PageTransition from '~/componets/transitions/PageTransition'
@@ -95,7 +94,10 @@ const CreateReductionOfGoodPage = () => {
   })
 
   const onSubmit = (values: typeof form.values) => {
-    mutate(values)
+    mutate({
+      ...values,
+      reducedAt: DateTime.fromJSDate(new Date(values.reducedAt)).toISODate({ format: 'extended' }),
+    })
   }
 
   const storageList = useMemo(() => {
@@ -105,8 +107,6 @@ const CreateReductionOfGoodPage = () => {
       value: storage.id.toString(),
     }))
   }, [storages])
-
-  const [openedStorageModal, { open: openStorageModal, close: closeStorageModal }] = useDisclosure()
 
   const productList = useMemo(() => {
     if (isEmpty(products)) return []
@@ -122,17 +122,14 @@ const CreateReductionOfGoodPage = () => {
     })
   }
 
+  const getCurrentProductAvailableStock = (productId: number, storageId: number) => {
+    const product = products?.find((item) => item.id === productId)
+    return product?.stocks?.find((item) => item.storageId === storageId)?.quantity || 0
+  }
+
   return (
     <>
       <Head title="Pengeluaran Barang" />
-
-      <StorageModal
-        opened={openedStorageModal}
-        onClose={closeStorageModal}
-        onCreatedId={(id) => {
-          if (id) form.getInputProps('storageId').onChange({ value: [id.toString()] })
-        }}
-      />
 
       <PageTransition>
         <Form form={form} onSubmit={onSubmit}>
@@ -163,13 +160,14 @@ const CreateReductionOfGoodPage = () => {
                     key={form.key('id')}
                     {...form.getInputProps('id')}
                   />
-                  <DateInput
-                    placeholder="Pilih tanggal pengeluaran"
-                    label="Tanggal Pengeluaran"
+                  <DatePickerInput
+                    placeholder="Pilih tanggal penerimaan"
+                    label="Tanggal Penerimaan"
                     withAsterisk
                     highlightToday
-                    key={form.key('receivedAt')}
-                    {...form.getInputProps('receivedAt')}
+                    valueFormat="DD MMMM YYYY"
+                    key={form.key('reducedAt')}
+                    {...form.getInputProps('reducedAt')}
                   />
                   <TextInput
                     placeholder="Masukkan referensi"
@@ -186,14 +184,6 @@ const CreateReductionOfGoodPage = () => {
                   disabled={isStoragesPending || isStoragesError}
                   searchable
                   descriptionProps={{ component: 'div' }}
-                  description={
-                    <Text c={'gray.6'} fz={'xs'}>
-                      Tidak menemukan rak?{' '}
-                      <UnstyledButton fz={'xs'} c={'blue.5'} onClick={openStorageModal}>
-                        Tambah rak.
-                      </UnstyledButton>
-                    </Text>
-                  }
                   clearable
                   key={form.key('storageId')}
                   {...form.getInputProps('storageId')}
@@ -250,25 +240,50 @@ const CreateReductionOfGoodPage = () => {
                           <Select
                             data={productList}
                             placeholder="Pilih nama barang"
-                            disabled={isProductsPending || isProductsError}
+                            disabled={
+                              isProductsPending ||
+                              isProductsError ||
+                              isEmpty(form.getValues()?.storageId)
+                            }
                             searchable
                             withAsterisk
                             filter={optionsFilter}
                             key={form.key(`items.${index}.id`)}
                             {...form.getInputProps(`items.${index}.id`)}
+                            onChange={(value) => {
+                              form.getInputProps(`items.${index}.id`).onChange(value)
+                              const selectedProduct =
+                                products?.find((item) => item.id === Number(value))?.salePrice || 0
+
+                              form.setFieldValue(`items.${index}.price`, selectedProduct)
+                            }}
                           />
                         </Table.Td>
                         <Table.Td>
-                          <NumberInput
-                            placeholder="Masukkan jumlah barang"
-                            withAsterisk
-                            hideControls
-                            allowNegative={false}
-                            decimalSeparator=","
-                            thousandSeparator="."
-                            key={form.key(`items.${index}.quantity`)}
-                            {...form.getInputProps(`items.${index}.quantity`)}
-                          />
+                          <Flex align={'center'} gap={'sm'}>
+                            <NumberInput
+                              placeholder="Masukkan jumlah barang"
+                              withAsterisk
+                              hideControls
+                              w={'100%'}
+                              max={getCurrentProductAvailableStock(
+                                Number(form.getValues().items[index].id),
+                                Number(form.getValues().storageId)
+                              )}
+                              allowNegative={false}
+                              decimalSeparator=","
+                              thousandSeparator="."
+                              key={form.key(`items.${index}.quantity`)}
+                              {...form.getInputProps(`items.${index}.quantity`)}
+                            />
+                            <Badge className="min-w-max !capitalize">
+                              Sisa Stok:{' '}
+                              {getCurrentProductAvailableStock(
+                                Number(form.getValues().items[index].id),
+                                Number(form.getValues().storageId)
+                              )}
+                            </Badge>
+                          </Flex>
                         </Table.Td>
                         <Table.Td>
                           <NumberInput

@@ -1,3 +1,4 @@
+import ReductionOfGood from '#models/reduction_of_good'
 import ReductionOfGoodService from '#services/reduction_of_good_service'
 import type { HttpContext } from '@adonisjs/core/http'
 
@@ -7,7 +8,11 @@ export default class ReductionOfGoodController {
   }
 
   async showCreate({ inertia }: HttpContext) {
-    return inertia.render('reductionOfGoods/CreateReductionOfGoodPage')
+    const generatedInvoiceNumber = await ReductionOfGood.generateInvoiceNumber()
+
+    return inertia.render('reductionOfGoods/CreateReductionOfGoodPage', {
+      generatedId: generatedInvoiceNumber,
+    })
   }
 
   async showDetail({ inertia, request }: HttpContext) {

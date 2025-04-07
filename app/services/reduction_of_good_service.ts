@@ -35,7 +35,7 @@ export default class ReductionOfGoodService {
       ])
 
       return ResponseHelper.okResponse({
-        totalReductionOfGood: totalReductionOfGood.$extras.total,
+        totalTransaction: totalReductionOfGood.$extras.total,
         totalAmount: totalAmount.$extras.total,
         lastUpdated,
       })

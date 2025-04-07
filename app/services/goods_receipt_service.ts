@@ -131,6 +131,7 @@ export default class GoodsReceiptService {
 
       const goodsReceiptItems = items.map((item) => {
         return {
+          goods_receipt_id: newGoodsReceipt.id,
           productId: item.id,
           quantity: item.quantity,
           price: item.price,

@@ -55,7 +55,7 @@ export default class ReductionOfGood extends BaseModel {
     const prefix = 'ROG'
     // make format like this INV-ddmmyy-xxxx with random 4 digit letter at the end
     const date = DateTime.now().toFormat('ddMMyy')
-    const random = Math.random().toString(36).substring(7).toUpperCase()
+    const random = Math.random().toString(36).substring(2, 6).toUpperCase()
     return `${prefix}-${date}-${random}`
   }
 }

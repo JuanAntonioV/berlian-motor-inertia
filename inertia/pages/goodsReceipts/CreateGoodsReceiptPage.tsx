@@ -23,6 +23,7 @@ import { useDisclosure } from '@mantine/hooks'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { isEmpty } from 'lodash'
 import { Info, Plus, Trash } from 'lucide-react'
+import { DateTime } from 'luxon'
 import { useMemo } from 'react'
 import toast from 'react-hot-toast'
 import { createGoodsReceiptApi } from '~/api/goods_receipt_api'
@@ -91,7 +92,12 @@ const CreateGoodsReceiptPage = () => {
   })
 
   const onSubmit = (values: typeof form.values) => {
-    mutate(values)
+    mutate({
+      ...values,
+      receivedAt: DateTime.fromJSDate(new Date(values.receivedAt)).toISODate({
+        format: 'extended',
+      }),
+    })
   }
 
   const storageList = useMemo(() => {
