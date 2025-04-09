@@ -116,6 +116,7 @@ const StorageModal = ({ data, onCreatedId, ...props }: Props) => {
       onClose={() => {
         props.onClose()
         form.reset()
+        setPreviewImage(null)
       }}
     >
       <Modal.Overlay />

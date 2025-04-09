@@ -13,7 +13,7 @@ type Props = {
 }
 const ProductStockTable = ({ id }: Props) => {
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ['product-stock', { id: id }],
+    queryKey: ['product-stock', { id }],
     queryFn: () => getProductStockApi({ id }),
     select: (res) => res.data,
   })

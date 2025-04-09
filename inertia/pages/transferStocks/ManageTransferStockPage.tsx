@@ -2,41 +2,39 @@ import { Head } from '@inertiajs/react'
 import { Card } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { SearchIcon } from 'lucide-react'
-import { getReductionOfGoodsListApi } from '~/api/reduction_of_good_api'
-import { reductionOfGoodsColumn } from '~/componets/columns/reduction_of_good_column'
-import ReductionOfGoodStatSection from '~/componets/sections/ReductionOfGoodStatSection'
+import { getTransferStockListApi } from '~/api/transfer_stock_api'
+import { transferStockColumn } from '~/componets/columns/transfer_column'
 import SectionHeader from '~/componets/sections/SectionHeader'
 import DataTable from '~/componets/tables/DataTable'
 import PageTransition from '~/componets/transitions/PageTransition'
 import AdminLayout from '~/layouts/AdminLayout'
 
-const ManageReductionOfGoodPage = () => {
+const ManageTransferStockPage = () => {
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ['reductionOfGoods'],
-    queryFn: getReductionOfGoodsListApi,
+    queryKey: ['transferStocks'],
+    queryFn: getTransferStockListApi,
   })
 
   return (
     <>
-      <Head title="Kelola Pengeluaran Barang" />
+      <Head title="Kelola Transfer Barang" />
 
       <PageTransition>
-        <ReductionOfGoodStatSection />
         <Card shadow="xs">
           <SectionHeader
-            title="Tabel Pengeluaran Barang"
-            description="Berisi tentang pengeluaran barang yang ada di aplikasi"
+            title="Tabel Transfer Barang"
+            description="Berisi tentang transfer barang yang ada di aplikasi"
           />
           <DataTable
             data={data?.data || []}
-            columns={reductionOfGoodsColumn}
+            columns={transferStockColumn}
             loading={isPending}
             isError={isError}
             errorMessage={error?.message}
             enableRowSelection={false}
-            createPath="/pengeluaran-barang/tambah"
+            createPath="/transfer-barang/tambah"
             editAsDetail
-            editPath="/pengeluaran-barang"
+            editPath="/transfer-barang"
             editIcon={<SearchIcon />}
             editLabel="Detail"
           />
@@ -45,7 +43,5 @@ const ManageReductionOfGoodPage = () => {
     </>
   )
 }
-
-ManageReductionOfGoodPage.layout = (page) => <AdminLayout children={page} />
-
-export default ManageReductionOfGoodPage
+ManageTransferStockPage.layout = (page) => <AdminLayout children={page} />
+export default ManageTransferStockPage

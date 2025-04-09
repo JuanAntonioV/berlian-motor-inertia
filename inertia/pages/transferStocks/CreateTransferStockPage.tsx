@@ -1,44 +1,44 @@
 import { Head, router, usePage } from '@inertiajs/react'
 import {
-  ActionIcon,
-  Alert,
-  Badge,
-  Button,
-  Card,
-  Center,
-  ComboboxItem,
-  FileInput,
-  Flex,
-  NumberInput,
   OptionsFilter,
+  ComboboxItem,
+  Button,
+  Stack,
+  Card,
+  Alert,
+  SimpleGrid,
+  ActionIcon,
+  Center,
+  NumberInput,
   rem,
   Select,
-  SimpleGrid,
-  Stack,
-  Table,
   Textarea,
   TextInput,
+  FileInput,
+  Table,
+  Badge,
+  Flex,
 } from '@mantine/core'
-import { DatePickerInput } from '@mantine/dates'
 import { Form, useForm, zodResolver } from '@mantine/form'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { isEmpty } from 'lodash'
-import { Trash, Plus, Info } from 'lucide-react'
 import { DateTime } from 'luxon'
 import { useMemo, useState } from 'react'
 import toast from 'react-hot-toast'
+import { createTransferStockApi } from '~/api/transfer_stock_api'
 import { getProductListApi } from '~/api/product_api'
-import { createReductionOfGoodsApi } from '~/api/reduction_of_good_api'
 import { getStorageListApi } from '~/api/storage_api'
-import SectionHeader from '~/componets/sections/SectionHeader'
-import PageTitle from '~/componets/titles/PageTitle'
 import PageTransition from '~/componets/transitions/PageTransition'
 import AdminLayout from '~/layouts/AdminLayout'
 import { formErrorResolver } from '~/lib/utils'
-import { reductionOfGoodsSchema } from '~/lib/validators'
-import { TProduct, TStorage } from '~/types'
+import { transferStockSchema } from '~/lib/validators'
+import { TStorage, TProduct } from '~/types'
+import PageTitle from '~/componets/titles/PageTitle'
+import SectionHeader from '~/componets/sections/SectionHeader'
+import { Info, Plus, Trash } from 'lucide-react'
+import { DatePickerInput } from '@mantine/dates'
 
-const CreateReductionOfGoodPage = () => {
+const CreateTransferStockPage = () => {
   const { generatedId } = usePage().props
 
   const {
@@ -53,21 +53,23 @@ const CreateReductionOfGoodPage = () => {
 
   const form = useForm({
     mode: 'uncontrolled',
-    validate: zodResolver(reductionOfGoodsSchema),
+    validate: zodResolver(transferStockSchema),
     initialValues: {
       id: generatedId,
-      storageId: 0,
       reference: '',
-      reducedAt: new Date(),
+      transferedAt: new Date(),
+      sourceStorageId: 0,
+      destinationStorageId: 0,
       attachment: null,
       notes: '',
-      items: [{ id: -1, quantity: '', price: '' }],
+      items: [{ id: -1, quantity: '' }],
     },
   })
 
-  const [selectedStorageId, setSelectedStorageId] = useState<number | null>(null)
-  form.watch('storageId', ({ value }) => {
-    setSelectedStorageId(Number(value))
+  const [selectedSourceStorageId, setSelectedSourceStorageId] = useState<number | null>(null)
+
+  form.watch('sourceStorageId', ({ value }) => {
+    setSelectedSourceStorageId(value)
   })
 
   const {
@@ -75,22 +77,21 @@ const CreateReductionOfGoodPage = () => {
     isPending: isProductsPending,
     isError: isProductsError,
   } = useQuery({
-    queryKey: ['products', { storageId: selectedStorageId }],
-    queryFn: () => getProductListApi({ storageId: selectedStorageId || undefined }),
+    queryKey: ['products', { storageId: selectedSourceStorageId }],
+    queryFn: () => getProductListApi({ storageId: selectedSourceStorageId || undefined }),
     select: (res) => res.data,
   })
 
   const queryClient = useQueryClient()
 
   const { mutate, isPending, error } = useMutation({
-    mutationFn: createReductionOfGoodsApi,
+    mutationFn: createTransferStockApi,
     onSuccess: () => {
-      queryClient.refetchQueries({ queryKey: ['reductionOfGoods'] })
+      queryClient.refetchQueries({ queryKey: ['transferStocks'] })
       queryClient.refetchQueries({ queryKey: ['products'] })
-      queryClient.refetchQueries({ queryKey: ['product-stock'] })
-      queryClient.refetchQueries({ queryKey: ['reductionOfGoodStats'] })
+      queryClient.refetchQueries({ queryKey: ['transferStockStats'] })
       toast.success('Berhasil menyimpan transaksi!')
-      router.visit('/pengeluaran-barang')
+      router.visit('/transfer-barang')
     },
     onError: (err) => {
       form.setErrors(formErrorResolver(err.errors))
@@ -100,7 +101,9 @@ const CreateReductionOfGoodPage = () => {
   const onSubmit = (values: typeof form.values) => {
     mutate({
       ...values,
-      reducedAt: DateTime.fromJSDate(new Date(values.reducedAt)).toISODate({ format: 'extended' }),
+      transferedAt: DateTime.fromJSDate(new Date(values.transferedAt)).toISODate({
+        format: 'extended',
+      }),
     })
   }
 
@@ -126,6 +129,12 @@ const CreateReductionOfGoodPage = () => {
     })
   }
 
+  const storageDestinationFilter: OptionsFilter = ({ options }) => {
+    return (options as ComboboxItem[]).filter((option) => {
+      return String(form.getValues()?.sourceStorageId) !== String(option.value)
+    })
+  }
+
   const getCurrentProductAvailableStock = (productId: number, storageId: number) => {
     const product = products?.find((item) => item.id === productId)
     return product?.stocks?.find((item) => item.storageId === storageId)?.quantity || 0
@@ -133,13 +142,13 @@ const CreateReductionOfGoodPage = () => {
 
   return (
     <>
-      <Head title="Pengeluaran Barang" />
+      <Head title="Transfer Barang" />
 
       <PageTransition>
         <Form form={form} onSubmit={onSubmit}>
           <PageTitle
-            title="Tambah Pengeluaran Barang"
-            description="Merupakan halaman untuk menambah pengeluaran barang baru ke dalam sistem."
+            title="Tambah Transfer Barang"
+            description="Merupakan halaman untuk menambah transfer barang baru ke dalam sistem."
           >
             <Button type="submit" loading={isPending}>
               Simpan
@@ -147,7 +156,7 @@ const CreateReductionOfGoodPage = () => {
           </PageTitle>
           <Stack>
             <Card shadow="xs">
-              <SectionHeader title="Informasi Pengeluaran" />
+              <SectionHeader title="Informasi Transfer" />
 
               {error?.message && (
                 <Alert color="red" c={'red'} icon={<Info />} mb={'md'}>
@@ -165,13 +174,13 @@ const CreateReductionOfGoodPage = () => {
                     {...form.getInputProps('id')}
                   />
                   <DatePickerInput
-                    placeholder="Pilih tanggal penerimaan"
-                    label="Tanggal Penerimaan"
+                    placeholder="Pilih tanggal transfer"
+                    label="Tanggal Transfer"
                     withAsterisk
                     highlightToday
                     valueFormat="DD MMMM YYYY"
-                    key={form.key('reducedAt')}
-                    {...form.getInputProps('reducedAt')}
+                    key={form.key('transferedAt')}
+                    {...form.getInputProps('transferedAt')}
                   />
                   <TextInput
                     placeholder="Masukkan referensi"
@@ -180,36 +189,58 @@ const CreateReductionOfGoodPage = () => {
                     {...form.getInputProps('reference')}
                   />
                 </SimpleGrid>
-                <Select
-                  data={storageList}
-                  label="Rak Penyimpanan Barang"
-                  placeholder="Pilih rak penyimpanan barang"
-                  withAsterisk
-                  disabled={isStoragesPending || isStoragesError}
-                  searchable
-                  descriptionProps={{ component: 'div' }}
-                  clearable
-                  onClear={() => {
-                    form.setFieldValue('storageId', 0)
-                    if (
-                      form.getValues().items.length > 1 ||
-                      form.getValues().items.some((item) => item.id !== -1)
-                    ) {
-                      form.removeListItem('items', form.getValues().items.length - 1)
-                    }
-                  }}
-                  key={form.key('storageId')}
-                  {...form.getInputProps('storageId')}
-                  onChange={(value) => {
-                    form.getInputProps('storageId').onChange(value)
-                    if (
-                      form.getValues().items.length > 1 ||
-                      form.getValues().items.some((item) => item.id !== -1)
-                    ) {
-                      form.removeListItem('items', form.getValues().items.length - 1)
-                    }
-                  }}
-                />
+                <SimpleGrid cols={{ base: 1, md: 2 }} spacing={'lg'}>
+                  <Select
+                    data={storageList}
+                    label="Rak Penyimpanan Asal"
+                    placeholder="Pilih rak penyimpanan barang"
+                    withAsterisk
+                    disabled={isStoragesPending || isStoragesError}
+                    searchable
+                    descriptionProps={{ component: 'div' }}
+                    clearable
+                    onClear={() => {
+                      form.setFieldValue('sourceStorageId', 0)
+                      form.setFieldValue('destinationStorageId', 0)
+                      if (
+                        form.getValues().items.length > 1 ||
+                        form.getValues().items.some((item) => item.id !== -1)
+                      ) {
+                        form.removeListItem('items', form.getValues().items.length - 1)
+                      }
+                    }}
+                    key={form.key('sourceStorageId')}
+                    {...form.getInputProps('sourceStorageId')}
+                    onChange={(value) => {
+                      form.getInputProps('sourceStorageId').onChange(value)
+                      if (
+                        form.getValues().items.length > 1 ||
+                        form.getValues().items.some((item) => item.id !== -1)
+                      ) {
+                        form.removeListItem('items', form.getValues().items.length - 1)
+                      }
+                    }}
+                  />
+                  <Select
+                    data={storageList}
+                    label="Rak Tujuan"
+                    placeholder="Pilih rak tujuan barang"
+                    withAsterisk
+                    disabled={isStoragesPending || isStoragesError}
+                    searchable
+                    descriptionProps={{ component: 'div' }}
+                    clearable
+                    onClear={() => {
+                      form.setFieldValue('destinationStorageId', 0)
+                    }}
+                    filter={storageDestinationFilter}
+                    key={form.key('destinationStorageId')}
+                    {...form.getInputProps('destinationStorageId')}
+                    onChange={(value) => {
+                      form.getInputProps('destinationStorageId').onChange(value)
+                    }}
+                  />
+                </SimpleGrid>
                 <FileInput
                   accept="image/*, application/pdf"
                   placeholder="Pilih file lampiran"
@@ -240,7 +271,6 @@ const CreateReductionOfGoodPage = () => {
                       <Table.Th>Aksi</Table.Th>
                       <Table.Th>Nama Barang</Table.Th>
                       <Table.Th>QTY</Table.Th>
-                      <Table.Th>Harga</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
@@ -263,20 +293,14 @@ const CreateReductionOfGoodPage = () => {
                             disabled={
                               isProductsPending ||
                               isProductsError ||
-                              isEmpty(form.getValues()?.storageId)
+                              isStoragesPending ||
+                              isEmpty(form.getValues().sourceStorageId)
                             }
                             searchable
                             withAsterisk
                             filter={optionsFilter}
                             key={form.key(`items.${index}.id`)}
                             {...form.getInputProps(`items.${index}.id`)}
-                            onChange={(value) => {
-                              form.getInputProps(`items.${index}.id`).onChange(value)
-                              const selectedProduct =
-                                products?.find((item) => item.id === Number(value))?.salePrice || 0
-
-                              form.setFieldValue(`items.${index}.price`, selectedProduct)
-                            }}
                           />
                         </Table.Td>
                         <Table.Td>
@@ -286,10 +310,6 @@ const CreateReductionOfGoodPage = () => {
                               withAsterisk
                               hideControls
                               w={'100%'}
-                              max={getCurrentProductAvailableStock(
-                                Number(form.getValues().items[index].id),
-                                Number(form.getValues().storageId)
-                              )}
                               allowNegative={false}
                               decimalSeparator=","
                               thousandSeparator="."
@@ -300,30 +320,17 @@ const CreateReductionOfGoodPage = () => {
                               Sisa Stok:{' '}
                               {getCurrentProductAvailableStock(
                                 Number(form.getValues().items[index].id),
-                                Number(form.getValues().storageId)
+                                Number(form.getValues().sourceStorageId)
                               )}
                             </Badge>
                           </Flex>
-                        </Table.Td>
-                        <Table.Td>
-                          <NumberInput
-                            placeholder="Masukkan harga barang"
-                            withAsterisk
-                            decimalSeparator=","
-                            thousandSeparator="."
-                            prefix="Rp "
-                            allowNegative={false}
-                            hideControls
-                            key={form.key(`items.${index}.price`)}
-                            {...form.getInputProps(`items.${index}.price`)}
-                          />
                         </Table.Td>
                       </Table.Tr>
                     ))}
                   </Table.Tbody>
                   <Table.Tfoot>
                     <Table.Tr>
-                      <Table.Th colSpan={4}>
+                      <Table.Th colSpan={5}>
                         <Center w={'100%'}>
                           <Button
                             variant="outline"
@@ -331,7 +338,6 @@ const CreateReductionOfGoodPage = () => {
                               form.insertListItem('items', {
                                 id: -1,
                                 quantity: '',
-                                price: '',
                               })
                             }
                             leftSection={<Plus size={16} />}
@@ -351,6 +357,5 @@ const CreateReductionOfGoodPage = () => {
     </>
   )
 }
-
-CreateReductionOfGoodPage.layout = (page) => <AdminLayout children={page} />
-export default CreateReductionOfGoodPage
+CreateTransferStockPage.layout = (page) => <AdminLayout children={page} />
+export default CreateTransferStockPage

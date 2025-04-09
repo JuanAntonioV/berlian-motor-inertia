@@ -205,3 +205,17 @@ export const reductionOfGoodsSchema = z.object({
     })
   ),
 })
+
+export const transferStockSchema = z.object({
+  id: z.string().nullish().optional(),
+  reference: z.string().nullish(),
+  transferedAt: z.date(),
+  notes: z.string().nullish(),
+  attachment: z.instanceof(File).nullish(),
+  items: z.array(
+    z.object({
+      id: z.coerce.number(),
+      quantity: z.coerce.number(),
+    })
+  ),
+})

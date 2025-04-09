@@ -27,7 +27,7 @@ export default class ProductService {
           query.sum('quantity').as('totalStock')
         })
         .if(storageId, (query) => {
-          query.preload('stocks', (q) => {
+          query.preload('stocks').whereHas('stocks', (q) => {
             q.where('storageId', storageId)
           })
         })

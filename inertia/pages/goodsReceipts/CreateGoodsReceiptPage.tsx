@@ -253,6 +253,7 @@ const CreateGoodsReceiptPage = () => {
                             size={'lg'}
                             color="red"
                             onClick={() => form.removeListItem('items', index)}
+                            disabled={form.getValues().items.length === 1}
                           >
                             <Trash size={16} />
                           </ActionIcon>

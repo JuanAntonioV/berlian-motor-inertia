@@ -1,24 +1,36 @@
 import { Link, usePage } from '@inertiajs/react'
-import { Divider, Flex, Loader, LoadingOverlay, NumberFormatter } from '@mantine/core'
-import { Table } from '@mantine/core'
-import { Button, Card, Group, SimpleGrid, Stack, Text, Title } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { StatusCodes } from 'http-status-codes'
-import { ArrowLeft } from 'lucide-react'
-import { DateTime } from 'luxon'
-import { getGoodsReceiptDetailApi } from '~/api/goods_receipt_api'
-import DisplayField from '~/componets/fields/DisplayField'
-import PageTitle from '~/componets/titles/PageTitle'
 import PageTransition from '~/componets/transitions/PageTransition'
 import AdminLayout from '~/layouts/AdminLayout'
 import NotFoundScreen from '../errors/not_found'
+import { getTransferStockDetailApi } from '~/api/transfer_stock_api'
+import {
+  Button,
+  Card,
+  Divider,
+  Flex,
+  Group,
+  Loader,
+  LoadingOverlay,
+  NumberFormatter,
+  SimpleGrid,
+  Stack,
+  Table,
+  Text,
+  Title,
+} from '@mantine/core'
+import PageTitle from '~/componets/titles/PageTitle'
+import { ArrowLeft } from 'lucide-react'
+import { DateTime } from 'luxon'
+import DisplayField from '~/componets/fields/DisplayField'
 
-const DetailGoodsReceiptPage = () => {
+const DetailTransferStockPage = () => {
   const { id } = usePage().props
 
   const { data, isPending, error } = useQuery({
-    queryKey: ['goodsReceipts', { id }],
-    queryFn: () => getGoodsReceiptDetailApi({ id: id as string }),
+    queryKey: ['transferStock', { id }],
+    queryFn: () => getTransferStockDetailApi({ id: id as string }),
     enabled: !!id,
     select: (res) => res.data,
   })
@@ -45,29 +57,36 @@ const DetailGoodsReceiptPage = () => {
       ) : (
         <PageTransition>
           <PageTitle
-            title="Detail Penerimaan Barang"
-            description={`Merupakan halaman detail penerimaan barang dari transaksi dengan nomor ${id}`}
+            title="Detail Transfer Barang"
+            description={`Merupakan halaman detail transfer barang dari transaksi dengan nomor ${id}`}
           />
           <Card shadow="xs" p={'xl'}>
             <Stack gap={'xl'}>
               <SimpleGrid cols={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing="lg">
                 <DisplayField title="Nomor Transaksi" value={data?.id} copyable />
                 <DisplayField
-                  title="Tanggal Penerimaan"
-                  value={DateTime.fromISO(data?.receivedAt).toLocaleString(DateTime.DATE_MED)}
+                  title="Tanggal Transfer"
+                  value={DateTime.fromISO(data?.transferedAt).toLocaleString(DateTime.DATE_MED)}
                 />
                 <DisplayField
                   title="Tanggal Transaksi"
                   value={DateTime.fromISO(data?.createdAt).toLocaleString(DateTime.DATETIME_MED)}
                 />
-              </SimpleGrid>
-              <SimpleGrid cols={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing="lg">
-                <DisplayField title="Nama Pemasok" value={data?.supplier?.name || '-'} />
                 <DisplayField title="Nomor Referensi" value={data?.reference || '-'} />
               </SimpleGrid>
               <DisplayField title="Catatan" value={data?.notes || '-'} fz="md" fw={'normal'} />
               <Divider />
-              <Stack>
+              <Stack gap={'md'}>
+                <Title order={3} fz={'md'}>
+                  Detail Rak
+                </Title>
+                <SimpleGrid cols={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing="lg">
+                  <DisplayField title="Dari Rak" value={data?.sourceStorage?.name || '-'} />
+                  <DisplayField title="Rak Tujuan" value={data?.destinationStorage?.name || '-'} />
+                </SimpleGrid>
+              </Stack>
+              <Divider />
+              <Stack gap={'md'}>
                 <Title order={3} fz={'md'}>
                   Detail Pengguna
                 </Title>
@@ -78,7 +97,7 @@ const DetailGoodsReceiptPage = () => {
                 </SimpleGrid>
               </Stack>
               <Divider />
-              <Stack>
+              <Stack gap={'md'}>
                 <Title order={3} fz={'md'}>
                   Detail Barang
                 </Title>
@@ -88,7 +107,6 @@ const DetailGoodsReceiptPage = () => {
                       <Table.Th>No</Table.Th>
                       <Table.Th>Nama Barang</Table.Th>
                       <Table.Th>QTY</Table.Th>
-                      <Table.Th>Harga</Table.Th>
                     </Table.Tr>
                   </Table.Thead>
                   <Table.Tbody>
@@ -108,16 +126,6 @@ const DetailGoodsReceiptPage = () => {
                               value={item.quantity || 0}
                               thousandSeparator="."
                               decimalSeparator=","
-                            />
-                          </Text>
-                        </Table.Td>
-                        <Table.Td>
-                          <Text c={'gray'}>
-                            <NumberFormatter
-                              value={item.price || 0}
-                              thousandSeparator="."
-                              decimalSeparator=","
-                              prefix="Rp "
                             />
                           </Text>
                         </Table.Td>
@@ -142,20 +150,6 @@ const DetailGoodsReceiptPage = () => {
                     </Text>
                   </Flex>
                   <Divider />
-                  <Flex justify={'space-between'} align={'center'} py={'md'}>
-                    <Title order={3} fz={'sm'} fw={'bold'} c={'orange'}>
-                      Total Harga:
-                    </Title>
-                    <Text fw={'bold'} fz={'md'} c={'orange'}>
-                      <NumberFormatter
-                        value={data?.totalAmount || 0}
-                        prefix="Rp "
-                        thousandSeparator="."
-                        decimalSeparator=","
-                      />
-                    </Text>
-                  </Flex>
-                  <Divider />
                 </Stack>
               </Flex>
             </Stack>
@@ -164,7 +158,7 @@ const DetailGoodsReceiptPage = () => {
           <Group>
             <Button
               component={Link}
-              href="/penerimaan-barang"
+              href="/transfer-barang"
               color="gray.4"
               c={'gray'}
               variant="outline"
@@ -179,7 +173,5 @@ const DetailGoodsReceiptPage = () => {
     </>
   )
 }
-
-DetailGoodsReceiptPage.layout = (page: React.ReactNode) => <AdminLayout children={page} />
-
-export default DetailGoodsReceiptPage
+DetailTransferStockPage.layout = (page) => <AdminLayout children={page} />
+export default DetailTransferStockPage

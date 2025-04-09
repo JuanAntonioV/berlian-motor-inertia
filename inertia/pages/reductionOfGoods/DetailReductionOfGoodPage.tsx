@@ -76,61 +76,65 @@ const DetailReductionOfGoodPage = () => {
               </SimpleGrid>
               <DisplayField title="Catatan" value={data?.notes || '-'} fz="md" fw={'normal'} />
               <Divider />
-              <Title order={3} fz={'md'}>
-                Detail Pengguna
-              </Title>
-              <SimpleGrid cols={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing="lg">
-                <DisplayField title="Dilakukan Oleh" value={data?.user?.fullName || '-'} />
-                <DisplayField title="Email" value={data?.user?.email || '-'} />
-                <DisplayField title="Telepon" value={data?.user?.phone || '-'} />
-              </SimpleGrid>
+              <Stack gap={'md'}>
+                <Title order={3} fz={'md'}>
+                  Detail Pengguna
+                </Title>
+                <SimpleGrid cols={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing="lg">
+                  <DisplayField title="Dilakukan Oleh" value={data?.user?.fullName || '-'} />
+                  <DisplayField title="Email" value={data?.user?.email || '-'} />
+                  <DisplayField title="Telepon" value={data?.user?.phone || '-'} />
+                </SimpleGrid>
+              </Stack>
               <Divider />
-              <Title order={3} fz={'md'}>
-                Detail Barang
-              </Title>
-              <Table striped verticalSpacing={'md'}>
-                <Table.Thead>
-                  <Table.Tr>
-                    <Table.Th>No</Table.Th>
-                    <Table.Th>Nama Barang</Table.Th>
-                    <Table.Th>QTY</Table.Th>
-                    <Table.Th>Harga</Table.Th>
-                  </Table.Tr>
-                </Table.Thead>
-                <Table.Tbody>
-                  {data?.items?.map((item, index) => (
-                    <Table.Tr key={index}>
-                      <Table.Td>
-                        <Text c={'gray'}>{index + 1}</Text>
-                      </Table.Td>
-                      <Table.Td>
-                        <Text c={'gray'}>
-                          {`${item.product?.name} - ${item.product?.sku}` || '-'}
-                        </Text>
-                      </Table.Td>
-                      <Table.Td>
-                        <Text c={'gray'}>
-                          <NumberFormatter
-                            value={item.quantity || 0}
-                            thousandSeparator="."
-                            decimalSeparator=","
-                          />
-                        </Text>
-                      </Table.Td>
-                      <Table.Td>
-                        <Text c={'gray'}>
-                          <NumberFormatter
-                            value={item.price || 0}
-                            thousandSeparator="."
-                            decimalSeparator=","
-                            prefix="Rp "
-                          />
-                        </Text>
-                      </Table.Td>
+              <Stack gap={'md'}>
+                <Title order={3} fz={'md'}>
+                  Detail Barang
+                </Title>
+                <Table striped verticalSpacing={'md'}>
+                  <Table.Thead>
+                    <Table.Tr>
+                      <Table.Th>No</Table.Th>
+                      <Table.Th>Nama Barang</Table.Th>
+                      <Table.Th>QTY</Table.Th>
+                      <Table.Th>Harga</Table.Th>
                     </Table.Tr>
-                  ))}
-                </Table.Tbody>
-              </Table>
+                  </Table.Thead>
+                  <Table.Tbody>
+                    {data?.items?.map((item, index) => (
+                      <Table.Tr key={index}>
+                        <Table.Td>
+                          <Text c={'gray'}>{index + 1}</Text>
+                        </Table.Td>
+                        <Table.Td>
+                          <Text c={'gray'}>
+                            {`${item.product?.name} - ${item.product?.sku}` || '-'}
+                          </Text>
+                        </Table.Td>
+                        <Table.Td>
+                          <Text c={'gray'}>
+                            <NumberFormatter
+                              value={item.quantity || 0}
+                              thousandSeparator="."
+                              decimalSeparator=","
+                            />
+                          </Text>
+                        </Table.Td>
+                        <Table.Td>
+                          <Text c={'gray'}>
+                            <NumberFormatter
+                              value={item.price || 0}
+                              thousandSeparator="."
+                              decimalSeparator=","
+                              prefix="Rp "
+                            />
+                          </Text>
+                        </Table.Td>
+                      </Table.Tr>
+                    ))}
+                  </Table.Tbody>
+                </Table>
+              </Stack>
 
               <Flex justify="flex-end">
                 <Stack maw={{ base: '50%', md: '40%' }} w={'100%'} gap={0}>

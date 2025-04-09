@@ -204,3 +204,29 @@ export interface TReductionOfGoods {
   updatedAt: string
   items: TReductionOfGoodItems[]
 }
+
+export interface TTransferStock {
+  id: string
+  userId: number
+  user: TStaff
+  totalQuantity: number
+  attachment: string | null
+  notes: string | null
+  reference: string | null
+  totalAmount: number
+  createdAt: string
+  updatedAt: string
+  items: TTransferStockItems[]
+  sourceStorageId: number
+  sourceStorage: TStorage
+  destinationStorageId: number
+  destinationStorage: TStorage
+}
+
+export type TTransferStockItems = Omit<
+  TGoodsReceiptItems,
+  'goodsReceiptId' | 'goodsReceipt' | 'price'
+> & {
+  transferStockId: string
+  transferStock: TTransferStocks
+}

@@ -25,7 +25,7 @@ const NavList = ({ onToggleSidebar }: Props) => {
       },
       {
         id: 2,
-        label: 'Products',
+        label: 'Produk',
         href: '/kelola-produk',
         icon: <ShoppingCart size={24} />,
         subMenus: [],
