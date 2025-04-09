@@ -192,7 +192,6 @@ const CreateStaffPage = () => {
                         key={form.key('roles')}
                         {...form.getInputProps('roles')}
                         onChange={(value) => {
-                          console.log('🚀 ~ CreateStaffPage ~ value:', value)
                           form.getInputProps('roles').onChange(value)
                         }}
                       />

@@ -58,7 +58,11 @@ const GoodsReceiptStatSection = () => {
         </Title>
         <Group justify="space-between" align="center">
           <Text fz={'h2'} fw={'bold'}>
-            {data?.totalGoodsReceipt}
+            <NumberFormatter
+              value={data?.totalGoodsReceipt || 0}
+              decimalSeparator=","
+              thousandSeparator="."
+            />
           </Text>
 
           <Paper p="xs" radius="md" bg="blue" className="!text-white">

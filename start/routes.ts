@@ -61,6 +61,12 @@ router
 
         router
           .group(() => {
+            router.get('stats', [DashboardController, 'stats']).as('dashboard.stats')
+          })
+          .prefix('dashboard')
+
+        router
+          .group(() => {
             router.get('list', [CategoryController, 'list']).as('categories.list')
             router.post('/', [CategoryController, 'create']).as('categories.create')
             router.put(':id', [CategoryController, 'update']).as('categories.update')

@@ -17,7 +17,6 @@ export default class ProductService {
   static async list({ request }: HttpContext) {
     const queryParams = request.qs()
     const { storageId } = queryParams
-    console.log('🚀 ~ ProductService ~ list ~ storageId:', storageId)
 
     try {
       const products = await Product.query()

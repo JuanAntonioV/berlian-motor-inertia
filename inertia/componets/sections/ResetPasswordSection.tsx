@@ -23,7 +23,6 @@ const ResetPasswordSection = () => {
       toast.error(error.message)
     },
   })
-  console.log('🚀 ~ ResetPasswordSection ~ error:', error)
 
   const onSubmit = (values: typeof form.values) => {
     mutate(values)

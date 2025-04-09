@@ -53,11 +53,17 @@ const DetailGoodsReceiptPage = () => {
               <SimpleGrid cols={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing="lg">
                 <DisplayField title="Nomor Transaksi" value={data?.id} copyable />
                 <DisplayField
+                  title="Tanggal Penerimaan"
+                  value={DateTime.fromISO(data?.receivedAt).toLocaleString(DateTime.DATE_MED)}
+                />
+                <DisplayField
                   title="Tanggal Transaksi"
                   value={DateTime.fromISO(data?.createdAt).toLocaleString(DateTime.DATETIME_MED)}
                 />
-                <DisplayField title="Nomor Referensi" value={data?.reference || '-'} />
+              </SimpleGrid>
+              <SimpleGrid cols={{ base: 1, md: 2, lg: 3, xl: 4 }} spacing="lg">
                 <DisplayField title="Nama Pemasok" value={data?.supplier?.name || '-'} />
+                <DisplayField title="Nomor Referensi" value={data?.reference || '-'} />
               </SimpleGrid>
               <DisplayField title="Catatan" value={data?.notes || '-'} fz="md" fw={'normal'} />
               <Divider />
