@@ -215,7 +215,5 @@ router
         router.get('/:id', [TransferStockController, 'showDetail']).as('transfer.detail.page')
       })
       .prefix('transfer-barang')
-
-    // TODO: Laporan
   })
   .middleware(middleware.auth())
