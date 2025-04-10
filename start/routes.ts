@@ -171,16 +171,29 @@ router
     router.get('/', ({ response }) => response.redirect().toRoute('dashboard.page')).as('home.page')
     router.get('dashboard', [DashboardController, 'show']).as('dashboard.page')
     router.get('akun-saya', [ProfileController, 'show']).as('profile.page')
-    router.get('kelola-kategori', [CategoryController, 'show']).as('category.page')
-    router.get('kelola-merek', [BrandController, 'show']).as('brand.page')
-    router.get('kelola-tipe', [TypeController, 'show']).as('type.page')
-    router.get('kelola-rak', [StorageController, 'show']).as('storage.page')
+    router
+      .get('kelola-kategori', [CategoryController, 'show'])
+      .as('category.page')
+      .middleware(middleware.checkPermission())
+    router
+      .get('kelola-merek', [BrandController, 'show'])
+      .as('brand.page')
+      .middleware(middleware.checkPermission())
+    router
+      .get('kelola-tipe', [TypeController, 'show'])
+      .as('type.page')
+      .middleware(middleware.checkPermission())
+    router
+      .get('kelola-rak', [StorageController, 'show'])
+      .as('storage.page')
+      .middleware(middleware.checkPermission())
     router
       .group(() => {
         router.get('/', [ProductController, 'show']).as('product.page')
         router.get('/tambah', [ProductController, 'showCreate']).as('product.create.page')
         router.get('/:id/edit', [ProductController, 'showEdit']).as('product.edit.page')
       })
+      .middleware(middleware.checkPermission())
       .prefix('kelola-produk')
     router
       .group(() => {
@@ -188,6 +201,7 @@ router
         router.get('/tambah', [StaffController, 'showCreate']).as('staff.create.page')
         router.get('/:id/edit', [StaffController, 'showEdit']).as('staff.edit.page')
       })
+      .middleware(middleware.checkPermission())
       .prefix('kelola-karyawan')
     router
       .group(() => {
@@ -195,6 +209,7 @@ router
         router.get('/tambah', [GoodsReceiptController, 'showCreate']).as('goodsReceipt.create.page')
         router.get('/:id', [GoodsReceiptController, 'showDetail']).as('goodsReceipt.detail.page')
       })
+      .middleware(middleware.checkPermission())
       .prefix('penerimaan-barang')
 
     router
@@ -207,6 +222,7 @@ router
           .get('/:id', [ReductionOfGoodController, 'showDetail'])
           .as('reductionOfGoods.detail.page')
       })
+      .middleware(middleware.checkPermission())
       .prefix('pengeluaran-barang')
     router
       .group(() => {
@@ -214,6 +230,13 @@ router
         router.get('/tambah', [TransferStockController, 'showCreate']).as('transfer.create.page')
         router.get('/:id', [TransferStockController, 'showDetail']).as('transfer.detail.page')
       })
+      .middleware(middleware.checkPermission())
       .prefix('transfer-barang')
   })
   .middleware(middleware.auth())
+
+router
+  .get('403', ({ inertia }) => {
+    return inertia.render('errors/forbidden')
+  })
+  .as('403.page')
