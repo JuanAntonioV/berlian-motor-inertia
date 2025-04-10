@@ -1,4 +1,4 @@
-import { Head } from '@inertiajs/react'
+import { Head, usePage } from '@inertiajs/react'
 import { Card } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { getProductListApi } from '~/api/product_api'
@@ -7,12 +7,17 @@ import SectionHeader from '~/componets/sections/SectionHeader'
 import DataTable from '~/componets/tables/DataTable'
 import PageTransition from '~/componets/transitions/PageTransition'
 import AdminLayout from '~/layouts/AdminLayout'
+import { TUser } from '~/types'
 
 const ManageProductPage = () => {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['products'],
     queryFn: () => getProductListApi(),
   })
+
+  const user = usePage().props.user as TUser
+  const userRoles = user?.roles?.map((role) => role.slug) || []
+  const canCreateProduct = userRoles.includes('super-admin') || userRoles.includes('admin')
 
   return (
     <>
@@ -31,7 +36,7 @@ const ManageProductPage = () => {
             isError={isError}
             errorMessage={error?.message}
             enableRowSelection={false}
-            createPath="/kelola-produk/tambah"
+            createPath={canCreateProduct ? '/kelola-produk/tambah' : undefined}
             editPath="/kelola-produk"
           />
         </Card>

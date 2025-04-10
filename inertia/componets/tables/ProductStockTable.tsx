@@ -7,11 +7,17 @@ import { useDisclosure } from '@mantine/hooks'
 import AddProductStockModal from '../modals/AddProductStockModal'
 import { productStockColumn } from '../columns/product_stock_column'
 import { isEmpty } from 'lodash'
+import { usePage } from '@inertiajs/react'
+import { TUser } from '~/types'
 
 type Props = {
   id: number
 }
 const ProductStockTable = ({ id }: Props) => {
+  const user = usePage().props.user as TUser
+  const userRoles = user?.roles?.map((role) => role.slug) || []
+  const canAddStock = userRoles.includes('super-admin') || userRoles.includes('admin')
+
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['product-stock', { id }],
     queryFn: () => getProductStockApi({ id }),
@@ -29,7 +35,7 @@ const ProductStockTable = ({ id }: Props) => {
           description="Berisi tentang informasi stok produk yang tersedia."
         />
 
-        {isEmpty(data) && (
+        {canAddStock && isEmpty(data) && (
           <AddProductStockModal
             opened={openedAddStockModal}
             onClose={closeAddStockModal}
@@ -44,7 +50,7 @@ const ProductStockTable = ({ id }: Props) => {
           isError={isError}
           errorMessage={error?.message}
           enableRowSelection={false}
-          onCreate={isEmpty(data) ? openAddStockModal : undefined}
+          onCreate={canAddStock && isEmpty(data) ? openAddStockModal : undefined}
           enableRowActions={false}
         />
       </Stack>

@@ -39,10 +39,17 @@ import { useEffect, useState, useMemo } from 'react'
 import { formErrorResolver } from '~/lib/utils'
 import { Group } from '@mantine/core'
 import ProductStockTable from '~/componets/tables/ProductStockTable'
+import { TUser } from '~/types'
 
 const EditProductPage = () => {
   const { id } = usePage().props
   const serverProps = usePage().props
+
+  const user = serverProps.user as TUser
+  const userRoles = user?.roles?.map((role) => role.slug) || []
+
+  const canEditProduct = userRoles.includes('super-admin') || userRoles.includes('admin')
+  const canDeleteProduct = userRoles.includes('super-admin') || userRoles.includes('admin')
 
   const { data, isPending, error } = useQuery({
     queryKey: ['product-detail', { id }],
@@ -197,9 +204,11 @@ const EditProductPage = () => {
             title="Ubah Produk"
             description="Merupakan halaman untuk mengubah data produk dalam sistem."
           >
-            <Button type="submit" loading={isUpdatePending || isPending}>
-              Simpan
-            </Button>
+            {canEditProduct && (
+              <Button type="submit" loading={isUpdatePending || isPending}>
+                Simpan
+              </Button>
+            )}
           </PageTitle>
 
           <Grid gutter="lg">
@@ -224,6 +233,7 @@ const EditProductPage = () => {
                         label="Nama Produk"
                         withAsterisk
                         autoFocus
+                        readOnly={!canEditProduct}
                         key={form.key('name')}
                         {...form.getInputProps('name')}
                       />
@@ -231,7 +241,7 @@ const EditProductPage = () => {
                         placeholder="Masukkan kode SKU produk"
                         label="SKU Produk"
                         withAsterisk
-                        disabled
+                        readOnly
                         key={form.key('sku')}
                         {...form.getInputProps('sku')}
                       />
@@ -242,6 +252,7 @@ const EditProductPage = () => {
                         withAsterisk
                         searchable
                         clearable
+                        readOnly={!canEditProduct}
                         key={form.key('brandId')}
                         {...form.getInputProps('brandId')}
                         onChange={(value) => {
@@ -256,6 +267,7 @@ const EditProductPage = () => {
                         placeholder="Pilih tipe produk"
                         withAsterisk
                         searchable
+                        readOnly={!canEditProduct}
                         clearable
                         {...form.getInputProps('typeId')}
                       />
@@ -270,6 +282,7 @@ const EditProductPage = () => {
                         decimalSeparator=","
                         thousandSeparator="."
                         withAsterisk
+                        readOnly={!canEditProduct}
                         key={form.key('salePrice')}
                         {...form.getInputProps('salePrice')}
                       />
@@ -281,6 +294,7 @@ const EditProductPage = () => {
                         decimalSeparator=","
                         thousandSeparator="."
                         withAsterisk
+                        readOnly={!canEditProduct}
                         key={form.key('supplierPrice')}
                         {...form.getInputProps('supplierPrice')}
                       />
@@ -292,6 +306,7 @@ const EditProductPage = () => {
                         decimalSeparator=","
                         thousandSeparator="."
                         withAsterisk
+                        readOnly={!canEditProduct}
                         key={form.key('wholesalePrice')}
                         {...form.getInputProps('wholesalePrice')}
                       />
@@ -303,6 +318,7 @@ const EditProductPage = () => {
                         decimalSeparator=","
                         thousandSeparator="."
                         withAsterisk
+                        readOnly={!canEditProduct}
                         key={form.key('retailPrice')}
                         {...form.getInputProps('retailPrice')}
                       />
@@ -315,6 +331,7 @@ const EditProductPage = () => {
                       withAsterisk
                       multiple
                       searchable
+                      readOnly={!canEditProduct}
                       clearable
                       key={form.key('categoryIds')}
                       {...form.getInputProps('categoryIds')}
@@ -324,6 +341,7 @@ const EditProductPage = () => {
                       placeholder="Masukkan deskripsi produk"
                       label="Deskripsi Produk"
                       rows={3}
+                      readOnly={!canEditProduct}
                       key={form.key('description')}
                       {...form.getInputProps('description')}
                     />
@@ -385,44 +403,48 @@ const EditProductPage = () => {
                         </AspectRatio>
                       )}
 
-                      <Stack gap={'xs'}>
-                        <FileButton
-                          name="image"
-                          accept="image/*"
-                          key={form.key('image')}
-                          {...form.getInputProps('image')}
-                          onChange={onImageChange}
-                        >
-                          {(props) => (
-                            <Button {...props} w={'fit-content'} size="sm">
-                              Unggah foto
-                            </Button>
-                          )}
-                        </FileButton>
-                        <Text fz={'xs'} c={'gray.6'}>
-                          Format: JPG, PNG, maksimal 2MB
-                        </Text>
-                      </Stack>
+                      {canEditProduct && (
+                        <Stack gap={'xs'}>
+                          <FileButton
+                            name="image"
+                            accept="image/*"
+                            key={form.key('image')}
+                            {...form.getInputProps('image')}
+                            onChange={onImageChange}
+                          >
+                            {(props) => (
+                              <Button {...props} w={'fit-content'} size="sm">
+                                Unggah foto
+                              </Button>
+                            )}
+                          </FileButton>
+                          <Text fz={'xs'} c={'gray.6'}>
+                            Format: JPG, PNG, maksimal 2MB
+                          </Text>
+                        </Stack>
+                      )}
                     </Flex>
                   </Stack>
                 </Card>
 
-                <Card shadow="xs">
-                  <SectionHeader
-                    title="Hapus Produk"
-                    description="Anda dapat menghapus produk ini dari sistem."
-                  />
+                {canDeleteProduct && (
+                  <Card shadow="xs">
+                    <SectionHeader
+                      title="Hapus Produk"
+                      description="Anda dapat menghapus produk ini dari sistem."
+                    />
 
-                  <Stack>
-                    <Alert color="red" title="Peringatan" icon={<AlertCircleIcon color="red" />}>
-                      Produk yang dihapus tidak dapat dikembalikan.
-                    </Alert>
+                    <Stack>
+                      <Alert color="red" title="Peringatan" icon={<AlertCircleIcon color="red" />}>
+                        Produk yang dihapus tidak dapat dikembalikan.
+                      </Alert>
 
-                    <Button color="red" fullWidth onClick={confirmDeleteModal}>
-                      Hapus Produk
-                    </Button>
-                  </Stack>
-                </Card>
+                      <Button color="red" fullWidth onClick={confirmDeleteModal}>
+                        Hapus Produk
+                      </Button>
+                    </Stack>
+                  </Card>
+                )}
               </Stack>
             </Grid.Col>
           </Grid>

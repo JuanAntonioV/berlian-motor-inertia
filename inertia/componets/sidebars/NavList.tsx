@@ -4,14 +4,16 @@ import { Spotlight, SpotlightActionData, SpotlightActionGroupData } from '@manti
 import { isEmpty } from 'lodash'
 import { FolderCog, Inbox, PanelsTopLeft, Search, ShoppingCart, UsersRound } from 'lucide-react'
 import { useMemo } from 'react'
-import { TMenu } from '~/types'
+import { TMenu, TUser } from '~/types'
 
 type Props = {
   onToggleSidebar?: () => void
 }
 
 const NavList = ({ onToggleSidebar }: Props) => {
-  const { url } = usePage()
+  const { url, props } = usePage()
+  const user = props.user as TUser
+  const userRoles = user?.roles?.map((role) => role.slug) || []
 
   const menuList = useMemo<TMenu[]>(() => {
     return [
@@ -21,7 +23,7 @@ const NavList = ({ onToggleSidebar }: Props) => {
         href: '/dashboard',
         icon: <PanelsTopLeft size={24} />,
         subMenus: [],
-        roles: ['admin', 'karyawan'],
+        roles: ['super-admin', 'admin', 'karyawan'],
       },
       {
         id: 2,
@@ -29,7 +31,7 @@ const NavList = ({ onToggleSidebar }: Props) => {
         href: '/kelola-produk',
         icon: <ShoppingCart size={24} />,
         subMenus: [],
-        roles: ['admin', 'karyawan'],
+        roles: ['super-admin', 'admin', 'karyawan'],
       },
       {
         id: 3,
@@ -37,7 +39,7 @@ const NavList = ({ onToggleSidebar }: Props) => {
         href: '/kelola-karyawan',
         icon: <UsersRound size={24} />,
         subMenus: [],
-        roles: ['admin', 'karyawan'],
+        roles: ['super-admin', 'admin'],
       },
       {
         id: 4,
@@ -66,7 +68,7 @@ const NavList = ({ onToggleSidebar }: Props) => {
             href: '/kelola-tipe',
           },
         ],
-        roles: ['admin', 'karyawan'],
+        roles: ['super-admin', 'admin'],
       },
       {
         id: 5,
@@ -90,7 +92,7 @@ const NavList = ({ onToggleSidebar }: Props) => {
             href: '/transfer-barang',
           },
         ],
-        roles: ['admin', 'karyawan'],
+        roles: ['super-admin', 'admin'],
       },
     ]
   }, [])
@@ -148,65 +150,70 @@ const NavList = ({ onToggleSidebar }: Props) => {
           }}
           spacing={rem(8)}
         >
-          {menuList.map((menu) => {
-            if (isEmpty(menu.subMenus)) {
-              return (
-                <List.Item key={`menu-${menu.id}`}>
-                  <NavLink
-                    href={menu.href}
-                    component={Link}
-                    label={menu.label}
-                    prefetch
-                    onClick={onToggleSidebar}
-                    leftSection={menu.icon || <Inbox size={24} />}
-                    className="!rounded-lg hover:!bg-gray-900 data-[active=true]:!bg-gray-600 data-[active=true]:!text-white"
-                    childrenOffset={28}
-                    active={url === menu.href}
-                    variant="light"
-                  />
-                </List.Item>
-              )
-            } else {
-              return (
-                <List.Item key={`menu-${menu.id}`}>
-                  <NavLink
-                    component={'button'}
-                    label={menu.label}
-                    leftSection={menu.icon}
-                    className="!rounded-lg hover:!bg-gray-900"
-                    childrenOffset={28}
-                    active={url === menu.href}
-                    variant="light"
-                  >
-                    {menu.subMenus && (
-                      <List
-                        classNames={{
-                          itemLabel: '!w-full',
-                          itemWrapper: '!w-full',
-                        }}
-                      >
-                        {menu.subMenus?.map((subMenu) => (
-                          <List.Item key={`sub-menu-${subMenu.id}`}>
-                            <NavLink
-                              href={subMenu.href}
-                              component={Link}
-                              prefetch
-                              label={subMenu.label}
-                              className="!rounded-lg hover:!bg-gray-900 data-[active=true]:!bg-gray-600 data-[active=true]:!text-white"
-                              childrenOffset={28}
-                              active={url.includes(subMenu.href)}
-                              variant="light"
-                              onClick={onToggleSidebar}
-                            />
-                          </List.Item>
-                        ))}
-                      </List>
-                    )}
-                  </NavLink>
-                </List.Item>
-              )
-            }
-          })}
+          {menuList
+            .filter((menu) => {
+              if (isEmpty(menu.roles)) return true
+              return menu.roles?.some((role) => userRoles.includes(role))
+            })
+            .map((menu) => {
+              if (isEmpty(menu.subMenus)) {
+                return (
+                  <List.Item key={`menu-${menu.id}`}>
+                    <NavLink
+                      href={menu.href}
+                      component={Link}
+                      label={menu.label}
+                      prefetch
+                      onClick={onToggleSidebar}
+                      leftSection={menu.icon || <Inbox size={24} />}
+                      className="!rounded-lg hover:!bg-gray-900 data-[active=true]:!bg-gray-600 data-[active=true]:!text-white"
+                      childrenOffset={28}
+                      active={url === menu.href}
+                      variant="light"
+                    />
+                  </List.Item>
+                )
+              } else {
+                return (
+                  <List.Item key={`menu-${menu.id}`}>
+                    <NavLink
+                      component={'button'}
+                      label={menu.label}
+                      leftSection={menu.icon}
+                      className="!rounded-lg hover:!bg-gray-900"
+                      childrenOffset={28}
+                      active={url === menu.href}
+                      variant="light"
+                    >
+                      {menu.subMenus && (
+                        <List
+                          classNames={{
+                            itemLabel: '!w-full',
+                            itemWrapper: '!w-full',
+                          }}
+                        >
+                          {menu.subMenus?.map((subMenu) => (
+                            <List.Item key={`sub-menu-${subMenu.id}`}>
+                              <NavLink
+                                href={subMenu.href}
+                                component={Link}
+                                prefetch
+                                label={subMenu.label}
+                                className="!rounded-lg hover:!bg-gray-900 data-[active=true]:!bg-gray-600 data-[active=true]:!text-white"
+                                childrenOffset={28}
+                                active={url.includes(subMenu.href)}
+                                variant="light"
+                                onClick={onToggleSidebar}
+                              />
+                            </List.Item>
+                          ))}
+                        </List>
+                      )}
+                    </NavLink>
+                  </List.Item>
+                )
+              }
+            })}
         </List>
       </ScrollArea>
     </>
