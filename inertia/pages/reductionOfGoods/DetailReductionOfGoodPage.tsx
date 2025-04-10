@@ -20,7 +20,7 @@ import {
   Table,
   Group,
 } from '@mantine/core'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Download } from 'lucide-react'
 import { DateTime } from 'luxon'
 import DisplayField from '~/componets/fields/DisplayField'
 import PageTitle from '~/componets/titles/PageTitle'
@@ -134,6 +134,21 @@ const DetailReductionOfGoodPage = () => {
                     ))}
                   </Table.Tbody>
                 </Table>
+
+                {data?.attachment && (
+                  <Button
+                    w={'fit-content'}
+                    variant="outline"
+                    leftSection={<Download size={16} />}
+                    mt={'md'}
+                    component={'a'}
+                    target="_blank"
+                    download={`${id}_Pengeluaran_Barang`}
+                    href={`/api/reduction-of-goods/${id}/download-attachment`}
+                  >
+                    Download Lampiran
+                  </Button>
+                )}
               </Stack>
 
               <Flex justify="flex-end">

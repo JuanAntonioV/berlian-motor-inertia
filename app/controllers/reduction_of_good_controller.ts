@@ -42,4 +42,8 @@ export default class ReductionOfGoodController {
     const res = await ReductionOfGoodService.create(c)
     return c.response.status(res.code).json(res)
   }
+
+  async downloadAttachment(c: HttpContext) {
+    return await ReductionOfGoodService.downloadAttachment(c)
+  }
 }

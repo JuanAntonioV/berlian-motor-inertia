@@ -3,7 +3,6 @@ import { HttpContext } from '@adonisjs/core/http'
 import ResponseHelper from '../helpers/response_helper.js'
 import GoodsReceipt from '#models/goods_receipt'
 import { errors as lucidErrors } from '@adonisjs/lucid'
-import { cuid } from '@adonisjs/core/helpers'
 import app from '@adonisjs/core/services/app'
 import env from '#start/env'
 import Supplier from '#models/supplier'
@@ -96,7 +95,7 @@ export default class GoodsReceiptService {
       let attachmentPath = null
 
       if (attachment) {
-        const filename = `${cuid()}.${attachment.extname}`
+        const filename = `${invoiceNumber}_Penerimaan_Barang.${attachment.extname}`
         const folderPath = 'storage/uploads/goods_receipt'
         await attachment.move(app.makePath(folderPath), {
           name: filename,
@@ -196,6 +195,31 @@ export default class GoodsReceiptService {
       }
 
       return ResponseHelper.serverErrorResponse(err.message)
+    }
+  }
+
+  static async downloadAttachment({ request, response }: HttpContext) {
+    const id = request.param('id')
+
+    try {
+      const goodsReceipt = await GoodsReceipt.query().where('id', id).firstOrFail()
+
+      if (!goodsReceipt.attachment) {
+        return ResponseHelper.badRequestResponse('Tidak ada lampiran yang ditemukan')
+      }
+
+      const filePath = app.makePath(goodsReceipt.attachment.replace(/^\//, ''))
+      const generateEtag = true
+
+      return response.download(filePath, generateEtag, (error) => {
+        if (error.code === 'ENOENT') {
+          return ['File tidak ditemukan', 404]
+        }
+
+        return ['Terjadi kesalahan saat mengunduh file', 500]
+      })
+    } catch (e) {
+      return ResponseHelper.serverErrorResponse(e.message)
     }
   }
 }

@@ -170,9 +170,38 @@ export default class ReductionOfGoodService {
         return ResponseHelper.badRequestResponse('Stok tidak cukup')
       }
 
-      await ProductStock.updateOrCreateMany(['productId', 'storageId'], newProductStock, {
-        client: trx,
-      })
+      // await ProductStock.updateOrCreateMany(['productId', 'storageId'], newProductStock, {
+      //   client: trx,
+      // })
+      for (const item of newProductStock) {
+        const productStock = await ProductStock.query({ client: trx })
+          .where('productId', item.productId)
+          .where('storageId', item.storageId)
+          .first()
+
+        if (!productStock) {
+          await ProductStock.create(
+            {
+              productId: item.productId,
+              storageId: item.storageId,
+              quantity: item.quantity,
+            },
+            { client: trx }
+          )
+        } else {
+          if (item.quantity <= 0) {
+            await ProductStock.query({ client: trx })
+              .where('productId', item.productId)
+              .where('storageId', item.storageId)
+              .delete()
+          } else {
+            await ProductStock.query({ client: trx })
+              .where('productId', item.productId)
+              .where('storageId', item.storageId)
+              .update({ quantity: item.quantity })
+          }
+        }
+      }
 
       trx.commit()
       return ResponseHelper.okResponse(newReductionOfGood, 'Pengurangan barang berhasil dibuat')
@@ -204,6 +233,31 @@ export default class ReductionOfGoodService {
       }
 
       return ResponseHelper.serverErrorResponse(err.message)
+    }
+  }
+
+  static async downloadAttachment({ request, response }: HttpContext) {
+    const id = request.param('id')
+
+    try {
+      const reductionOfGood = await ReductionOfGood.query().where('id', id).firstOrFail()
+
+      if (!reductionOfGood.attachment) {
+        return ResponseHelper.badRequestResponse('Tidak ada lampiran yang ditemukan')
+      }
+
+      const filePath = app.makePath(reductionOfGood.attachment.replace(/^\//, ''))
+      const generateEtag = true
+
+      return response.download(filePath, generateEtag, (error) => {
+        if (error.code === 'ENOENT') {
+          return ['File tidak ditemukan', 404]
+        }
+
+        return ['Terjadi kesalahan saat mengunduh file', 500]
+      })
+    } catch (e) {
+      return ResponseHelper.serverErrorResponse(e.message)
     }
   }
 }

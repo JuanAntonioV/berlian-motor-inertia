@@ -4,7 +4,7 @@ import { Table } from '@mantine/core'
 import { Button, Card, Group, SimpleGrid, Stack, Text, Title } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
 import { StatusCodes } from 'http-status-codes'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Download } from 'lucide-react'
 import { DateTime } from 'luxon'
 import { getGoodsReceiptDetailApi } from '~/api/goods_receipt_api'
 import DisplayField from '~/componets/fields/DisplayField'
@@ -125,6 +125,20 @@ const DetailGoodsReceiptPage = () => {
                     ))}
                   </Table.Tbody>
                 </Table>
+                {data?.attachment && (
+                  <Button
+                    w={'fit-content'}
+                    variant="outline"
+                    leftSection={<Download size={16} />}
+                    mt={'md'}
+                    component={'a'}
+                    target="_blank"
+                    download={`${id}_Penerimaan_Barang`}
+                    href={`/api/goods-receipts/${id}/download-attachment`}
+                  >
+                    Download Lampiran
+                  </Button>
+                )}
               </Stack>
 
               <Flex justify="flex-end">

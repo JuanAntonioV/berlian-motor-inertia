@@ -236,4 +236,29 @@ export default class TransferStockService {
       return ResponseHelper.serverErrorResponse(err.message)
     }
   }
+
+  static async downloadAttachment({ request, response }: HttpContext) {
+    const id = request.param('id')
+
+    try {
+      const transferStock = await TransferStock.query().where('id', id).firstOrFail()
+
+      if (!transferStock.attachment) {
+        return ResponseHelper.badRequestResponse('Tidak ada lampiran yang ditemukan')
+      }
+
+      const filePath = app.makePath(transferStock.attachment.replace(/^\//, ''))
+      const generateEtag = true
+
+      return response.download(filePath, generateEtag, (error) => {
+        if (error.code === 'ENOENT') {
+          return ['File tidak ditemukan', 404]
+        }
+
+        return ['Terjadi kesalahan saat mengunduh file', 500]
+      })
+    } catch (e) {
+      return ResponseHelper.serverErrorResponse(e.message)
+    }
+  }
 }

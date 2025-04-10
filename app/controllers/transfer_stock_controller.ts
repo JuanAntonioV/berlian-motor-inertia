@@ -41,4 +41,8 @@ export default class TransferStockController {
     const res = await TransferStockService.create(c)
     return c.response.status(res.code).json(res)
   }
+
+  async downloadAttachment(c: HttpContext) {
+    return await TransferStockService.downloadAttachment(c)
+  }
 }

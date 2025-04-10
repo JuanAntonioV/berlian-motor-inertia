@@ -21,7 +21,7 @@ import {
   Title,
 } from '@mantine/core'
 import PageTitle from '~/componets/titles/PageTitle'
-import { ArrowLeft } from 'lucide-react'
+import { ArrowLeft, Download } from 'lucide-react'
 import { DateTime } from 'luxon'
 import DisplayField from '~/componets/fields/DisplayField'
 
@@ -133,6 +133,21 @@ const DetailTransferStockPage = () => {
                     ))}
                   </Table.Tbody>
                 </Table>
+
+                {data?.attachment && (
+                  <Button
+                    w={'fit-content'}
+                    variant="outline"
+                    leftSection={<Download size={16} />}
+                    mt={'md'}
+                    component={'a'}
+                    target="_blank"
+                    download={`${id}_Transfer_Barang`}
+                    href={`/api/transfer-stocks/${id}/download-attachment`}
+                  >
+                    Download Lampiran
+                  </Button>
+                )}
               </Stack>
 
               <Flex justify="flex-end">

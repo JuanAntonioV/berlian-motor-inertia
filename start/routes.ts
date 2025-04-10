@@ -124,6 +124,9 @@ router
             router.get('list', [GoodsReceiptController, 'list']).as('goodsReceipt.list')
             router.get(':id', [GoodsReceiptController, 'detail']).as('goodsReceipt.detail')
             router.post('/', [GoodsReceiptController, 'create']).as('goodsReceipt.create')
+            router
+              .get(':id/download-attachment', [GoodsReceiptController, 'downloadAttachment'])
+              .as('goodsReceipt.downloadAttachment')
           })
           .prefix('goods-receipts')
         router
@@ -132,6 +135,9 @@ router
             router.get('list', [ReductionOfGoodController, 'list']).as('reductionOfGood.list')
             router.get(':id', [ReductionOfGoodController, 'detail']).as('reductionOfGood.detail')
             router.post('/', [ReductionOfGoodController, 'create']).as('reductionOfGood.create')
+            router
+              .get(':id/download-attachment', [ReductionOfGoodController, 'downloadAttachment'])
+              .as('reductionOfGood.downloadAttachment')
           })
           .prefix('reduction-of-goods')
         router
@@ -140,6 +146,9 @@ router
             router.get('list', [TransferStockController, 'list']).as('transferStock.list')
             router.get(':id', [TransferStockController, 'detail']).as('transferStock.detail')
             router.post('/', [TransferStockController, 'create']).as('transferStock.create')
+            router
+              .get(':id/download-attachment', [TransferStockController, 'downloadAttachment'])
+              .as('transferStock.downloadAttachment')
           })
           .prefix('transfer-stocks')
       })

@@ -41,4 +41,8 @@ export default class GoodsReceiptController {
     const res = await GoodsReceiptService.create(c)
     return c.response.status(res.code).json(res)
   }
+
+  async downloadAttachment(c: HttpContext) {
+    return await GoodsReceiptService.downloadAttachment(c)
+  }
 }
