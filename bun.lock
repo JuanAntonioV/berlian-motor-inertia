@@ -30,7 +30,7 @@
         "@mantine/nprogress": "^7.17.0",
         "@mantine/spotlight": "^7.17.0",
         "@mantine/tiptap": "^7.17.0",
-        "@tabler/icons-react": "2.23.0",
+        "@tabler/icons-react": "^3.31.0",
         "@tailwindcss/vite": "^4.0.8",
         "@tanstack/react-query": "^5.66.9",
         "@tanstack/react-query-devtools": "^5.66.9",
@@ -489,9 +489,9 @@
 
     "@swc/types": ["@swc/types@0.1.17", "", { "dependencies": { "@swc/counter": "^0.1.3" } }, "sha512-V5gRru+aD8YVyCOMAjMpWR1Ui577DD5KSJsHP8RAxopAH22jFz6GZd/qxqjO6MJHQhcsjvjOFXyDhyLQUnMveQ=="],
 
-    "@tabler/icons": ["@tabler/icons@2.23.0", "", {}, "sha512-dU54aBwaxG0H+jQ4BdrqtYFN5L7PZevvlnzyL6XeOZgfDS3+sVNCtuG3JmpTEqQSwGLYC1IEwogPGA/Iit2bOA=="],
+    "@tabler/icons": ["@tabler/icons@3.31.0", "", {}, "sha512-dblAdeKY3+GA1U+Q9eziZ0ooVlZMHsE8dqP0RkwvRtEsAULoKOYaCUOcJ4oW1DjWegdxk++UAt2SlQVnmeHv+g=="],
 
-    "@tabler/icons-react": ["@tabler/icons-react@2.23.0", "", { "dependencies": { "@tabler/icons": "2.23.0", "prop-types": "^15.7.2" }, "peerDependencies": { "react": "^16.5.1 || ^17.0.0 || ^18.0.0" } }, "sha512-+H4mC1EZVCzCRhnPwZEVTI0veVCJuAKlopeCnRlfsYcmzgJm6Ye234c4A2qrLPQoi1Y29uN9+kqCyuYW007jPg=="],
+    "@tabler/icons-react": ["@tabler/icons-react@3.31.0", "", { "dependencies": { "@tabler/icons": "3.31.0" }, "peerDependencies": { "react": ">= 16" } }, "sha512-2rrCM5y/VnaVKnORpDdAua9SEGuJKVqPtWxeQ/vUVsgaUx30LDgBZph7/lterXxDY1IKR6NO//HDhWiifXTi3w=="],
 
     "@tailwindcss/node": ["@tailwindcss/node@4.0.8", "", { "dependencies": { "enhanced-resolve": "^5.18.1", "jiti": "^2.4.2", "tailwindcss": "4.0.8" } }, "sha512-FKArQpbrbwv08TNT0k7ejYXpF+R8knZFAatNc0acOxbgeqLzwb86r+P3LGOjIeI3Idqe9CVkZrh4GlsJLJKkkw=="],
 
