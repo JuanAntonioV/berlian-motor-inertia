@@ -1,1 +1,0 @@
-import{a as s}from"./utils-BzyQMKcG.js";async function n(){const{data:t}=await s.get("/transfer-stocks/list");return t}async function e({id:t}){const{data:a}=await s.get(`/transfer-stocks/${t}`);return a}async function o(t){const{data:a}=await s.post("/transfer-stocks",t,{headers:{"Content-Type":"multipart/form-data"}});return a}export{n as a,o as c,e as g};
