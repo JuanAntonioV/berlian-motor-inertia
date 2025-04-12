@@ -5,7 +5,7 @@ const inertiaConfig = defineConfig({
     rootView: 'inertia_layout',
     sharedData: {
         user: async (ctx) => {
-            const user = ctx.auth.user;
+            const user = ctx?.auth?.user;
             if (!user) {
                 return ctx.inertia.always(() => null);
             }

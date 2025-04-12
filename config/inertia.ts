@@ -14,7 +14,7 @@ const inertiaConfig = defineConfig({
    */
   sharedData: {
     user: async (ctx) => {
-      const user = ctx.auth.user
+      const user = ctx?.auth?.user
 
       if (!user) {
         return ctx.inertia.always(() => null)
