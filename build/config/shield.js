@@ -10,6 +10,12 @@ const shieldConfig = defineConfig({
         exceptRoutes: [],
         enableXsrfCookie: true,
         methods: ['POST', 'PUT', 'PATCH', 'DELETE'],
+        cookieOptions: {
+            httpOnly: true,
+            sameSite: true,
+            path: '/',
+            maxAge: 60 * 60 * 24 * 7,
+        },
     },
     xFrame: {
         enabled: true,
