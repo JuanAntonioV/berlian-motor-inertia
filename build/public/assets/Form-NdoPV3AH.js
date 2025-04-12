@@ -1,1 +1,0 @@
-import{d as i,i as f}from"./app-9RPrKl8e.js";const p=i.forwardRef(({form:r,onSubmit:m,onReset:o,...s},t)=>f.jsx("form",{...s,onSubmit:r.onSubmit(typeof m=="function"?m:()=>{}),onReset:a=>{o==null||o(a),r.onReset(a)},ref:t}));p.displayName="@mantine/use-form/Form";export{p as F};
