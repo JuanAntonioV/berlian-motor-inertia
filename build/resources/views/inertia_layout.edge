@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title inertia>
+      Dashboard - Berlian Motor
+    </title>
+    <meta
+      name="description"
+      content="Inventory Management System berbasis Website untuk bengkel Berlian Motor"
+    />
+
+    @stack('dumper')
+    @viteReactRefresh()
+    @inertiaHead()
+    @vite(['inertia/app/app.tsx', `inertia/pages/${page.component}.tsx`])
+  </head>
+
+  <body class="font-sans">
+    @inertia()
+  </body>
+
+</html>

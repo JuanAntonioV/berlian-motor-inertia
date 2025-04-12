@@ -1,0 +1,1 @@
+import{n as a,i as m}from"./app-9RPrKl8e.js";import{N as n}from"./react-number-format.es-CJxqVQco.js";const u={};function e(r){const o=a("NumberFormatter",u,r),{value:t,defaultValue:p,...s}=o;return t===void 0?null:m.jsx(n,{displayType:"text",value:t,...s})}const i=r=>r;e.extend=i;e.displayName="@mantine/core/NumberFormatter";export{e as N};

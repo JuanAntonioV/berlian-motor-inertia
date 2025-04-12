@@ -1,0 +1,17 @@
+import { BaseSchema } from '@adonisjs/lucid/schema';
+export default class extends BaseSchema {
+    tableName = 'brands';
+    async up() {
+        this.schema.createTable(this.tableName, (table) => {
+            table.increments('id');
+            table.string('name').notNullable().unique();
+            table.text('description').nullable();
+            table.timestamp('created_at');
+            table.timestamp('updated_at');
+        });
+    }
+    async down() {
+        this.schema.dropTable(this.tableName);
+    }
+}
+//# sourceMappingURL=1741095517823_create_brands_table.js.map
