@@ -8,7 +8,7 @@ export default class FileController {
         if (PATH_TRAVERSAL_REGEX.test(normalizedPath)) {
             return response.badRequest('Malformed path');
         }
-        const absolutePath = app.makePath('uploads', normalizedPath);
+        const absolutePath = app.makePath('storage', normalizedPath);
         return response.download(absolutePath);
     }
 }
