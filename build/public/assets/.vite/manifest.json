@@ -1,448 +1,447 @@
 {
-  "_AdminLayout-CIoriq3d.js": {
-    "file": "AdminLayout-CIoriq3d.js",
+  "_AdminLayout-aHbIS04J.js": {
+    "file": "AdminLayout-aHbIS04J.js",
     "name": "AdminLayout",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_Title-C18PzRI1.js"
+      "_utils-DTxDwtwe.js",
+      "_Title-tHG7-3SR.js"
     ]
   },
-  "_Badge-Du3f5JaO.js": {
-    "file": "Badge-Du3f5JaO.js",
+  "_Badge-Cah9mW7N.js": {
+    "file": "Badge-Cah9mW7N.js",
     "name": "Badge",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_BrandModal-CqzReZEN.js": {
-    "file": "BrandModal-CqzReZEN.js",
+  "_BrandModal-D9kEA3Ov.js": {
+    "file": "BrandModal-D9kEA3Ov.js",
     "name": "BrandModal",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-BzS_F88k.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Title-C18PzRI1.js",
-      "_Textarea-Dk2XprJw.js"
+      "_utils-DTxDwtwe.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-CJvRVwyL.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Title-tHG7-3SR.js",
+      "_Textarea-BR9ZfWql.js"
     ]
   },
-  "_CategoryModal-Dx9KUb4D.js": {
-    "file": "CategoryModal-Dx9KUb4D.js",
+  "_CategoryModal-3G9y1RBd.js": {
+    "file": "CategoryModal-3G9y1RBd.js",
     "name": "CategoryModal",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-BzS_F88k.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Title-C18PzRI1.js",
-      "_Textarea-Dk2XprJw.js"
+      "_utils-DTxDwtwe.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-CJvRVwyL.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Title-tHG7-3SR.js",
+      "_Textarea-BR9ZfWql.js"
     ]
   },
-  "_CheckIcon-0vp9SztL.js": {
-    "file": "CheckIcon-0vp9SztL.js",
+  "_CheckIcon-DNFR220-.js": {
+    "file": "CheckIcon-DNFR220-.js",
     "name": "CheckIcon",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_Checkbox-CpfnvvSP.js": {
-    "file": "Checkbox-CpfnvvSP.js",
+  "_Checkbox-Dyi8jSIW.js": {
+    "file": "Checkbox-Dyi8jSIW.js",
     "name": "Checkbox",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_CheckIcon-0vp9SztL.js"
+      "_utils-DTxDwtwe.js",
+      "_CheckIcon-DNFR220-.js"
     ]
   },
-  "_DataTable-C0fJxe2V.js": {
-    "file": "DataTable-C0fJxe2V.js",
+  "_DataTable-BcEzQGxw.js": {
+    "file": "DataTable-BcEzQGxw.js",
     "name": "DataTable",
     "imports": [
       "inertia/app/app.tsx",
-      "_AdminLayout-CIoriq3d.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_utils-R8C2eLnL.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Select-59oFSAVi.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Badge-Du3f5JaO.js",
-      "_Title-C18PzRI1.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js"
+      "_AdminLayout-aHbIS04J.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_utils-DTxDwtwe.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Select-CxzNu1PS.js",
+      "_MultiSelect-GE27vihm.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Badge-Cah9mW7N.js",
+      "_Title-tHG7-3SR.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js"
     ]
   },
-  "_DatePickerInput-U0H_1PUu.js": {
-    "file": "DatePickerInput-U0H_1PUu.js",
+  "_DatePickerInput-DVZY_bk_.js": {
+    "file": "DatePickerInput-DVZY_bk_.js",
     "name": "DatePickerInput",
     "imports": [
       "inertia/app/app.tsx",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_utils-R8C2eLnL.js",
-      "_TextInput-Dz9QFHVX.js"
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_utils-DTxDwtwe.js",
+      "_TextInput-BSrrIIRU.js"
     ]
   },
-  "_DisplayField-3NCtqx5U.js": {
-    "file": "DisplayField-3NCtqx5U.js",
+  "_DisplayField-BaqiuFg0.js": {
+    "file": "DisplayField-BaqiuFg0.js",
     "name": "DisplayField",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_Title-C18PzRI1.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_Tooltip-6pp6knvp.js",
-      "_createReactComponent-jXwooc9l.js"
+      "_utils-DTxDwtwe.js",
+      "_Title-tHG7-3SR.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_createReactComponent-ZPzu5hwl.js"
     ]
   },
-  "_FileButton-Cv8kjxZv.js": {
-    "file": "FileButton-Cv8kjxZv.js",
+  "_FileButton-DyzLEDw_.js": {
+    "file": "FileButton-DyzLEDw_.js",
     "name": "FileButton",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_Form-Bxo2eKZU.js": {
-    "file": "Form-Bxo2eKZU.js",
+  "_Form-CJvRVwyL.js": {
+    "file": "Form-CJvRVwyL.js",
+    "name": "Form",
+    "imports": [
+      "inertia/app/app.tsx",
+      "_utils-DTxDwtwe.js"
+    ]
+  },
+  "_Form-DvdKhdsd.js": {
+    "file": "Form-DvdKhdsd.js",
     "name": "Form",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_Form-BzS_F88k.js": {
-    "file": "Form-BzS_F88k.js",
-    "name": "Form",
-    "imports": [
-      "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js"
-    ]
-  },
-  "_Grid-mDakIk0z.js": {
-    "file": "Grid-mDakIk0z.js",
+  "_Grid-BwWjE6_-.js": {
+    "file": "Grid-BwWjE6_-.js",
     "name": "Grid",
     "imports": [
       "inertia/app/app.tsx",
-      "_SimpleGrid-DQqJhNpN.js"
+      "_SimpleGrid-DEOOUVqu.js"
     ]
   },
-  "_Image-B_MVlKcF.js": {
-    "file": "Image-B_MVlKcF.js",
+  "_Image-DSSokqw9.js": {
+    "file": "Image-DSSokqw9.js",
     "name": "Image",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_ImageViewer-CchzMFhD.js": {
-    "file": "ImageViewer-CchzMFhD.js",
+  "_ImageViewer-Cup2Xam8.js": {
+    "file": "ImageViewer-Cup2Xam8.js",
     "name": "ImageViewer",
     "imports": [
       "inertia/app/app.tsx",
-      "_AdminLayout-CIoriq3d.js",
-      "_Image-B_MVlKcF.js"
+      "_AdminLayout-aHbIS04J.js",
+      "_Image-DSSokqw9.js"
     ]
   },
-  "_LoadingOverlay-oFkbmy5E.js": {
-    "file": "LoadingOverlay-oFkbmy5E.js",
+  "_LoadingOverlay-mFnWD4Gw.js": {
+    "file": "LoadingOverlay-mFnWD4Gw.js",
     "name": "LoadingOverlay",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_MultiSelect-B4WEXaWj.js": {
-    "file": "MultiSelect-B4WEXaWj.js",
+  "_MultiSelect-GE27vihm.js": {
+    "file": "MultiSelect-GE27vihm.js",
     "name": "MultiSelect",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_Select-59oFSAVi.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Pill-cgfAKtjR.js"
+      "_utils-DTxDwtwe.js",
+      "_Select-CxzNu1PS.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Pill-Dd1-LyUL.js"
     ]
   },
-  "_NumberFormatter-Pjf_Ovv_.js": {
-    "file": "NumberFormatter-Pjf_Ovv_.js",
+  "_NumberFormatter-DcL9_fCP.js": {
+    "file": "NumberFormatter-DcL9_fCP.js",
     "name": "NumberFormatter",
     "imports": [
       "inertia/app/app.tsx",
-      "_react-number-format.es-CdROQBut.js"
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
-  "_NumberInput-DPyLvvSl.js": {
-    "file": "NumberInput-DPyLvvSl.js",
+  "_NumberInput-BbaRQacq.js": {
+    "file": "NumberInput-BbaRQacq.js",
     "name": "NumberInput",
     "imports": [
       "inertia/app/app.tsx",
-      "_react-number-format.es-CdROQBut.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_utils-R8C2eLnL.js",
-      "_TextInput-Dz9QFHVX.js"
+      "_react-number-format.es-DChZyRhV.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_utils-DTxDwtwe.js",
+      "_TextInput-BSrrIIRU.js"
     ]
   },
-  "_PageTitle-Wsevyc98.js": {
-    "file": "PageTitle-Wsevyc98.js",
+  "_PageTitle-BQ63YMTJ.js": {
+    "file": "PageTitle-BQ63YMTJ.js",
     "name": "PageTitle",
     "imports": [
       "inertia/app/app.tsx",
-      "_Title-C18PzRI1.js"
+      "_Title-tHG7-3SR.js"
     ]
   },
-  "_PageTransition-ClCa20jH.js": {
-    "file": "PageTransition-ClCa20jH.js",
+  "_PageTransition-pWmh_Ckg.js": {
+    "file": "PageTransition-pWmh_Ckg.js",
     "name": "PageTransition",
     "imports": [
       "inertia/app/app.tsx",
-      "_Title-C18PzRI1.js"
+      "_Title-tHG7-3SR.js"
     ]
   },
-  "_PasswordInput-VEjyTU3A.js": {
-    "file": "PasswordInput-VEjyTU3A.js",
+  "_PasswordInput-CiBjFsPR.js": {
+    "file": "PasswordInput-CiBjFsPR.js",
     "name": "PasswordInput",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_TextInput-Dz9QFHVX.js"
+      "_utils-DTxDwtwe.js",
+      "_TextInput-BSrrIIRU.js"
     ]
   },
-  "_Pill-cgfAKtjR.js": {
-    "file": "Pill-cgfAKtjR.js",
+  "_Pill-Dd1-LyUL.js": {
+    "file": "Pill-Dd1-LyUL.js",
     "name": "Pill",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_SectionHeader-C79HTeJK.js": {
-    "file": "SectionHeader-C79HTeJK.js",
+  "_SectionHeader-BnsUQOTq.js": {
+    "file": "SectionHeader-BnsUQOTq.js",
     "name": "SectionHeader",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_Title-C18PzRI1.js"
+      "_utils-DTxDwtwe.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_Title-tHG7-3SR.js"
     ]
   },
-  "_Select-59oFSAVi.js": {
-    "file": "Select-59oFSAVi.js",
+  "_Select-CxzNu1PS.js": {
+    "file": "Select-CxzNu1PS.js",
     "name": "Select",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_TextInput-Dz9QFHVX.js"
+      "_utils-DTxDwtwe.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_CheckIcon-DNFR220-.js",
+      "_TextInput-BSrrIIRU.js"
     ]
   },
-  "_SimpleGrid-DQqJhNpN.js": {
-    "file": "SimpleGrid-DQqJhNpN.js",
+  "_SimpleGrid-DEOOUVqu.js": {
+    "file": "SimpleGrid-DEOOUVqu.js",
     "name": "SimpleGrid",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_StorageModal-CWkPkYOC.js": {
-    "file": "StorageModal-CWkPkYOC.js",
+  "_StorageModal-Cj-3kjjk.js": {
+    "file": "StorageModal-Cj-3kjjk.js",
     "name": "StorageModal",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_storage_api-CnF066L4.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-BzS_F88k.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Title-C18PzRI1.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_Image-B_MVlKcF.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_Textarea-Dk2XprJw.js"
+      "_utils-DTxDwtwe.js",
+      "_storage_api-B2KrBUEE.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-CJvRVwyL.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Title-tHG7-3SR.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_Image-DSSokqw9.js",
+      "_FileButton-DyzLEDw_.js",
+      "_Textarea-BR9ZfWql.js"
     ]
   },
-  "_Table-Df9SZcKh.js": {
-    "file": "Table-Df9SZcKh.js",
+  "_Table-yAPx-a7c.js": {
+    "file": "Table-yAPx-a7c.js",
     "name": "Table",
     "imports": [
       "inertia/app/app.tsx",
-      "_AdminLayout-CIoriq3d.js"
+      "_AdminLayout-aHbIS04J.js"
     ]
   },
-  "_TextInput-Dz9QFHVX.js": {
-    "file": "TextInput-Dz9QFHVX.js",
+  "_TextInput-BSrrIIRU.js": {
+    "file": "TextInput-BSrrIIRU.js",
     "name": "TextInput",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
-  "_Textarea-Dk2XprJw.js": {
-    "file": "Textarea-Dk2XprJw.js",
+  "_Textarea-BR9ZfWql.js": {
+    "file": "Textarea-BR9ZfWql.js",
     "name": "Textarea",
     "imports": [
       "inertia/app/app.tsx",
-      "_TextInput-Dz9QFHVX.js"
+      "_TextInput-BSrrIIRU.js"
     ]
   },
-  "_Title-C18PzRI1.js": {
-    "file": "Title-C18PzRI1.js",
+  "_Title-tHG7-3SR.js": {
+    "file": "Title-tHG7-3SR.js",
     "name": "Title",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_Tooltip-6pp6knvp.js": {
-    "file": "Tooltip-6pp6knvp.js",
+  "_Tooltip-D6qVf7E4.js": {
+    "file": "Tooltip-D6qVf7E4.js",
     "name": "Tooltip",
     "imports": [
       "inertia/app/app.tsx",
-      "_AdminLayout-CIoriq3d.js"
+      "_AdminLayout-aHbIS04J.js"
     ]
   },
-  "_TypeModal-BW452uP1.js": {
-    "file": "TypeModal-BW452uP1.js",
+  "_TypeModal-CcX7hWv4.js": {
+    "file": "TypeModal-CcX7hWv4.js",
     "name": "TypeModal",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-BzS_F88k.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Title-C18PzRI1.js",
-      "_Textarea-Dk2XprJw.js"
+      "_utils-DTxDwtwe.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-CJvRVwyL.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Title-tHG7-3SR.js",
+      "_Textarea-BR9ZfWql.js"
     ]
   },
-  "_arrow-left-DpnuV4UC.js": {
-    "file": "arrow-left-DpnuV4UC.js",
+  "_arrow-left-DScie-4S.js": {
+    "file": "arrow-left-DScie-4S.js",
     "name": "arrow-left",
     "imports": [
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
-  "_createReactComponent-jXwooc9l.js": {
-    "file": "createReactComponent-jXwooc9l.js",
+  "_createReactComponent-ZPzu5hwl.js": {
+    "file": "createReactComponent-ZPzu5hwl.js",
     "name": "createReactComponent",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_goods_receipt_api-BKFbxSRL.js": {
-    "file": "goods_receipt_api-BKFbxSRL.js",
+  "_goods_receipt_api-BbOrJVkI.js": {
+    "file": "goods_receipt_api-BbOrJVkI.js",
     "name": "goods_receipt_api",
     "imports": [
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
-  "_pick-calendar-levels-props-yptq5JC5.js": {
-    "file": "pick-calendar-levels-props-yptq5JC5.js",
+  "_pick-calendar-levels-props-C4Pob9S0.js": {
+    "file": "pick-calendar-levels-props-C4Pob9S0.js",
     "name": "pick-calendar-levels-props",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_AdminLayout-CIoriq3d.js"
+      "_utils-DTxDwtwe.js",
+      "_AdminLayout-aHbIS04J.js"
     ]
   },
-  "_plus-DrFSM_FR.js": {
-    "file": "plus-DrFSM_FR.js",
+  "_plus-DZL43UE9.js": {
+    "file": "plus-DZL43UE9.js",
     "name": "plus",
     "imports": [
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
-  "_product_api-D4DTzYhy.js": {
-    "file": "product_api-D4DTzYhy.js",
+  "_product_api-Bgqi4uHy.js": {
+    "file": "product_api-Bgqi4uHy.js",
     "name": "product_api",
     "imports": [
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
-  "_react-number-format.es-CdROQBut.js": {
-    "file": "react-number-format.es-CdROQBut.js",
+  "_react-number-format.es-DChZyRhV.js": {
+    "file": "react-number-format.es-DChZyRhV.js",
     "name": "react-number-format.es",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_reduction_of_good_api-BNyQhxyl.js": {
-    "file": "reduction_of_good_api-BNyQhxyl.js",
+  "_reduction_of_good_api-qyOyZPiy.js": {
+    "file": "reduction_of_good_api-qyOyZPiy.js",
     "name": "reduction_of_good_api",
     "imports": [
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
-  "_staff_api-DPaE-TBm.js": {
-    "file": "staff_api-DPaE-TBm.js",
+  "_staff_api-Dr0kiH9D.js": {
+    "file": "staff_api-Dr0kiH9D.js",
     "name": "staff_api",
     "imports": [
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
   "_status-codes-B_I7eCRx.js": {
     "file": "status-codes-B_I7eCRx.js",
     "name": "status-codes"
   },
-  "_storage_api-CnF066L4.js": {
-    "file": "storage_api-CnF066L4.js",
+  "_storage_api-B2KrBUEE.js": {
+    "file": "storage_api-B2KrBUEE.js",
     "name": "storage_api",
     "imports": [
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
-  "_transfer_stock_api-DLYYN_0b.js": {
-    "file": "transfer_stock_api-DLYYN_0b.js",
+  "_transfer_stock_api-CN_htb_Z.js": {
+    "file": "transfer_stock_api-CN_htb_Z.js",
     "name": "transfer_stock_api",
     "imports": [
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
-  "_trash-DOYqag2Q.js": {
-    "file": "trash-DOYqag2Q.js",
+  "_trash-JYz6Yr-a.js": {
+    "file": "trash-JYz6Yr-a.js",
     "name": "trash",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_TextInput-Dz9QFHVX.js"
+      "_utils-DTxDwtwe.js",
+      "_FileButton-DyzLEDw_.js",
+      "_TextInput-BSrrIIRU.js"
     ]
   },
-  "_useQuery-BqMeT-pC.js": {
-    "file": "useQuery-BqMeT-pC.js",
+  "_useQuery-CivF-W0P.js": {
+    "file": "useQuery-CivF-W0P.js",
     "name": "useQuery",
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
-  "_utils-R8C2eLnL.js": {
-    "file": "utils-R8C2eLnL.js",
+  "_utils-DTxDwtwe.js": {
+    "file": "utils-DTxDwtwe.js",
     "name": "utils",
     "imports": [
       "inertia/app/app.tsx"
     ]
   },
-  "_validators-BCjQ9g7n.js": {
-    "file": "validators-BCjQ9g7n.js",
+  "_validators-Cc5AS_Iv.js": {
+    "file": "validators-Cc5AS_Iv.js",
     "name": "validators",
     "imports": [
-      "_utils-R8C2eLnL.js",
+      "_utils-DTxDwtwe.js",
       "inertia/app/app.tsx"
     ]
   },
-  "_wallet-CmPhbGBB.js": {
-    "file": "wallet-CmPhbGBB.js",
+  "_wallet-Cxl4oZFf.js": {
+    "file": "wallet-Cxl4oZFf.js",
     "name": "wallet",
     "imports": [
-      "_utils-R8C2eLnL.js"
+      "_utils-DTxDwtwe.js"
     ]
   },
   "inertia/app/app.tsx": {
-    "file": "app-wHcAaFvM.js",
+    "file": "app-CsfJiPAg.js",
     "name": "app",
     "src": "inertia/app/app.tsx",
     "isEntry": true,
     "dynamicImports": [
-      "node_modules/@tanstack/query-devtools/build/DevtoolsComponent/SUXNJKMM.js",
       "inertia/pages/DashboardPage.tsx",
       "inertia/pages/auth/LoginPage.tsx",
       "inertia/pages/brands/ManageBrandPage.tsx",
@@ -490,130 +489,130 @@
     ]
   },
   "inertia/pages/DashboardPage.tsx": {
-    "file": "DashboardPage-GTAy70AE.js",
+    "file": "DashboardPage-B-Y8aSBY.js",
     "name": "DashboardPage",
     "src": "inertia/pages/DashboardPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_utils-R8C2eLnL.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_Title-C18PzRI1.js",
-      "_NumberFormatter-Pjf_Ovv_.js",
-      "_wallet-CmPhbGBB.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_PageTitle-Wsevyc98.js",
-      "_PageTransition-ClCa20jH.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_useQuery-CivF-W0P.js",
+      "_utils-DTxDwtwe.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_Title-tHG7-3SR.js",
+      "_NumberFormatter-DcL9_fCP.js",
+      "_wallet-Cxl4oZFf.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_PageTitle-BQ63YMTJ.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/auth/LoginPage.tsx": {
-    "file": "LoginPage-RVTrfulT.js",
+    "file": "LoginPage-ZPHCqba1.js",
     "name": "LoginPage",
     "src": "inertia/pages/auth/LoginPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-BzS_F88k.js",
-      "_Title-C18PzRI1.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_PasswordInput-VEjyTU3A.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js"
+      "_utils-DTxDwtwe.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-CJvRVwyL.js",
+      "_Title-tHG7-3SR.js",
+      "_TextInput-BSrrIIRU.js",
+      "_PasswordInput-CiBjFsPR.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js"
     ]
   },
   "inertia/pages/brands/ManageBrandPage.tsx": {
-    "file": "ManageBrandPage-CvvGclO5.js",
+    "file": "ManageBrandPage-BVzO6XBY.js",
     "name": "ManageBrandPage",
     "src": "inertia/pages/brands/ManageBrandPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_utils-R8C2eLnL.js",
-      "_BrandModal-CqzReZEN.js",
-      "_DataTable-C0fJxe2V.js",
-      "_Title-C18PzRI1.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-BzS_F88k.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Textarea-Dk2XprJw.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Select-59oFSAVi.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Pill-cgfAKtjR.js",
-      "_Badge-Du3f5JaO.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js"
+      "_useQuery-CivF-W0P.js",
+      "_utils-DTxDwtwe.js",
+      "_BrandModal-D9kEA3Ov.js",
+      "_DataTable-BcEzQGxw.js",
+      "_Title-tHG7-3SR.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-CJvRVwyL.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Textarea-BR9ZfWql.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js",
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Select-CxzNu1PS.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Pill-Dd1-LyUL.js",
+      "_Badge-Cah9mW7N.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js"
     ]
   },
   "inertia/pages/categories/ManageCategoryPage.tsx": {
-    "file": "ManageCategoryPage-Cmhn5GXQ.js",
+    "file": "ManageCategoryPage-CxcOz0t5.js",
     "name": "ManageCategoryPage",
     "src": "inertia/pages/categories/ManageCategoryPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_utils-R8C2eLnL.js",
-      "_CategoryModal-Dx9KUb4D.js",
-      "_DataTable-C0fJxe2V.js",
-      "_Title-C18PzRI1.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-BzS_F88k.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Textarea-Dk2XprJw.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Select-59oFSAVi.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Pill-cgfAKtjR.js",
-      "_Badge-Du3f5JaO.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js"
+      "_useQuery-CivF-W0P.js",
+      "_utils-DTxDwtwe.js",
+      "_CategoryModal-3G9y1RBd.js",
+      "_DataTable-BcEzQGxw.js",
+      "_Title-tHG7-3SR.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-CJvRVwyL.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Textarea-BR9ZfWql.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js",
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Select-CxzNu1PS.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Pill-Dd1-LyUL.js",
+      "_Badge-Cah9mW7N.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js"
     ]
   },
   "inertia/pages/errors/forbidden.tsx": {
-    "file": "forbidden-DVKlCv0M.js",
+    "file": "forbidden-p6J5o1BF.js",
     "name": "forbidden",
     "src": "inertia/pages/errors/forbidden.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_Title-C18PzRI1.js"
+      "_Title-tHG7-3SR.js"
     ]
   },
   "inertia/pages/errors/not_found.tsx": {
-    "file": "not_found-BLVmc93S.js",
+    "file": "not_found-CV1GlSVs.js",
     "name": "not_found",
     "src": "inertia/pages/errors/not_found.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_Title-C18PzRI1.js"
+      "_Title-tHG7-3SR.js"
     ]
   },
   "inertia/pages/errors/server_error.tsx": {
-    "file": "server_error-B12knw-5.js",
+    "file": "server_error-kwdbs77i.js",
     "name": "server_error",
     "src": "inertia/pages/errors/server_error.tsx",
     "isDynamicEntry": true,
@@ -622,589 +621,589 @@
     ]
   },
   "inertia/pages/goodsReceipts/CreateGoodsReceiptPage.tsx": {
-    "file": "CreateGoodsReceiptPage-ETLsfY6A.js",
+    "file": "CreateGoodsReceiptPage-Bu6HV4dl.js",
     "name": "CreateGoodsReceiptPage",
     "src": "inertia/pages/goodsReceipts/CreateGoodsReceiptPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_utils-R8C2eLnL.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_goods_receipt_api-BKFbxSRL.js",
-      "_product_api-D4DTzYhy.js",
-      "_storage_api-CnF066L4.js",
-      "_StorageModal-CWkPkYOC.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTitle-Wsevyc98.js",
-      "_PageTransition-ClCa20jH.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-Bxo2eKZU.js",
-      "_Title-C18PzRI1.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_DatePickerInput-U0H_1PUu.js",
-      "_Select-59oFSAVi.js",
-      "_trash-DOYqag2Q.js",
-      "_Textarea-Dk2XprJw.js",
-      "_Table-Df9SZcKh.js",
-      "_NumberInput-DPyLvvSl.js",
-      "_plus-DrFSM_FR.js",
-      "_Form-BzS_F88k.js",
-      "_Image-B_MVlKcF.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_useQuery-CivF-W0P.js",
+      "_utils-DTxDwtwe.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_goods_receipt_api-BbOrJVkI.js",
+      "_product_api-Bgqi4uHy.js",
+      "_storage_api-B2KrBUEE.js",
+      "_StorageModal-Cj-3kjjk.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTitle-BQ63YMTJ.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-DvdKhdsd.js",
+      "_Title-tHG7-3SR.js",
+      "_TextInput-BSrrIIRU.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_DatePickerInput-DVZY_bk_.js",
+      "_Select-CxzNu1PS.js",
+      "_trash-JYz6Yr-a.js",
+      "_Textarea-BR9ZfWql.js",
+      "_Table-yAPx-a7c.js",
+      "_NumberInput-BbaRQacq.js",
+      "_plus-DZL43UE9.js",
+      "_Form-CJvRVwyL.js",
+      "_Image-DSSokqw9.js",
+      "_FileButton-DyzLEDw_.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_CheckIcon-DNFR220-.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/goodsReceipts/DetailGoodsReceiptPage.tsx": {
-    "file": "DetailGoodsReceiptPage-BBS8nESK.js",
+    "file": "DetailGoodsReceiptPage-kjKwkYR3.js",
     "name": "DetailGoodsReceiptPage",
     "src": "inertia/pages/goodsReceipts/DetailGoodsReceiptPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_goods_receipt_api-BKFbxSRL.js",
-      "_DisplayField-3NCtqx5U.js",
-      "_PageTitle-Wsevyc98.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
+      "_useQuery-CivF-W0P.js",
+      "_goods_receipt_api-BbOrJVkI.js",
+      "_DisplayField-BaqiuFg0.js",
+      "_PageTitle-BQ63YMTJ.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
       "inertia/pages/errors/not_found.tsx",
       "_status-codes-B_I7eCRx.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Title-C18PzRI1.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_Table-Df9SZcKh.js",
-      "_NumberFormatter-Pjf_Ovv_.js",
-      "_arrow-left-DpnuV4UC.js",
-      "_utils-R8C2eLnL.js",
-      "_Tooltip-6pp6knvp.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Title-tHG7-3SR.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_Table-yAPx-a7c.js",
+      "_NumberFormatter-DcL9_fCP.js",
+      "_arrow-left-DScie-4S.js",
+      "_utils-DTxDwtwe.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/goodsReceipts/ManageGoodsReceiptPage.tsx": {
-    "file": "ManageGoodsReceiptPage-CPbgNsIH.js",
+    "file": "ManageGoodsReceiptPage-CuXZOJj7.js",
     "name": "ManageGoodsReceiptPage",
     "src": "inertia/pages/goodsReceipts/ManageGoodsReceiptPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_goods_receipt_api-BKFbxSRL.js",
-      "_DataTable-C0fJxe2V.js",
-      "_Title-C18PzRI1.js",
-      "_NumberFormatter-Pjf_Ovv_.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_wallet-CmPhbGBB.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTransition-ClCa20jH.js",
-      "_utils-R8C2eLnL.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Select-59oFSAVi.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Pill-cgfAKtjR.js",
-      "_Badge-Du3f5JaO.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_useQuery-CivF-W0P.js",
+      "_goods_receipt_api-BbOrJVkI.js",
+      "_DataTable-BcEzQGxw.js",
+      "_Title-tHG7-3SR.js",
+      "_NumberFormatter-DcL9_fCP.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_wallet-Cxl4oZFf.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_utils-DTxDwtwe.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js",
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Select-CxzNu1PS.js",
+      "_TextInput-BSrrIIRU.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Pill-Dd1-LyUL.js",
+      "_Badge-Cah9mW7N.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/products/CreateProductPage.tsx": {
-    "file": "CreateProductPage-Bq65RgVz.js",
+    "file": "CreateProductPage-CpkEgDWP.js",
     "name": "CreateProductPage",
     "src": "inertia/pages/products/CreateProductPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_product_api-D4DTzYhy.js",
-      "_BrandModal-CqzReZEN.js",
-      "_CategoryModal-Dx9KUb4D.js",
-      "_TypeModal-BW452uP1.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTitle-Wsevyc98.js",
-      "_PageTransition-ClCa20jH.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-Bxo2eKZU.js",
-      "_Grid-mDakIk0z.js",
-      "_Title-C18PzRI1.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_Select-59oFSAVi.js",
-      "_NumberInput-DPyLvvSl.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Textarea-Dk2XprJw.js",
-      "_arrow-left-DpnuV4UC.js",
-      "_Image-B_MVlKcF.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_Form-BzS_F88k.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_react-number-format.es-CdROQBut.js",
-      "_Pill-cgfAKtjR.js"
+      "_utils-DTxDwtwe.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_product_api-Bgqi4uHy.js",
+      "_BrandModal-D9kEA3Ov.js",
+      "_CategoryModal-3G9y1RBd.js",
+      "_TypeModal-CcX7hWv4.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTitle-BQ63YMTJ.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-DvdKhdsd.js",
+      "_Grid-BwWjE6_-.js",
+      "_Title-tHG7-3SR.js",
+      "_TextInput-BSrrIIRU.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_Select-CxzNu1PS.js",
+      "_NumberInput-BbaRQacq.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Textarea-BR9ZfWql.js",
+      "_arrow-left-DScie-4S.js",
+      "_Image-DSSokqw9.js",
+      "_FileButton-DyzLEDw_.js",
+      "_Form-CJvRVwyL.js",
+      "_CheckIcon-DNFR220-.js",
+      "_react-number-format.es-DChZyRhV.js",
+      "_Pill-Dd1-LyUL.js"
     ]
   },
   "inertia/pages/products/EditProductPage.tsx": {
-    "file": "EditProductPage-f16t1-P4.js",
+    "file": "EditProductPage-CiC6LmOo.js",
     "name": "EditProductPage",
     "src": "inertia/pages/products/EditProductPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_utils-R8C2eLnL.js",
-      "_product_api-D4DTzYhy.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTitle-Wsevyc98.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
+      "_useQuery-CivF-W0P.js",
+      "_utils-DTxDwtwe.js",
+      "_product_api-Bgqi4uHy.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTitle-BQ63YMTJ.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
       "inertia/pages/errors/not_found.tsx",
-      "_validators-BCjQ9g7n.js",
-      "_DataTable-C0fJxe2V.js",
-      "_storage_api-CnF066L4.js",
-      "_Form-Bxo2eKZU.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Title-C18PzRI1.js",
-      "_Select-59oFSAVi.js",
-      "_NumberInput-DPyLvvSl.js",
+      "_validators-Cc5AS_Iv.js",
+      "_DataTable-BcEzQGxw.js",
+      "_storage_api-B2KrBUEE.js",
+      "_Form-DvdKhdsd.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Title-tHG7-3SR.js",
+      "_Select-CxzNu1PS.js",
+      "_NumberInput-BbaRQacq.js",
       "_status-codes-B_I7eCRx.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Grid-mDakIk0z.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Textarea-Dk2XprJw.js",
-      "_arrow-left-DpnuV4UC.js",
-      "_Image-B_MVlKcF.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_Badge-Du3f5JaO.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js",
-      "_react-number-format.es-CdROQBut.js",
-      "_Pill-cgfAKtjR.js"
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Grid-BwWjE6_-.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Textarea-BR9ZfWql.js",
+      "_arrow-left-DScie-4S.js",
+      "_Image-DSSokqw9.js",
+      "_FileButton-DyzLEDw_.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js",
+      "_Badge-Cah9mW7N.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js",
+      "_react-number-format.es-DChZyRhV.js",
+      "_Pill-Dd1-LyUL.js"
     ]
   },
   "inertia/pages/products/ManageProductPage.tsx": {
-    "file": "ManageProductPage-Rt_FDrLi.js",
+    "file": "ManageProductPage-DDVk4chK.js",
     "name": "ManageProductPage",
     "src": "inertia/pages/products/ManageProductPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_product_api-D4DTzYhy.js",
-      "_DataTable-C0fJxe2V.js",
-      "_ImageViewer-CchzMFhD.js",
-      "_Title-C18PzRI1.js",
-      "_NumberFormatter-Pjf_Ovv_.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_utils-R8C2eLnL.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Select-59oFSAVi.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Pill-cgfAKtjR.js",
-      "_Badge-Du3f5JaO.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js",
-      "_Image-B_MVlKcF.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_useQuery-CivF-W0P.js",
+      "_product_api-Bgqi4uHy.js",
+      "_DataTable-BcEzQGxw.js",
+      "_ImageViewer-Cup2Xam8.js",
+      "_Title-tHG7-3SR.js",
+      "_NumberFormatter-DcL9_fCP.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_utils-DTxDwtwe.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js",
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Select-CxzNu1PS.js",
+      "_TextInput-BSrrIIRU.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Pill-Dd1-LyUL.js",
+      "_Badge-Cah9mW7N.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js",
+      "_Image-DSSokqw9.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/profiles/ProfilePage.tsx": {
-    "file": "ProfilePage-DWIEe8tk.js",
+    "file": "ProfilePage-Cb9AxDVx.js",
     "name": "ProfilePage",
     "src": "inertia/pages/profiles/ProfilePage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_SectionHeader-C79HTeJK.js",
-      "_validators-BCjQ9g7n.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_utils-R8C2eLnL.js",
-      "_Title-C18PzRI1.js",
-      "_Form-Bxo2eKZU.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Pill-cgfAKtjR.js",
-      "_Badge-Du3f5JaO.js",
-      "_PasswordInput-VEjyTU3A.js",
-      "_SimpleGrid-DQqJhNpN.js"
+      "_SectionHeader-BnsUQOTq.js",
+      "_validators-Cc5AS_Iv.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_utils-DTxDwtwe.js",
+      "_Title-tHG7-3SR.js",
+      "_Form-DvdKhdsd.js",
+      "_FileButton-DyzLEDw_.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Pill-Dd1-LyUL.js",
+      "_Badge-Cah9mW7N.js",
+      "_PasswordInput-CiBjFsPR.js",
+      "_SimpleGrid-DEOOUVqu.js"
     ]
   },
   "inertia/pages/reductionOfGoods/CreateReductionOfGoodPage.tsx": {
-    "file": "CreateReductionOfGoodPage-CAXQRxxi.js",
+    "file": "CreateReductionOfGoodPage-BIMZIU3l.js",
     "name": "CreateReductionOfGoodPage",
     "src": "inertia/pages/reductionOfGoods/CreateReductionOfGoodPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_utils-R8C2eLnL.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_product_api-D4DTzYhy.js",
-      "_reduction_of_good_api-BNyQhxyl.js",
-      "_storage_api-CnF066L4.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTitle-Wsevyc98.js",
-      "_PageTransition-ClCa20jH.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-Bxo2eKZU.js",
-      "_Title-C18PzRI1.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_DatePickerInput-U0H_1PUu.js",
-      "_Select-59oFSAVi.js",
-      "_trash-DOYqag2Q.js",
-      "_Textarea-Dk2XprJw.js",
-      "_Table-Df9SZcKh.js",
-      "_NumberInput-DPyLvvSl.js",
-      "_Badge-Du3f5JaO.js",
-      "_plus-DrFSM_FR.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_useQuery-CivF-W0P.js",
+      "_utils-DTxDwtwe.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_product_api-Bgqi4uHy.js",
+      "_reduction_of_good_api-qyOyZPiy.js",
+      "_storage_api-B2KrBUEE.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTitle-BQ63YMTJ.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-DvdKhdsd.js",
+      "_Title-tHG7-3SR.js",
+      "_TextInput-BSrrIIRU.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_DatePickerInput-DVZY_bk_.js",
+      "_Select-CxzNu1PS.js",
+      "_trash-JYz6Yr-a.js",
+      "_Textarea-BR9ZfWql.js",
+      "_Table-yAPx-a7c.js",
+      "_NumberInput-BbaRQacq.js",
+      "_Badge-Cah9mW7N.js",
+      "_plus-DZL43UE9.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_CheckIcon-DNFR220-.js",
+      "_FileButton-DyzLEDw_.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/reductionOfGoods/DetailReductionOfGoodPage.tsx": {
-    "file": "DetailReductionOfGoodPage-DO9LmC0G.js",
+    "file": "DetailReductionOfGoodPage-BvW1EftT.js",
     "name": "DetailReductionOfGoodPage",
     "src": "inertia/pages/reductionOfGoods/DetailReductionOfGoodPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_reduction_of_good_api-BNyQhxyl.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
+      "_useQuery-CivF-W0P.js",
+      "_reduction_of_good_api-qyOyZPiy.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
       "inertia/pages/errors/not_found.tsx",
-      "_DisplayField-3NCtqx5U.js",
-      "_PageTitle-Wsevyc98.js",
+      "_DisplayField-BaqiuFg0.js",
+      "_PageTitle-BQ63YMTJ.js",
       "_status-codes-B_I7eCRx.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Title-C18PzRI1.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_Table-Df9SZcKh.js",
-      "_NumberFormatter-Pjf_Ovv_.js",
-      "_arrow-left-DpnuV4UC.js",
-      "_utils-R8C2eLnL.js",
-      "_Tooltip-6pp6knvp.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Title-tHG7-3SR.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_Table-yAPx-a7c.js",
+      "_NumberFormatter-DcL9_fCP.js",
+      "_arrow-left-DScie-4S.js",
+      "_utils-DTxDwtwe.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/reductionOfGoods/ManageReductionOfGoodPage.tsx": {
-    "file": "ManageReductionOfGoodPage-BKeKt5r0.js",
+    "file": "ManageReductionOfGoodPage-cu-p_ZrZ.js",
     "name": "ManageReductionOfGoodPage",
     "src": "inertia/pages/reductionOfGoods/ManageReductionOfGoodPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_reduction_of_good_api-BNyQhxyl.js",
-      "_DataTable-C0fJxe2V.js",
-      "_Title-C18PzRI1.js",
-      "_NumberFormatter-Pjf_Ovv_.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_wallet-CmPhbGBB.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTransition-ClCa20jH.js",
-      "_utils-R8C2eLnL.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Select-59oFSAVi.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Pill-cgfAKtjR.js",
-      "_Badge-Du3f5JaO.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_useQuery-CivF-W0P.js",
+      "_reduction_of_good_api-qyOyZPiy.js",
+      "_DataTable-BcEzQGxw.js",
+      "_Title-tHG7-3SR.js",
+      "_NumberFormatter-DcL9_fCP.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_wallet-Cxl4oZFf.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_utils-DTxDwtwe.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js",
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Select-CxzNu1PS.js",
+      "_TextInput-BSrrIIRU.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Pill-Dd1-LyUL.js",
+      "_Badge-Cah9mW7N.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/staffs/CreateStaffPage.tsx": {
-    "file": "CreateStaffPage-DMfsmPT_.js",
+    "file": "CreateStaffPage-CtsCBCZd.js",
     "name": "CreateStaffPage",
     "src": "inertia/pages/staffs/CreateStaffPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_utils-R8C2eLnL.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_staff_api-DPaE-TBm.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTitle-Wsevyc98.js",
-      "_PageTransition-ClCa20jH.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-Bxo2eKZU.js",
-      "_Grid-mDakIk0z.js",
-      "_Title-C18PzRI1.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_PasswordInput-VEjyTU3A.js",
-      "_DatePickerInput-U0H_1PUu.js",
-      "_Select-59oFSAVi.js",
-      "_arrow-left-DpnuV4UC.js",
-      "_Image-B_MVlKcF.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_CheckIcon-0vp9SztL.js"
+      "_utils-DTxDwtwe.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_staff_api-Dr0kiH9D.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTitle-BQ63YMTJ.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-DvdKhdsd.js",
+      "_Grid-BwWjE6_-.js",
+      "_Title-tHG7-3SR.js",
+      "_TextInput-BSrrIIRU.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_PasswordInput-CiBjFsPR.js",
+      "_DatePickerInput-DVZY_bk_.js",
+      "_Select-CxzNu1PS.js",
+      "_arrow-left-DScie-4S.js",
+      "_Image-DSSokqw9.js",
+      "_FileButton-DyzLEDw_.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_CheckIcon-DNFR220-.js"
     ]
   },
   "inertia/pages/staffs/EditStaffPage.tsx": {
-    "file": "EditStaffPage-Cb6FcIUR.js",
+    "file": "EditStaffPage-ewn__SJW.js",
     "name": "EditStaffPage",
     "src": "inertia/pages/staffs/EditStaffPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_utils-R8C2eLnL.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_staff_api-DPaE-TBm.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTitle-Wsevyc98.js",
-      "_PageTransition-ClCa20jH.js",
-      "_validators-BCjQ9g7n.js",
+      "_useQuery-CivF-W0P.js",
+      "_utils-DTxDwtwe.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_staff_api-Dr0kiH9D.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTitle-BQ63YMTJ.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_validators-Cc5AS_Iv.js",
       "inertia/pages/errors/not_found.tsx",
       "_status-codes-B_I7eCRx.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Title-C18PzRI1.js",
-      "_Form-Bxo2eKZU.js",
-      "_Grid-mDakIk0z.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_DatePickerInput-U0H_1PUu.js",
-      "_Select-59oFSAVi.js",
-      "_arrow-left-DpnuV4UC.js",
-      "_PasswordInput-VEjyTU3A.js",
-      "_Image-B_MVlKcF.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_CheckIcon-0vp9SztL.js"
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Title-tHG7-3SR.js",
+      "_Form-DvdKhdsd.js",
+      "_Grid-BwWjE6_-.js",
+      "_TextInput-BSrrIIRU.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_DatePickerInput-DVZY_bk_.js",
+      "_Select-CxzNu1PS.js",
+      "_arrow-left-DScie-4S.js",
+      "_PasswordInput-CiBjFsPR.js",
+      "_Image-DSSokqw9.js",
+      "_FileButton-DyzLEDw_.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_CheckIcon-DNFR220-.js"
     ]
   },
   "inertia/pages/staffs/ManageStaffPage.tsx": {
-    "file": "ManageStaffPage-BvaZYzq2.js",
+    "file": "ManageStaffPage-DEu_Wh-B.js",
     "name": "ManageStaffPage",
     "src": "inertia/pages/staffs/ManageStaffPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_staff_api-DPaE-TBm.js",
-      "_DataTable-C0fJxe2V.js",
-      "_ImageViewer-CchzMFhD.js",
-      "_Badge-Du3f5JaO.js",
-      "_Title-C18PzRI1.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_utils-R8C2eLnL.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Select-59oFSAVi.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Pill-cgfAKtjR.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js",
-      "_Image-B_MVlKcF.js"
+      "_useQuery-CivF-W0P.js",
+      "_staff_api-Dr0kiH9D.js",
+      "_DataTable-BcEzQGxw.js",
+      "_ImageViewer-Cup2Xam8.js",
+      "_Badge-Cah9mW7N.js",
+      "_Title-tHG7-3SR.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_utils-DTxDwtwe.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js",
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Select-CxzNu1PS.js",
+      "_TextInput-BSrrIIRU.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Pill-Dd1-LyUL.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js",
+      "_Image-DSSokqw9.js"
     ]
   },
   "inertia/pages/storages/ManageStoragePage.tsx": {
-    "file": "ManageStoragePage-BZlcJ_Uf.js",
+    "file": "ManageStoragePage-NDCjx7EJ.js",
     "name": "ManageStoragePage",
     "src": "inertia/pages/storages/ManageStoragePage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_utils-R8C2eLnL.js",
-      "_storage_api-CnF066L4.js",
-      "_DataTable-C0fJxe2V.js",
-      "_ImageViewer-CchzMFhD.js",
-      "_Title-C18PzRI1.js",
-      "_StorageModal-CWkPkYOC.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Select-59oFSAVi.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Pill-cgfAKtjR.js",
-      "_Badge-Du3f5JaO.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js",
-      "_Image-B_MVlKcF.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-BzS_F88k.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_Textarea-Dk2XprJw.js"
+      "_useQuery-CivF-W0P.js",
+      "_utils-DTxDwtwe.js",
+      "_storage_api-B2KrBUEE.js",
+      "_DataTable-BcEzQGxw.js",
+      "_ImageViewer-Cup2Xam8.js",
+      "_Title-tHG7-3SR.js",
+      "_StorageModal-Cj-3kjjk.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js",
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Select-CxzNu1PS.js",
+      "_TextInput-BSrrIIRU.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Pill-Dd1-LyUL.js",
+      "_Badge-Cah9mW7N.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js",
+      "_Image-DSSokqw9.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-CJvRVwyL.js",
+      "_FileButton-DyzLEDw_.js",
+      "_Textarea-BR9ZfWql.js"
     ]
   },
   "inertia/pages/transferStocks/CreateTransferStockPage.tsx": {
-    "file": "CreateTransferStockPage-Ce7lHHPx.js",
+    "file": "CreateTransferStockPage-XoA7JuY6.js",
     "name": "CreateTransferStockPage",
     "src": "inertia/pages/transferStocks/CreateTransferStockPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_utils-R8C2eLnL.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_transfer_stock_api-DLYYN_0b.js",
-      "_product_api-D4DTzYhy.js",
-      "_storage_api-CnF066L4.js",
-      "_PageTransition-ClCa20jH.js",
-      "_validators-BCjQ9g7n.js",
-      "_PageTitle-Wsevyc98.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_Form-Bxo2eKZU.js",
-      "_Title-C18PzRI1.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_DatePickerInput-U0H_1PUu.js",
-      "_Select-59oFSAVi.js",
-      "_trash-DOYqag2Q.js",
-      "_Textarea-Dk2XprJw.js",
-      "_Table-Df9SZcKh.js",
-      "_NumberInput-DPyLvvSl.js",
-      "_Badge-Du3f5JaO.js",
-      "_plus-DrFSM_FR.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_FileButton-Cv8kjxZv.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_useQuery-CivF-W0P.js",
+      "_utils-DTxDwtwe.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_transfer_stock_api-CN_htb_Z.js",
+      "_product_api-Bgqi4uHy.js",
+      "_storage_api-B2KrBUEE.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_validators-Cc5AS_Iv.js",
+      "_PageTitle-BQ63YMTJ.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_Form-DvdKhdsd.js",
+      "_Title-tHG7-3SR.js",
+      "_TextInput-BSrrIIRU.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_DatePickerInput-DVZY_bk_.js",
+      "_Select-CxzNu1PS.js",
+      "_trash-JYz6Yr-a.js",
+      "_Textarea-BR9ZfWql.js",
+      "_Table-yAPx-a7c.js",
+      "_NumberInput-BbaRQacq.js",
+      "_Badge-Cah9mW7N.js",
+      "_plus-DZL43UE9.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_CheckIcon-DNFR220-.js",
+      "_FileButton-DyzLEDw_.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/transferStocks/DetailTransferStockPage.tsx": {
-    "file": "DetailTransferStockPage-Cv7DuOZL.js",
+    "file": "DetailTransferStockPage-BwcENuRt.js",
     "name": "DetailTransferStockPage",
     "src": "inertia/pages/transferStocks/DetailTransferStockPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
+      "_useQuery-CivF-W0P.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
       "inertia/pages/errors/not_found.tsx",
-      "_transfer_stock_api-DLYYN_0b.js",
-      "_PageTitle-Wsevyc98.js",
-      "_DisplayField-3NCtqx5U.js",
+      "_transfer_stock_api-CN_htb_Z.js",
+      "_PageTitle-BQ63YMTJ.js",
+      "_DisplayField-BaqiuFg0.js",
       "_status-codes-B_I7eCRx.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Title-C18PzRI1.js",
-      "_SimpleGrid-DQqJhNpN.js",
-      "_Table-Df9SZcKh.js",
-      "_NumberFormatter-Pjf_Ovv_.js",
-      "_arrow-left-DpnuV4UC.js",
-      "_utils-R8C2eLnL.js",
-      "_Tooltip-6pp6knvp.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Title-tHG7-3SR.js",
+      "_SimpleGrid-DEOOUVqu.js",
+      "_Table-yAPx-a7c.js",
+      "_NumberFormatter-DcL9_fCP.js",
+      "_arrow-left-DScie-4S.js",
+      "_utils-DTxDwtwe.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/transferStocks/ManageTransferStockPage.tsx": {
-    "file": "ManageTransferStockPage-DkG0Wx9u.js",
+    "file": "ManageTransferStockPage-DsObtNNX.js",
     "name": "ManageTransferStockPage",
     "src": "inertia/pages/transferStocks/ManageTransferStockPage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_transfer_stock_api-DLYYN_0b.js",
-      "_DataTable-C0fJxe2V.js",
-      "_Title-C18PzRI1.js",
-      "_NumberFormatter-Pjf_Ovv_.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_utils-R8C2eLnL.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Select-59oFSAVi.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Pill-cgfAKtjR.js",
-      "_Badge-Du3f5JaO.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js",
-      "_react-number-format.es-CdROQBut.js"
+      "_useQuery-CivF-W0P.js",
+      "_transfer_stock_api-CN_htb_Z.js",
+      "_DataTable-BcEzQGxw.js",
+      "_Title-tHG7-3SR.js",
+      "_NumberFormatter-DcL9_fCP.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_utils-DTxDwtwe.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js",
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Select-CxzNu1PS.js",
+      "_TextInput-BSrrIIRU.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Pill-Dd1-LyUL.js",
+      "_Badge-Cah9mW7N.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js",
+      "_react-number-format.es-DChZyRhV.js"
     ]
   },
   "inertia/pages/types/ManageTypePage.tsx": {
-    "file": "ManageTypePage-BxRAX0cL.js",
+    "file": "ManageTypePage-IGq8z3oi.js",
     "name": "ManageTypePage",
     "src": "inertia/pages/types/ManageTypePage.tsx",
     "isDynamicEntry": true,
     "imports": [
       "inertia/app/app.tsx",
-      "_useQuery-BqMeT-pC.js",
-      "_utils-R8C2eLnL.js",
-      "_TypeModal-BW452uP1.js",
-      "_DataTable-C0fJxe2V.js",
-      "_Title-C18PzRI1.js",
-      "_SectionHeader-C79HTeJK.js",
-      "_PageTransition-ClCa20jH.js",
-      "_AdminLayout-CIoriq3d.js",
-      "_validators-BCjQ9g7n.js",
-      "_Form-BzS_F88k.js",
-      "_TextInput-Dz9QFHVX.js",
-      "_Textarea-Dk2XprJw.js",
-      "_createReactComponent-jXwooc9l.js",
-      "_Tooltip-6pp6knvp.js",
-      "_Checkbox-CpfnvvSP.js",
-      "_CheckIcon-0vp9SztL.js",
-      "_LoadingOverlay-oFkbmy5E.js",
-      "_Select-59oFSAVi.js",
-      "_MultiSelect-B4WEXaWj.js",
-      "_Pill-cgfAKtjR.js",
-      "_Badge-Du3f5JaO.js",
-      "_Table-Df9SZcKh.js",
-      "_pick-calendar-levels-props-yptq5JC5.js",
-      "_plus-DrFSM_FR.js"
+      "_useQuery-CivF-W0P.js",
+      "_utils-DTxDwtwe.js",
+      "_TypeModal-CcX7hWv4.js",
+      "_DataTable-BcEzQGxw.js",
+      "_Title-tHG7-3SR.js",
+      "_SectionHeader-BnsUQOTq.js",
+      "_PageTransition-pWmh_Ckg.js",
+      "_AdminLayout-aHbIS04J.js",
+      "_validators-Cc5AS_Iv.js",
+      "_Form-CJvRVwyL.js",
+      "_TextInput-BSrrIIRU.js",
+      "_Textarea-BR9ZfWql.js",
+      "_createReactComponent-ZPzu5hwl.js",
+      "_Tooltip-D6qVf7E4.js",
+      "_Checkbox-Dyi8jSIW.js",
+      "_CheckIcon-DNFR220-.js",
+      "_LoadingOverlay-mFnWD4Gw.js",
+      "_Select-CxzNu1PS.js",
+      "_MultiSelect-GE27vihm.js",
+      "_Pill-Dd1-LyUL.js",
+      "_Badge-Cah9mW7N.js",
+      "_Table-yAPx-a7c.js",
+      "_pick-calendar-levels-props-C4Pob9S0.js",
+      "_plus-DZL43UE9.js"
     ]
   },
   "node_modules/@fontsource/inter/files/inter-cyrillic-400-normal.woff": {
@@ -1262,14 +1261,5 @@
   "node_modules/@fontsource/inter/files/inter-vietnamese-400-normal.woff2": {
     "file": "inter-vietnamese-400-normal-DMkecbls.woff2",
     "src": "node_modules/@fontsource/inter/files/inter-vietnamese-400-normal.woff2"
-  },
-  "node_modules/@tanstack/query-devtools/build/DevtoolsComponent/SUXNJKMM.js": {
-    "file": "SUXNJKMM-DT0_Vcca.js",
-    "name": "SUXNJKMM",
-    "src": "node_modules/@tanstack/query-devtools/build/DevtoolsComponent/SUXNJKMM.js",
-    "isDynamicEntry": true,
-    "imports": [
-      "inertia/app/app.tsx"
-    ]
   }
 }

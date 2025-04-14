@@ -12,7 +12,6 @@ import '@mantine/dates/styles.css'
 import 'mantine-react-table/styles.css'
 import { MantineProvider } from '@mantine/core'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { appTheme } from '~/themes/app_theme'
 import { ModalsProvider } from '@mantine/modals'
 import AppProvider from '~/providers/AppProvider'
@@ -49,7 +48,7 @@ createInertiaApp({
               </AppProvider>
             </ModalsProvider>
           </MantineEmotionProvider>
-          <ReactQueryDevtools initialIsOpen={false} />
+          {/* <ReactQueryDevtools initialIsOpen={false} /> */}
         </MantineProvider>
       </QueryClientProvider>
     )
